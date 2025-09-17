@@ -1,0 +1,28 @@
+<div class="modal-overlay" [ngClass]="{'fechando': fechando}">
+  <div class="modal-content" [ngClass]="{'fechando': fechando}">
+    <div class="modal-header">
+      <h2>{{ tarefa?.titulo }}</h2>
+    </div>
+
+    <hr class="linha1">
+
+    <div class="modal-body">
+      <p><strong>Vencimento:</strong> {{ tarefa?.vencimento }}</p>
+      <p><strong>Status:</strong> <span [ngClass]="tarefaStatusClass(tarefa?.status)">{{ tarefa?.status }}</span></p>
+      <p><strong>Membros:</strong></p>
+      <div class="membros">
+        <i class="fas fa-user-circle" *ngFor="let membro of tarefa?.membros"></i>
+      </div>
+      <p><strong>Descrição:</strong> {{ tarefa?.descricao }}</p>
+    </div>
+
+    <hr class="linha2">
+
+    <div class="modal-footer">
+      <button class="btn-editar" (click)="editarTarefa()">
+        Editar informações <i class="fas fa-edit" style="margin-left: 6px;"></i>
+      </button>
+      <button class="btn-fechar" (click)="fecharModal()">Fechar</button>
+    </div>
+  </div>
+</div>

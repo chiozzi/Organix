@@ -1,0 +1,25 @@
+{
+  "tarefas": [
+    {
+      "id": 1,
+      "titulo": "Faculdade",
+      "descricao": "Resumir a página 33 do livro",
+      "dataVencimento": "2025-09-08",
+      "status": "atrasado"
+    },
+    {
+      "id": 2,
+      "titulo": "Trabalho",
+      "descricao": "Finalizar o front-end do projeto",
+      "dataVencimento": "2025-10-15",
+      "status": "urgente"
+    },
+    {
+      "id": 3,
+      "titulo": "Documentação",
+      "descricao": "Escrever a documentação do projeto",
+      "dataVencimento": "2025-09-16",
+      "status": "pendente"
+    }
+  ]
+}

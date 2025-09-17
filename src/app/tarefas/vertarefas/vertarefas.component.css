@@ -1,0 +1,115 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5); /* fundo fixo, não animado */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #f9f9f9; /* tom mais suave que branco */
+  padding: 25px 30px;
+  border-radius: 15px;
+  width: 60%;
+  max-width: 700px;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  position: relative;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  animation: modalFadeIn 0.3s ease-in-out;
+}
+
+.modal-content.fechando {
+  animation: modalFadeOut 0.3s ease-in-out forwards;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #333;
+}
+
+.modal-body {
+  margin-top: 20px;
+}
+
+.modal-body p {
+  margin: 12px 0;
+  color: #555;
+  line-height: 1.4;
+}
+
+.modal-body .membros i {
+  font-size: 1.3em;
+  margin-right: 8px;
+  color: #007bff;
+}
+
+.modal-footer {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between; /* botão esquerdo e direito */
+  align-items: center;
+}
+
+.btn-fechar, .btn-editar {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95em;
+  transition: all 0.2s ease;
+}
+
+.btn-editar {
+  background: #0080D7;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.btn-editar i {
+  margin-left: 6px;
+}
+
+.btn-editar:hover {
+  background: #0066A1;
+}
+
+.btn-fechar {
+  background: #d9534f;
+  color: white;
+}
+
+.btn-fechar:hover {
+  background: #c9302c;
+}
+
+/* Animação do modal apenas */
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.95) translateY(-20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes modalFadeOut {
+  from { opacity: 1; transform: scale(1) translateY(0); }
+  to   { opacity: 0; transform: scale(0.95) translateY(-20px); }
+}
+
+.linha1 {
+  margin-top: 30px;
+  margin-bottom: -7px;
+}
+
+.linha2 {
+  margin: 7px;
+}
+  

@@ -1,0 +1,76 @@
+<div class="container">
+
+  <!-- Em atraso -->
+  <div class="coluna">
+    <h2>Em atraso</h2>
+    <div class="cards-linha">
+      <div class="card" *ngFor="let tarefa of atrasadas" (click)="abrirModal(tarefa)">
+        <div class="card-header">
+          <h3>{{ tarefa.titulo }}</h3>
+          <span class="status atraso">Atrasado</span>
+        </div>
+        <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+        <div class="card-footer">
+          <i class="fas fa-user-circle"></i>
+          <i class="fas fa-plus-circle mais"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Urgência -->
+  <div class="coluna">
+    <h2>Urgência</h2>
+    <div class="cards-linha">
+      <div class="card" *ngFor="let tarefa of urgentes" (click)="abrirModal(tarefa)">
+        <div class="card-header">
+          <h3>{{ tarefa.titulo }}</h3>
+          <span class="status urgente">Urgente</span>
+        </div>
+        <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+        <div class="card-footer">
+          <i class="fas fa-user-circle"></i>
+          <i class="fas fa-plus-circle mais"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- A fazer -->
+  <div class="coluna">
+    <h2>A fazer</h2>
+    <div class="cards-linha">
+      <div class="card" *ngFor="let tarefa of pendentes" (click)="abrirModal(tarefa)">
+        <div class="card-header">
+          <h3>{{ tarefa.titulo }}</h3>
+          <span class="status pendente">Pendente</span>
+        </div>
+        <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+        <div class="card-footer">
+          <i class="fas fa-user-circle"></i>
+          <i class="fas fa-plus-circle mais"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Botão flutuante -->
+<button class="btn-flutuante">
+  <i class="fas fa-plus"></i>
+</button>
+
+<!-- Modal -->
+<app-vertarefas 
+  *ngIf="tarefaSelecionada"  
+  [tarefa]="tarefaSelecionada"
+  (fechar)="fecharModal()"
+  (editar)="editarTarefa($event)">
+</app-vertarefas>

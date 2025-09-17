@@ -1,0 +1,151 @@
+  /* Container principal */
+  .sidebar-container {
+    position: relative;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 220px;
+    background-color: #0080D7;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s;
+    overflow: hidden;
+    z-index: 1000;
+  }
+
+  /* Sidebar colapsada */
+  .sidebar.collapsed {
+    width: 70px;
+  }
+
+  /* Header da sidebar (botão hamburguer) */
+  .sidebar-header {
+    display: flex;
+    justify-content: flex-start; /* padrão aberto */
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    transition: justify-content 0.3s;
+  }
+
+  /* Centraliza toggle quando colapsada */
+  .sidebar.collapsed .sidebar-header {
+    justify-content: center;
+  }
+
+  /* Botão hamburguer */
+  .toggle-btn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 6px;
+    transition: background 0.2s;
+  }
+
+  .toggle-btn:hover {
+    background-color: #34495e;
+  }
+
+  /* User info */
+  .user-info {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .avatar {
+    font-size: 36px;
+    margin-bottom: 6px;
+  }
+
+  .username {
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  /* Menu */
+  .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu li {
+    margin-bottom: 8px;
+  }
+
+  /* Links do menu e footer */
+  .menu a,
+  .profile-footer a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    font-size: 15px;
+    transition: background 0.15s, justify-content 0.3s;
+    padding: 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .menu a:hover,
+  .profile-footer a:hover {
+    background-color: #34495e;
+  }
+
+  .icon {
+    font-size: 18px;
+    text-align: center;
+    min-width: 26px;
+  }
+
+  .icon_perfil {
+    font-size: 24px;
+    text-align: center;
+    min-width: 26px;
+  }
+
+  /* Sidebar colapsada - centraliza itens e oculta textos */
+  .sidebar.collapsed .menu a,
+  .sidebar.collapsed .profile-footer a {
+    justify-content: center;
+    gap: 0;
+  }
+
+  .sidebar.collapsed .menu a span,
+  .sidebar.collapsed .profile-footer a span {
+    display: none;
+  }
+
+  .sidebar.collapsed .menu a .icon {
+    min-width: 0;
+  }
+
+  /* Profile footer fixo embaixo */
+  .profile-footer {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: justify-content 0.3s;
+  }
+
+  /* Centraliza footer quando colapsada */
+  .sidebar.collapsed .profile-footer {
+    align-items: center;
+  }

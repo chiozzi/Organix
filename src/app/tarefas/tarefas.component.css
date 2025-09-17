@@ -1,0 +1,154 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: #ffffff; /* mudar pra cinzinha */
+}
+
+/* Corpo da página */
+body {
+  min-height: 100vh;
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background-color: #333;
+  margin: 20px auto;   /* centraliza horizontalmente */
+  width: 96%;          /* ocupa 80% da largura da coluna */
+  border-radius: 2px;
+}
+
+
+/* Container principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px; /* padding agora está aqui */
+}
+
+/* Título das colunas */
+.coluna h2 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Linha de cards */
+.cards-linha {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+/* Cards */
+.card {
+  background: #f0eded; /* agora igual ao body */
+  border-radius: 10px;
+  padding: 15px;
+  width: 250px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-bottom: 30px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Cabeçalho do card */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  background: transparent; /* usa o fundo do card */
+  padding: 0;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #333;
+}
+
+/* Parágrafo dentro do card */
+.card p {
+  margin: 4px 0;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+}
+
+/* Status do card */
+.status {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.urgente { background: #fd3d02; margin-right: 12px; margin-bottom: 7px; }
+.atraso { background: #f73333; margin-right: 12px; margin-bottom: 7px; }
+.pendente { background: #FDE248; color: #000; margin-right: 12px; margin-bottom: 7px; }
+
+/* Rodapé do card */
+.card-footer {
+  display: flex;
+  gap: 6px;
+  font-size: 20px;
+  align-items: center;
+  margin-top: 8px;
+  background: transparent; /* usa o fundo do card */
+}
+
+/* Ícone “mais” do card */
+.mais {
+  color: #0080D7;
+  font-size: 22px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.mais:hover {
+  color: #0066cc;
+  transform: scale(1.05);
+}
+
+/* Botão flutuante */
+.btn-flutuante {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #0080D7;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-flutuante:hover { 
+  background: #0066cc; 
+  transform: scale(1.05);
+}
