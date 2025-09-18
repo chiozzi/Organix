@@ -8,8 +8,8 @@ import { Tarefa, TarefasService } from './tarefas.service';
   styleUrl: './tarefas.component.css'
 })
 export class TarefasComponent implements OnInit {
-  tarefas: Tarefa[] = []; // lista de todas as tarefas
-  tarefaSelecionada: Tarefa | null = null; // tarefa aberta no modal
+  tarefas: Tarefa[] = [];
+  tarefaSelecionada: Tarefa | null = null;
 
   constructor(private tarefasService: TarefasService) {}
 
@@ -26,17 +26,17 @@ export class TarefasComponent implements OnInit {
     });
   }
 
-  // ✅ Getters para evitar repetir filtros no carregarTarefas()
-  get atrasadas(): Tarefa[] {
-    return this.tarefas.filter(t => t.status === 'atrasado');
+  // 🔥 Getters baseados no "status" (para usar no HTML)
+  get tarefasAtrasadas(): Tarefa[] {
+    return this.tarefas.filter(t => t.condicao === 'atrasado');
   }
 
-  get urgentes(): Tarefa[] {
-    return this.tarefas.filter(t => t.status === 'urgente');
+  get tarefasUrgentes(): Tarefa[] {
+    return this.tarefas.filter(t => t.condicao === 'urgente');
   }
 
-  get pendentes(): Tarefa[] {
-    return this.tarefas.filter(t => t.status === 'pendente');
+  get tarefasPendentes(): Tarefa[] {
+    return this.tarefas.filter(t => t.condicao === 'pendente');
   }
 
   abrirModal(tarefa: Tarefa): void {

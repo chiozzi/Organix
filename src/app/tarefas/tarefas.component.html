@@ -4,13 +4,15 @@
   <div class="coluna">
     <h2>Em atraso</h2>
     <div class="cards-linha">
-      <div class="card" *ngFor="let tarefa of atrasadas" (click)="abrirModal(tarefa)">
+      <div class="card" *ngFor="let tarefa of tarefasAtrasadas" (click)="abrirModal(tarefa)">
         <div class="card-header">
           <h3>{{ tarefa.titulo }}</h3>
           <span class="status atraso">Atrasado</span>
         </div>
         <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
         <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+        <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
+        <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
         <div class="card-footer">
           <i class="fas fa-user-circle"></i>
           <i class="fas fa-plus-circle mais"></i>
@@ -19,19 +21,19 @@
     </div>
   </div>
 
-  <hr>
-
-  <!-- Urgência -->
+  <!-- Urgente -->
   <div class="coluna">
-    <h2>Urgência</h2>
+    <h2>Urgente</h2>
     <div class="cards-linha">
-      <div class="card" *ngFor="let tarefa of urgentes" (click)="abrirModal(tarefa)">
+      <div class="card" *ngFor="let tarefa of tarefasUrgentes" (click)="abrirModal(tarefa)">
         <div class="card-header">
           <h3>{{ tarefa.titulo }}</h3>
           <span class="status urgente">Urgente</span>
         </div>
         <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
         <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+        <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
+        <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
         <div class="card-footer">
           <i class="fas fa-user-circle"></i>
           <i class="fas fa-plus-circle mais"></i>
@@ -40,19 +42,19 @@
     </div>
   </div>
 
-  <hr>
-
-  <!-- A fazer -->
+  <!-- Pendente -->
   <div class="coluna">
-    <h2>A fazer</h2>
+    <h2>Pendente</h2>
     <div class="cards-linha">
-      <div class="card" *ngFor="let tarefa of pendentes" (click)="abrirModal(tarefa)">
+      <div class="card" *ngFor="let tarefa of tarefasPendentes" (click)="abrirModal(tarefa)">
         <div class="card-header">
           <h3>{{ tarefa.titulo }}</h3>
           <span class="status pendente">Pendente</span>
         </div>
         <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
         <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+        <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
+        <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
         <div class="card-footer">
           <i class="fas fa-user-circle"></i>
           <i class="fas fa-plus-circle mais"></i>
@@ -60,6 +62,7 @@
       </div>
     </div>
   </div>
+
 </div>
 
 <!-- Botão flutuante -->
