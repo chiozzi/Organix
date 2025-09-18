@@ -1,7 +1,7 @@
 html, body {
   height: 100%;
   margin: 0;
-  background-color: #ffffff; /* mudar pra cinzinha */
+  background-color: #f5f5f5; /* cinzinha */
 }
 
 /* Corpo da página */
@@ -13,51 +13,64 @@ hr {
   border: none;
   height: 2px;
   background-color: #333;
-  margin: 20px auto;   /* centraliza horizontalmente */
-  width: 96%;          /* ocupa 80% da largura da coluna */
+  margin: 20px auto;
+  width: 96%;
   border-radius: 2px;
 }
-
 
 /* Container principal */
 .container {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 20px; /* padding agora está aqui */
+  padding: 20px;
 }
 
-/* Título das colunas */
-.coluna h2 {
+/* ===== Kanban ===== */
+.kanban {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: auto; /* scroll se não couber */
+  padding-bottom: 10px;
+}
+
+/* Colunas */
+.kanban-col {
+  flex: 1;
+  min-width: 280px;
+  background: #f0eded;
+  border-radius: 8px;
+  padding: 15px;
+  min-height: 400px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.kanban-col h2 {
   margin-bottom: 15px;
   font-size: 18px;
   font-weight: bold;
+  color: #333;
 }
 
-/* Linha de cards */
-.cards-linha {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-/* Cards */
+/* ===== Cards ===== */
 .card {
-  background: #f0eded; /* agora igual ao body */
+  background: #fff;
   border-radius: 10px;
   padding: 15px;
-  width: 250px;
-  min-height: 200px;
+  width: 100%;
+  min-height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  cursor: pointer;
 }
 
 .card:hover {
@@ -71,8 +84,6 @@ hr {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
-  background: transparent; /* usa o fundo do card */
-  padding: 0;
 }
 
 .card-header h3 {
@@ -84,7 +95,7 @@ hr {
   color: #333;
 }
 
-/* Parágrafo dentro do card */
+/* Texto do card */
 .card p {
   margin: 4px 0;
   font-size: 13px;
@@ -115,7 +126,6 @@ hr {
   font-size: 20px;
   align-items: center;
   margin-top: 8px;
-  background: transparent; /* usa o fundo do card */
 }
 
 /* Ícone “mais” do card */

@@ -7,15 +7,15 @@ export interface Tarefa {
   id?: number;
   titulo: string;
   descricao?: string;
-  membros?: string[]; // array de nomes ou IDs dos membros
-  dataVencimento?: string; // pode ser string ou Date
+  membros?: string[];
+  dataVencimento?: string;
   prioridade?: 'baixa' | 'media' | 'alta';
 
-  // Fluxo de execução
+  // Fluxo de execução (colunas do kanban)
   statusExecucao: 'nao_iniciado' | 'iniciado' | 'em_andamento' | 'concluido';
 
-  // Condição (urgência/atraso/etc.)
-  condicao: 'pendente' | 'urgente' | 'atrasado' | 'normal'; // removi opcional para simplificar
+  // Condição (flag do card)
+  condicao: 'pendente' | 'urgente' | 'atrasado' | 'normal';
 }
 
 @Injectable({

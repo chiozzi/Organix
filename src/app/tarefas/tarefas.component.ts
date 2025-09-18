@@ -26,18 +26,26 @@ export class TarefasComponent implements OnInit {
     });
   }
 
-  // 🔥 Getters baseados no "status" (para usar no HTML)
-  get tarefasAtrasadas(): Tarefa[] {
-    return this.tarefas.filter(t => t.condicao === 'atrasado');
+  // === Getters para separar por statusExecucao ===
+
+  /** A Fazer (tarefas ainda não iniciadas) */
+  get tarefasAFazer(): Tarefa[] {
+    return this.tarefas.filter(t => t.statusExecucao === 'nao_iniciado');
   }
 
-  get tarefasUrgentes(): Tarefa[] {
-    return this.tarefas.filter(t => t.condicao === 'urgente');
+  /** Em Andamento (tarefas já iniciadas ou em andamento) */
+  get tarefasEmAndamento(): Tarefa[] {
+    return this.tarefas.filter(
+      t => t.statusExecucao === 'em_andamento' || t.statusExecucao === 'iniciado'
+    );
   }
 
-  get tarefasPendentes(): Tarefa[] {
-    return this.tarefas.filter(t => t.condicao === 'pendente');
+  /** Concluídas */
+  get tarefasConcluidas(): Tarefa[] {
+    return this.tarefas.filter(t => t.statusExecucao === 'concluido');
   }
+
+  // (Se no futuro quiser mais colunas, é só criar novos getters aqui)
 
   abrirModal(tarefa: Tarefa): void {
     this.tarefaSelecionada = tarefa;
