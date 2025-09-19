@@ -9,10 +9,9 @@ export interface Tarefa {
   descricao?: string;
   membros?: string[];
   dataVencimento?: string;
-  prioridade?: 'baixa' | 'media' | 'alta';
 
   // Fluxo de execução (colunas do kanban)
-  statusExecucao: 'nao_iniciado' | 'iniciado' | 'em_andamento' | 'concluido';
+  statusExecucao: 'nao_iniciado' | 'em_atraso' | 'iniciado' | 'em_andamento' | 'concluido';
 
   // Condição (flag do card)
   condicao: 'pendente' | 'urgente' | 'atrasado' | 'normal';

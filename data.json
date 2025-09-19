@@ -2,33 +2,46 @@
   "tarefas": [
     {
       "id": 1,
-      "titulo": "Faculdade",
-      "descricao": "Resumir a página 33 do livro",
-      "dataVencimento": "2025-09-08",
-      "statusExecucao": "em_andamento",
-      "condicao": "atrasado"
-    },
-    {
-      "id": 2,
-      "titulo": "Trabalho",
-      "descricao": "Finalizar o front-end do projeto",
-      "dataVencimento": "2025-10-15",
-      "statusExecucao": "em_andamento",
-      "condicao": "urgente"
-    },
-    {
-      "id": 3,
-      "titulo": "Documentação",
-      "descricao": "Escrever a documentação do projeto",
-      "dataVencimento": "2025-09-16",
+      "titulo": "Ler capítulo do livro",
+      "descricao": "Capítulo 5 de Estruturas de Dados",
+      "membros": ["Ana"],
+      "dataVencimento": "2025-09-25",
       "statusExecucao": "nao_iniciado",
       "condicao": "pendente"
     },
     {
+      "id": 2,
+      "titulo": "Corrigir bugs do sistema",
+      "descricao": "Correção de falhas no módulo de autenticação",
+      "membros": ["Carlos", "João"],
+      "dataVencimento": "2025-09-19",
+      "statusExecucao": "em_atraso",
+      "condicao": "atrasado"
+    },
+    {
+      "id": 3,
+      "titulo": "Preparar apresentação",
+      "descricao": "Slides para reunião com diretoria",
+      "membros": ["Mariana"],
+      "dataVencimento": "2025-09-21",
+      "statusExecucao": "iniciado",
+      "condicao": "urgente"
+    },
+    {
       "id": 4,
-      "titulo": "Deploy",
-      "descricao": "Subir versão final para produção",
-      "dataVencimento": "2025-09-30",
+      "titulo": "Desenvolver API de produtos",
+      "descricao": "Endpoints REST para listagem e cadastro",
+      "membros": ["Pedro", "Fernanda"],
+      "dataVencimento": "2025-10-02",
+      "statusExecucao": "em_andamento",
+      "condicao": "normal"
+    },
+    {
+      "id": 5,
+      "titulo": "Entrega do relatório mensal",
+      "descricao": "Relatório de indicadores de performance",
+      "membros": ["Lucas"],
+      "dataVencimento": "2025-09-15",
       "statusExecucao": "concluido",
       "condicao": "normal"
     }

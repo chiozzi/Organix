@@ -11,6 +11,9 @@ export class TarefasComponent implements OnInit {
   tarefas: Tarefa[] = [];
   tarefaSelecionada: Tarefa | null = null;
 
+  // controle do modal de criação
+  exibirCriarTarefa = false;
+
   constructor(private tarefasService: TarefasService) {}
 
   ngOnInit(): void {
@@ -33,6 +36,11 @@ export class TarefasComponent implements OnInit {
     return this.tarefas.filter(t => t.statusExecucao === 'nao_iniciado');
   }
 
+  /** Em Atraso */
+  get tarefasEmAtraso(): Tarefa[] {
+    return this.tarefas.filter(t => t.statusExecucao === 'em_atraso');
+  }
+
   /** Em Andamento (tarefas já iniciadas ou em andamento) */
   get tarefasEmAndamento(): Tarefa[] {
     return this.tarefas.filter(
@@ -45,7 +53,7 @@ export class TarefasComponent implements OnInit {
     return this.tarefas.filter(t => t.statusExecucao === 'concluido');
   }
 
-  // (Se no futuro quiser mais colunas, é só criar novos getters aqui)
+  // === Modal de detalhes ===
 
   abrirModal(tarefa: Tarefa): void {
     this.tarefaSelecionada = tarefa;
@@ -54,6 +62,27 @@ export class TarefasComponent implements OnInit {
   fecharModal(): void {
     this.tarefaSelecionada = null;
   }
+
+  // === Modal de criação ===
+
+  abrirCriarModal(): void {
+    this.exibirCriarTarefa = true;
+  }
+
+  fecharCriarModal(): void {
+    this.exibirCriarTarefa = false;
+  }
+
+  /** Recebe uma nova tarefa criada no modal e atualiza a lista */
+  tarefaCriada(novaTarefa: Tarefa): void {
+    this.fecharCriarModal();
+    if (!novaTarefa) return;
+
+    // adiciona na lista em memória para refletir imediatamente na UI
+    this.tarefas.push(novaTarefa);
+  }
+
+  // === Edição ===
 
   editarTarefa(tarefa: Tarefa): void {
     if (!tarefa.id) return;

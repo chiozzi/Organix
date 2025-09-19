@@ -1,1 +1,49 @@
-<p>criartarefas works!</p>
+<div class="modal-backdrop" *ngIf="exibirCriarTarefa">
+  <div class="modal-content">
+    <h2>Criar Nova Tarefa</h2>
+
+    <form [formGroup]="formTarefa" (ngSubmit)="salvarTarefa()">
+
+      <label for="titulo">Título</label>
+      <input id="titulo" type="text" formControlName="titulo" required />
+
+      <label for="dataVencimento">Data de Vencimento</label>
+      <input id="dataVencimento" type="date" formControlName="dataVencimento" />
+
+      <label for="descricao">Descrição</label>
+      <textarea id="descricao" formControlName="descricao"></textarea>
+
+      <label for="membros">Membros (separados por vírgula)</label>
+      <input id="membros" type="text" formControlName="membros" />
+
+      <label for="prioridade">Prioridade</label>
+      <select id="prioridade" formControlName="prioridade">
+        <option value="baixa">Baixa</option>
+        <option value="media">Média</option>
+        <option value="alta">Alta</option>
+      </select>
+
+      <label for="statusExecucao">Status de Execução</label>
+      <select id="statusExecucao" formControlName="statusExecucao">
+        <option value="nao_iniciado">Não Iniciado</option>
+        <option value="iniciado">Iniciado</option>
+        <option value="em_andamento">Em Andamento</option>
+        <option value="concluido">Concluído</option>
+      </select>
+
+      <label for="condicao">Condição</label>
+      <select id="condicao" formControlName="condicao">
+        <option value="pendente">Pendente</option>
+        <option value="urgente">Urgente</option>
+        <option value="atrasado">Atrasado</option>
+        <option value="normal">Normal</option>
+      </select>
+
+      <div class="modal-buttons">
+        <button type="submit" [disabled]="formTarefa.invalid">Salvar</button>
+        <button type="button" (click)="cancelar()">Cancelar</button>
+      </div>
+
+    </form>
+  </div>
+</div>

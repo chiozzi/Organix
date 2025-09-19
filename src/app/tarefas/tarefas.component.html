@@ -6,6 +6,23 @@
 
     <!-- Kanban -->
     <div class="kanban">
+
+       <!-- Coluna Em Atraso -->
+      <div class="kanban-col">
+        <h4>Em atraso</h4>
+        <div class="card" *ngFor="let tarefa of tarefasEmAtraso" (click)="abrirModal(tarefa)">
+          <div class="card-header">
+            <h3>{{ tarefa.titulo }}</h3>
+            <span class="status-badge" [ngClass]="tarefa.condicao">
+              {{ tarefa.condicao }}
+            </span>
+          </div>
+          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+          <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+          <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
+        </div>
+      </div>
+
       
       <!-- Coluna A Fazer -->
       <div class="kanban-col">
@@ -22,6 +39,9 @@
           <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
         </div>
       </div>
+      
+
+     
 
       <!-- Coluna Em Andamento -->
       <div class="kanban-col">
@@ -60,9 +80,12 @@
 </div>
 
 <!-- Botão flutuante -->
-<button class="btn-flutuante">
-  <i class="fas fa-plus"></i>
+<!-- Botão flutuante -->
+<button class="btn-flutuante" (click)="abrirCriarModal()">
+<i class="fas fa-plus"></i>
 </button>
+
+ 
 
 <!-- Modal -->
 <app-vertarefas 
@@ -71,3 +94,15 @@
   (fechar)="fecharModal()"
   (editar)="editarTarefa($event)">
 </app-vertarefas>
+
+<!-- Modal de Criar Tarefa -->
+<app-criartarefas
+
+  *ngIf="exibirCriarTarefa"
+
+  (fechar)="fecharCriarModal()"
+
+  (salvar)="tarefaCriada($event)">
+</app-criartarefas>
+
+ 

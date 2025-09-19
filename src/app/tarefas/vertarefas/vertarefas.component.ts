@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Tarefa } from '../tarefas.service';
 
 @Component({
   selector: 'app-vertarefas',
@@ -6,13 +7,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './vertarefas.component.html',
   styleUrl: './vertarefas.component.css'
 })
-
-
-
 export class VertarefasComponent {
-  @Input() tarefa: any | null = null;
+  @Input() tarefa: Tarefa | null = null;
   @Output() fechar = new EventEmitter<void>();
-  @Output() editar = new EventEmitter<any>();
+  @Output() editar = new EventEmitter<Tarefa>();
 
   fechando = false;
 
@@ -21,15 +19,17 @@ export class VertarefasComponent {
     setTimeout(() => {
       this.fechar.emit();
       this.fechando = false;
-    }, 300); // 300ms é a duração da animação
+    }, 300); // animação de fechamento
   }
 
   editarTarefa() {
-    this.editar.emit(this.tarefa);
+    if (this.tarefa) {
+      this.editar.emit(this.tarefa);
+    }
   }
 
-  tarefaStatusClass(status: string | undefined) {
-    switch(status?.toLowerCase()) {
+  tarefaStatusClass(condicao: string | undefined) {
+    switch(condicao?.toLowerCase()) {
       case 'atrasado': return 'status atraso';
       case 'urgente': return 'status urgente';
       case 'pendente': return 'status pendente';

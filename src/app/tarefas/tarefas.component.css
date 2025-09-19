@@ -1,29 +1,26 @@
 html, body {
   height: 100%;
   margin: 0;
-  background-color: #f5f5f5; /* cinzinha */
-}
-
-/* Corpo da página */
-body {
-  min-height: 100vh;
-}
-
-hr {
-  border: none;
-  height: 2px;
-  background-color: #333;
-  margin: 20px auto;
-  width: 96%;
-  border-radius: 2px;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  color: #333;
+  background-color: #f5f5f5; /* corrigido */
 }
 
 /* Container principal */
 .container {
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  padding: 20px;
+  gap: 30px;
+  padding: 30px;
+}
+
+/* Título principal */
+.container > h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #222;
+  border-left: 6px solid #0080D7;
+  padding-left: 10px;
 }
 
 /* ===== Kanban ===== */
@@ -31,51 +28,57 @@ hr {
   display: flex;
   gap: 20px;
   align-items: flex-start;
-  flex-wrap: nowrap;
-  overflow-x: auto; /* scroll se não couber */
+  flex-wrap: wrap;   /* colunas quebram linha se não couberem */
   padding-bottom: 10px;
 }
 
-/* Colunas */
+/* ===== Colunas ===== */
 .kanban-col {
-  flex: 1;
-  min-width: 280px;
-  background: #f0eded;
-  border-radius: 8px;
-  padding: 15px;
-  min-height: 400px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  flex: 1 1 300px;  /* cresce, encolhe, largura mínima */
+  max-width: 400px; /* largura máxima */
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 500px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s ease;
 }
 
-.kanban-col h2 {
-  margin-bottom: 15px;
+.kanban-col:hover {
+  transform: translateY(-3px);
+}
+
+.kanban-col h4 {
   font-size: 18px;
   font-weight: bold;
-  color: #333;
+  color: #444444;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* ===== Cards ===== */
 .card {
   background: #fff;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 15px;
   width: 100%;
-  min-height: 150px;
+  min-height: 140px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   margin-bottom: 15px;
   cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #f0f0f0;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
 }
 
 /* Cabeçalho do card */
@@ -83,82 +86,62 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .card-header h3 {
   margin: 0;
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #222;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #333;
 }
 
 /* Texto do card */
 .card p {
   margin: 4px 0;
   font-size: 13px;
+  color: #555;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #333;
 }
 
-/* Status do card */
-.status {
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-size: 12px;
+/* ===== Badges de status ===== */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
   font-weight: bold;
+  text-transform: uppercase;
   color: #fff;
-  flex-shrink: 0;
 }
 
-.urgente { background: #fd3d02; margin-right: 12px; margin-bottom: 7px; }
-.atraso { background: #f73333; margin-right: 12px; margin-bottom: 7px; }
-.pendente { background: #FDE248; color: #000; margin-right: 12px; margin-bottom: 7px; }
+.urgente { background: #d32f2f; }
+.atraso { background: #f57c00; }
+.pendente { background: #fbc02d; color: #000; }
+.concluido { background: #388e3c; }
 
-/* Rodapé do card */
-.card-footer {
-  display: flex;
-  gap: 6px;
-  font-size: 20px;
-  align-items: center;
-  margin-top: 8px;
-}
-
-/* Ícone “mais” do card */
-.mais {
-  color: #0080D7;
-  font-size: 22px;
-  cursor: pointer;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.mais:hover {
-  color: #0066cc;
-  transform: scale(1.05);
-}
-
-/* Botão flutuante */
+/* ===== Botão flutuante ===== */
 .btn-flutuante {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 25px;
+  right: 25px;
   background: #0080D7;
   color: #fff;
   border: none;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 22px;
+  width: 60px;
+  height: 60px;
+  font-size: 26px;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-  transition: color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .btn-flutuante:hover { 
-  background: #0066cc; 
-  transform: scale(1.05);
+  background: #0066cc; /* corrigido */
+  transform: scale(1.1);
 }
