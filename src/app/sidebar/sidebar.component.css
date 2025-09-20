@@ -1,151 +1,206 @@
-  /* Container principal */
-  .sidebar-container {
-    position: relative;
-  }
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  /* Sidebar */
-  .sidebar {
-    width: 220px;
-    background-color: #0080D7;
-    color: white;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    position: fixed;
-    top: 0;
-    left: 0;
-    transition: width 0.3s;
-    overflow: hidden;
-    z-index: 1000;
-  }
+/* Container principal */
+.sidebar-container {
+  position: relative;
+  user-select: none;
+  font-family: Arial, sans-serif;
+}
 
-  /* Sidebar colapsada */
-  .sidebar.collapsed {
-    width: 70px;
-  }
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #0080d7;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 12px;
+  transition: width 0.35s ease;
+  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 1000;
+}
 
-  /* Header da sidebar (botão hamburguer) */
-  .sidebar-header {
-    display: flex;
-    justify-content: flex-start; /* padrão aberto */
-    align-items: center;
-    padding: 10px;
-    margin-bottom: 10px;
-    transition: justify-content 0.3s;
-  }
+/* Sidebar colapsada */
+.sidebar.collapsed {
+  width: 70px;
+}
 
-  /* Centraliza toggle quando colapsada */
-  .sidebar.collapsed .sidebar-header {
-    justify-content: center;
-  }
+/* Header da sidebar */
+.sidebar-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 55px;
+  margin-bottom: 20px;
+}
 
-  /* Botão hamburguer */
-  .toggle-btn {
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    border-radius: 6px;
-    padding: 6px;
-    transition: background 0.2s;
-  }
+/* Botão toggle fixo */
+.toggle-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 42px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 22px;
+  border-radius: 8px;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
 
-  .toggle-btn:hover {
-    background-color: #34495e;
-  }
+.toggle-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: rotate(90deg);
+}
 
-  /* User info */
-  .user-info {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+/* Menu */
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
 
-  .avatar {
-    font-size: 36px;
-    margin-bottom: 6px;
-  }
+.menu li {
+  margin-bottom: 10px;
+}
 
-  .username {
-    font-weight: bold;
-    font-size: 14px;
-  }
+/* Links do menu e footer */
+.menu a,
+.profile-footer a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.3s ease;
+}
 
-  /* Menu */
-  .menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
+/* Hover no menu */
+.menu a:hover,
+.profile-footer a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateX(4px);
+}
 
-  .menu li {
-    margin-bottom: 8px;
-  }
+/* Ícones */
+.icon,
+.icon_perfil {
+  font-size: 18px;
+  min-width: 26px;
+  text-align: center;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
 
-  /* Links do menu e footer */
-  .menu a,
-  .profile-footer a {
-    color: white;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    font-size: 15px;
-    transition: background 0.15s, justify-content 0.3s;
-    padding: 8px;
-    border-radius: 6px;
-    white-space: nowrap;
-    width: 100%;
-    box-sizing: border-box;
-  }
+.menu a:hover .icon {
+  transform: scale(1.2);
+  color: #ffffff;
+}
 
-  .menu a:hover,
-  .profile-footer a:hover {
-    background-color: #34495e;
-  }
+.icon_perfil {
+  font-size: 24px;
+}
 
-  .icon {
-    font-size: 18px;
-    text-align: center;
-    min-width: 26px;
-  }
+/* Sidebar colapsada */
+.sidebar.collapsed .menu a,
+.sidebar.collapsed .profile-footer a {
+  justify-content: center;
+  gap: 0;
+  padding: 12px 0;
+}
 
-  .icon_perfil {
-    font-size: 24px;
-    text-align: center;
-    min-width: 26px;
-  }
+.sidebar.collapsed .menu a span,
+.sidebar.collapsed .profile-footer a span {
+  display: none;
+}
 
-  /* Sidebar colapsada - centraliza itens e oculta textos */
-  .sidebar.collapsed .menu a,
-  .sidebar.collapsed .profile-footer a {
-    justify-content: center;
-    gap: 0;
-  }
+/* Profile footer fixo embaixo */
+.profile-footer {
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 14px;
+}
 
-  .sidebar.collapsed .menu a span,
-  .sidebar.collapsed .profile-footer a span {
-    display: none;
-  }
+.profile-pic {
+  background-color: transparent;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
 
-  .sidebar.collapsed .menu a .icon {
-    min-width: 0;
-  }
+.profile-footer a:hover .profile-pic {
+  transform: rotate(15deg);
+}
 
-  /* Profile footer fixo embaixo */
-  .profile-footer {
-    margin-top: auto;
-    padding-top: 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: justify-content 0.3s;
-  }
+/* Item ativo */
+.menu a.active {
+  background-color: #ffffff;
+  color: #0080d7;
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(0,0,0,0.15);
+  transform: translateX(4px);
+}
 
-  /* Centraliza footer quando colapsada */
-  .sidebar.collapsed .profile-footer {
-    align-items: center;
-  }
+.menu a.active .icon {
+  color: #0049d7;
+}
+
+.menu a.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  height: calc(100% - 12px);
+  width: 4px;
+  background: #0049d7;
+  border-radius: 2px;
+}
+
+/* Tooltip (quando colapsado) */
+.sidebar.collapsed .menu a[mattooltip]::after,
+.sidebar.collapsed .profile-footer[mattooltip]::after {
+  content: attr(mattooltip);
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translate(12px, -50%);
+  background: #0049d7;
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sidebar.collapsed .menu a[mattooltip]:hover::after,
+.sidebar.collapsed .profile-footer[mattooltip]:hover::after {
+  opacity: 1;
+  transform: translate(16px, -50%);
+}

@@ -7,85 +7,84 @@
     <!-- Kanban -->
     <div class="kanban">
 
-       <!-- Coluna Em Atraso -->
+      <!-- Coluna Em Atraso -->
       <div class="kanban-col">
         <h4>Em atraso</h4>
-        <div class="card" *ngFor="let tarefa of tarefasEmAtraso" (click)="abrirModal(tarefa)">
-          <div class="card-header">
-            <h3>{{ tarefa.titulo }}</h3>
-            <span class="status-badge" [ngClass]="tarefa.condicao">
-              {{ tarefa.condicao }}
-            </span>
+        <div class="kanban-cards">
+          <div class="card" *ngFor="let tarefa of tarefasEmAtraso" (click)="abrirModal(tarefa)">
+            <div class="card-header">
+              <h3>{{ tarefa.titulo }}</h3>
+              <span class="status-badge" [ngClass]="tarefa.flag">
+                {{ tarefa.flag }}
+              </span>
+            </div>
+            <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+            <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+            <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
           </div>
-          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
-          <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
-          <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
         </div>
       </div>
 
-      
       <!-- Coluna A Fazer -->
       <div class="kanban-col">
         <h4>A Fazer</h4>
-        <div class="card" *ngFor="let tarefa of tarefasAFazer" (click)="abrirModal(tarefa)">
-          <div class="card-header">
-            <h3>{{ tarefa.titulo }}</h3>
-            <span class="status-badge" [ngClass]="tarefa.condicao">
-              {{ tarefa.condicao }}
-            </span>
+        <div class="kanban-cards">
+          <div class="card" *ngFor="let tarefa of tarefasAFazer" (click)="abrirModal(tarefa)">
+            <div class="card-header">
+              <h3>{{ tarefa.titulo }}</h3>
+              <span class="status-badge" [ngClass]="tarefa.flag">
+                {{ tarefa.flag }}
+              </span>
+            </div>
+            <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+            <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+            <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
           </div>
-          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
-          <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
-          <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
         </div>
       </div>
-      
-
-     
 
       <!-- Coluna Em Andamento -->
       <div class="kanban-col">
         <h4>Em Andamento</h4>
-        <div class="card" *ngFor="let tarefa of tarefasEmAndamento" (click)="abrirModal(tarefa)">
-          <div class="card-header">
-            <h3>{{ tarefa.titulo }}</h3>
-            <span class="status-badge" [ngClass]="tarefa.condicao">
-              {{ tarefa.condicao }}
-            </span>
+        <div class="kanban-cards">
+          <div class="card" *ngFor="let tarefa of tarefasEmAndamento" (click)="abrirModal(tarefa)">
+            <div class="card-header">
+              <h3>{{ tarefa.titulo }}</h3>
+              <span class="status-badge" [ngClass]="tarefa.flag">
+                {{ tarefa.flag }}
+              </span>
+            </div>
+            <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+            <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+            <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
           </div>
-          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
-          <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
-          <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
         </div>
       </div>
 
       <!-- Coluna Concluídas -->
-      <div class="kanban-col">
+      <div class="kanban-col concluidas">
         <h4>Concluídas</h4>
-        <div class="card" *ngFor="let tarefa of tarefasConcluidas" (click)="abrirModal(tarefa)">
-          <div class="card-header">
-            <h3>{{ tarefa.titulo }}</h3>
-            <span class="status-badge" [ngClass]="tarefa.condicao">
-              {{ tarefa.condicao }}
-            </span>
+        <div class="kanban-cards">
+          <div class="card concluidas" *ngFor="let tarefa of tarefasConcluidas" (click)="abrirModal(tarefa)">
+            <div class="card-header">
+              <h3>{{ tarefa.titulo }}</h3>
+              <span class="status-badge" [ngClass]="tarefa.flag">
+                {{ tarefa.flag }}
+              </span>
+            </div>
+            <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+            <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+            <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
           </div>
-          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
-          <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
-          <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
         </div>
       </div>
 
-    </div>
-  </div>
-</div>
 
-<!-- Botão flutuante -->
+
 <!-- Botão flutuante -->
 <button class="btn-flutuante" (click)="abrirCriarModal()">
-<i class="fas fa-plus"></i>
+  <i class="fas fa-plus"></i>
 </button>
-
- 
 
 <!-- Modal -->
 <app-vertarefas 
@@ -97,12 +96,7 @@
 
 <!-- Modal de Criar Tarefa -->
 <app-criartarefas
-
   *ngIf="exibirCriarTarefa"
-
   (fechar)="fecharCriarModal()"
-
   (salvar)="tarefaCriada($event)">
 </app-criartarefas>
-
- 

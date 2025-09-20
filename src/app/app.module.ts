@@ -11,6 +11,11 @@ import { CriartarefasComponent } from './tarefas/criartarefas/criartarefas.compo
 import { VertarefasComponent } from './tarefas/vertarefas/vertarefas.component';
 import { provideHttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
+import { EquipesComponent } from './equipes/equipes.component';
+import { CalendarioComponent } from './calendario/calendario.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     FooterComponent,
     TarefasComponent,
     CriartarefasComponent,
-    VertarefasComponent
+    VertarefasComponent,
+    HomeComponent,
+    EquipesComponent,
+    CalendarioComponent,
+    PerfilComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

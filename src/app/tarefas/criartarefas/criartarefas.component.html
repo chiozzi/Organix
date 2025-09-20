@@ -16,27 +16,20 @@
       <label for="membros">Membros (separados por vírgula)</label>
       <input id="membros" type="text" formControlName="membros" />
 
-      <label for="prioridade">Prioridade</label>
-      <select id="prioridade" formControlName="prioridade">
-        <option value="baixa">Baixa</option>
-        <option value="media">Média</option>
-        <option value="alta">Alta</option>
-      </select>
-
       <label for="statusExecucao">Status de Execução</label>
       <select id="statusExecucao" formControlName="statusExecucao">
-        <option value="nao_iniciado">Não Iniciado</option>
-        <option value="iniciado">Iniciado</option>
-        <option value="em_andamento">Em Andamento</option>
-        <option value="concluido">Concluído</option>
+        <option value="A Fazer">A Fazer</option>
+        <option value="Em Atraso">Em Atraso</option>
+        <option value="Em Andamento">Em Andamento</option>
+        <option value="Concluido">Concluído</option>
       </select>
 
-      <label for="condicao">Condição</label>
-      <select id="condicao" formControlName="condicao">
-        <option value="pendente">Pendente</option>
-        <option value="urgente">Urgente</option>
-        <option value="atrasado">Atrasado</option>
-        <option value="normal">Normal</option>
+      <label for="flag">Flags</label>
+      <select id="flag" formControlName="flag">
+        <option value="Normal">Normal</option>
+        <option value="Pendente">Pendente</option>
+        <option value="Urgente">Urgente</option>
+        <option value="Atrasado">Atrasado</option>
       </select>
 
       <div class="modal-buttons">

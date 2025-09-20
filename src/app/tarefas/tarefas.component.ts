@@ -33,24 +33,24 @@ export class TarefasComponent implements OnInit {
 
   /** A Fazer (tarefas ainda não iniciadas) */
   get tarefasAFazer(): Tarefa[] {
-    return this.tarefas.filter(t => t.statusExecucao === 'nao_iniciado');
+    return this.tarefas.filter(t => t.statusExecucao === 'A Fazer');
   }
 
   /** Em Atraso */
   get tarefasEmAtraso(): Tarefa[] {
-    return this.tarefas.filter(t => t.statusExecucao === 'em_atraso');
+    return this.tarefas.filter(t => t.statusExecucao === 'Em Atraso');
   }
 
   /** Em Andamento (tarefas já iniciadas ou em andamento) */
   get tarefasEmAndamento(): Tarefa[] {
     return this.tarefas.filter(
-      t => t.statusExecucao === 'em_andamento' || t.statusExecucao === 'iniciado'
+      t => t.statusExecucao === 'Em Andamento' || t.statusExecucao === 'A Fazer'
     );
   }
 
   /** Concluídas */
   get tarefasConcluidas(): Tarefa[] {
-    return this.tarefas.filter(t => t.statusExecucao === 'concluido');
+    return this.tarefas.filter(t => t.statusExecucao === 'Concluido');
   }
 
   // === Modal de detalhes ===

@@ -4,46 +4,58 @@
       "id": 1,
       "titulo": "Ler capítulo do livro",
       "descricao": "Capítulo 5 de Estruturas de Dados",
-      "membros": ["Ana"],
+      "membros": [
+        "Ana"
+      ],
       "dataVencimento": "2025-09-25",
-      "statusExecucao": "nao_iniciado",
-      "condicao": "pendente"
+      "statusExecucao": "A Fazer",
+      "flag": "Pendente"
     },
     {
       "id": 2,
       "titulo": "Corrigir bugs do sistema",
       "descricao": "Correção de falhas no módulo de autenticação",
-      "membros": ["Carlos", "João"],
+      "membros": [
+        "Carlos",
+        "João"
+      ],
       "dataVencimento": "2025-09-19",
-      "statusExecucao": "em_atraso",
-      "condicao": "atrasado"
+      "statusExecucao": "Em Atraso",
+      "flag": "Atrasado"
     },
     {
       "id": 3,
       "titulo": "Preparar apresentação",
       "descricao": "Slides para reunião com diretoria",
-      "membros": ["Mariana"],
+      "membros": [
+        "Mariana"
+      ],
       "dataVencimento": "2025-09-21",
-      "statusExecucao": "iniciado",
-      "condicao": "urgente"
+      "statusExecucao": "Em Andamento",
+      "flag": "Urgente"
     },
     {
       "id": 4,
       "titulo": "Desenvolver API de produtos",
       "descricao": "Endpoints REST para listagem e cadastro",
-      "membros": ["Pedro", "Fernanda"],
+      "membros": [
+        "Pedro",
+        "Fernanda"
+      ],
       "dataVencimento": "2025-10-02",
-      "statusExecucao": "em_andamento",
-      "condicao": "normal"
+      "statusExecucao": "Em Andamento",
+      "flag": "Normal"
     },
     {
       "id": 5,
       "titulo": "Entrega do relatório mensal",
       "descricao": "Relatório de indicadores de performance",
-      "membros": ["Lucas"],
+      "membros": [
+        "Lucas"
+      ],
       "dataVencimento": "2025-09-15",
-      "statusExecucao": "concluido",
-      "condicao": "normal"
+      "statusExecucao": "Concluido",
+      "flag": "Normal"
     }
   ]
 }

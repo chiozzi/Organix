@@ -9,7 +9,7 @@
     <div class="modal-body">
       <p><strong>Vencimento:</strong> {{ tarefa?.dataVencimento | date:'dd/MM/yyyy' }}</p>
       <p><strong>Status:</strong> 
-        <span [ngClass]="tarefaStatusClass(tarefa?.condicao)">
+        <span [ngClass]="tarefaStatusClass(tarefa?.flag)">
           {{ tarefa?.statusExecucao }}
         </span>
       </p>

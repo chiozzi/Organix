@@ -1,9 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TarefasComponent } from './tarefas/tarefas.component';
+import { CriartarefasComponent } from './tarefas/criartarefas/criartarefas.component';
+import { VertarefasComponent } from './tarefas/vertarefas/vertarefas.component';
+import { HomeComponent } from './home/home.component';
+import { CalendarioComponent } from './calendario/calendario.component';
+import { EquipesComponent } from './equipes/equipes.component';
+import { ChatComponent } from './chat/chat.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 const routes: Routes = [
-     { path: "tarefas", component: TarefasComponent   }
+  { path: '', component: HomeComponent }, // rota inicial
+  { path: 'tarefas', component: TarefasComponent },
+  { path: 'criartarefas', component: CriartarefasComponent },
+  { path: 'vertarefas', component: VertarefasComponent },
+  { path: 'calendario', component: CalendarioComponent },
+  { path: 'equipes', component: EquipesComponent },
+  { path: 'chat', component: ChatComponent},
+  { path: 'perfil', component: PerfilComponent},
+  { path: '**', redirectTo: '' } // rota inválida -> Home
 ];
 
 

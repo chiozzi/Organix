@@ -28,12 +28,19 @@ export class VertarefasComponent {
     }
   }
 
-  tarefaStatusClass(condicao: string | undefined) {
-    switch(condicao?.toLowerCase()) {
-      case 'atrasado': return 'status atraso';
-      case 'urgente': return 'status urgente';
-      case 'pendente': return 'status pendente';
-      default: return '';
+  /** Retorna a classe CSS baseada no flag */
+  tarefaStatusClass(flag: Tarefa['flag'] | undefined): string {
+    switch (flag) {
+      case 'Atrasado':
+        return 'status atraso';
+      case 'Urgente':
+        return 'status urgente';
+      case 'Pendente':
+        return 'status pendente';
+      case 'Normal':
+        return 'status normal';
+      default:
+        return '';
     }
   }
 }

@@ -1,54 +1,58 @@
 <div class="sidebar-container" [class.collapsed]="!isOpen">
   <nav class="sidebar" [class.collapsed]="!isOpen">
-    
-    <!-- Botão de menu no topo -->
+
+    <!-- Header com toggle fixo -->
     <div class="sidebar-header">
       <button class="toggle-btn" (click)="toggleSidebar()" aria-label="Abrir/Fechar menu">
-        <i class="fas fa-bars" aria-hidden="true"></i>
+        <i class="fas fa-bars hamburger-icon"></i>
       </button>
     </div>
 
-   
-
     <ul class="menu">
       <li>
-        <a href="#">
-          <i class="fas fa-home icon" aria-hidden="true"></i>
+        <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          <i class="fas fa-home icon"></i>
           <span *ngIf="isOpen">Home</span>
         </a>
       </li>
+
       <li>
-        <a href="#">
-          <i class="fas fa-tasks icon" aria-hidden="true"></i>
+        <a [routerLink]="['/tarefas']" routerLinkActive="active">
+          <i class="fas fa-tasks icon"></i>
           <span *ngIf="isOpen">Tarefas</span>
         </a>
       </li>
+
       <li>
-        <a href="#">
-          <i class="fas fa-calendar-alt icon" aria-hidden="true"></i>
+        <a [routerLink]="['/calendario']" routerLinkActive="active">
+          <i class="fas fa-calendar-alt icon"></i>
           <span *ngIf="isOpen">Calendário</span>
         </a>
       </li>
+
       <li>
-        <a href="#">
-          <i class="fas fa-users icon" aria-hidden="true"></i>
+        <a [routerLink]="['/equipes']" routerLinkActive="active">
+          <i class="fas fa-users icon"></i>
           <span *ngIf="isOpen">Equipes</span>
         </a>
       </li>
+
       <li>
-        <a href="#">
-          <i class="fas fa-comments icon" aria-hidden="true"></i>
+        <a [routerLink]="['/chat']" routerLinkActive="active">
+          <i class="fas fa-comments icon"></i>
           <span *ngIf="isOpen">Chat</span>
         </a>
       </li>
     </ul>
 
-    <!-- Ícone de perfil fixo no rodapé -->
     <div class="profile-footer">
-      <a href="#">
-        <i class="fas fa-user-circle icon_perfil" aria-hidden="true"></i>
+      <a [routerLink]="['/perfil']" routerLinkActive="active">
+        <div class="profile-pic">
+          <i class="fas fa-user"></i>
+        </div>
         <span *ngIf="isOpen">Perfil</span>
       </a>
     </div>
+
   </nav>
 </div>

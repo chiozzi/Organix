@@ -10,11 +10,8 @@ export interface Tarefa {
   membros?: string[];
   dataVencimento?: string;
 
-  // Fluxo de execução (colunas do kanban)
-  statusExecucao: 'nao_iniciado' | 'em_atraso' | 'iniciado' | 'em_andamento' | 'concluido';
-
-  // Condição (flag do card)
-  condicao: 'pendente' | 'urgente' | 'atrasado' | 'normal';
+  statusExecucao: 'A Fazer' | 'Em Atraso' | 'Em Andamento' | 'Concluido';
+  flag: 'Normal' | 'Pendente' | 'Urgente' | 'Atrasado';
 }
 
 @Injectable({
@@ -25,27 +22,22 @@ export class TarefasService {
 
   constructor(private http: HttpClient) {}
 
-  // Listar todas as tarefas
   listar(): Observable<Tarefa[]> {
     return this.http.get<Tarefa[]>(this.apiUrl);
   }
 
-  // Buscar tarefa por ID
   buscarPorId(id: number): Observable<Tarefa> {
     return this.http.get<Tarefa>(`${this.apiUrl}/${id}`);
   }
 
-  // Criar nova tarefa
   criar(tarefa: Tarefa): Observable<Tarefa> {
     return this.http.post<Tarefa>(this.apiUrl, tarefa);
   }
 
-  // Atualizar tarefa existente
   atualizar(id: number, tarefa: Tarefa): Observable<Tarefa> {
     return this.http.put<Tarefa>(`${this.apiUrl}/${id}`, tarefa);
   }
 
-  // Remover tarefa por ID
   remover(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
