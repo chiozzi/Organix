@@ -24,18 +24,19 @@ html, body {
 }
 
 /* ===== Kanban ===== */
+/* ===== Kanban ===== */
 .kanban {
   display: flex;
   gap: 20px;
   align-items: flex-start;
-  flex-wrap: wrap;        /* colunas quebram linha se não couberem */
+  flex-wrap: wrap;
   padding-bottom: 10px;
 }
 
-/* ===== Colunas ===== */
+/* ===== Colunas principais (Em atraso, A fazer, Em andamento) ===== */
 .kanban-col {
-  flex: 1 1 300px;        /* cresce, encolhe, largura mínima */
-  max-width: 400px;       /* largura máxima */
+  flex: 1 1 calc(33.33% - 20px); /* cada uma ocupa 1/3 do espaço */
+  max-width: calc(33.33% - 20px);
   background: #e9e9e9;
   border-radius: 16px;
   padding: 20px;
@@ -45,13 +46,17 @@ html, body {
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  
 }
 
 .kanban-col:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-  
+}
+
+/* ===== Coluna Concluídas (ocupa a linha inteira) ===== */
+.kanban-col.concluidas {
+  flex: 1 1 100%;
+  max-width: 100%;
 }
 
 .kanban-col h4 {
@@ -61,11 +66,6 @@ html, body {
   margin-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-}
-
-.kanban-col.concluidas {
-  flex: 1 1 100%;
-  max-width: 100%;
 }
 
 /* ===== Scroll da lista de cards ===== */
