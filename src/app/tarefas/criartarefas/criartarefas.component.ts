@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Tarefa, TarefasService } from '../tarefas.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -9,22 +9,44 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './criartarefas.component.css'
 })
 export class CriartarefasComponent implements OnInit {
+  @Input() tarefa: Tarefa | null = null; // tarefa para edição, null = criar nova
   @Output() salvar = new EventEmitter<Tarefa>();
   @Output() fechar = new EventEmitter<void>();
 
   formTarefa!: FormGroup;
+  fechando = false;
 
   constructor(private tarefasService: TarefasService) {}
 
   ngOnInit(): void {
+    this.inicializarFormulario();
+  }
+
+  /** Inicializa ou reseta o formulário, preenchendo se for edição */
+  inicializarFormulario(): void {
     this.formTarefa = new FormGroup({
-      titulo: new FormControl('', Validators.required),
-      descricao: new FormControl(''),
-      dataVencimento: new FormControl(''),
-      membros: new FormControl(''),
-      statusExecucao: new FormControl('A Fazer', Validators.required),
-      flag: new FormControl('Normal', Validators.required)
+      titulo: new FormControl(this.tarefa?.titulo || '', Validators.required),
+      descricao: new FormControl(this.tarefa?.descricao || ''),
+      dataVencimento: new FormControl(this.tarefa?.dataVencimento || ''),
+      membros: new FormControl(this.tarefa?.membros ? this.tarefa.membros.join(', ') : ''),
+      statusExecucao: new FormControl(this.tarefa?.statusExecucao || 'A Fazer', Validators.required),
+      flag: new FormControl(this.tarefa?.flag || 'Normal', Validators.required)
     });
+  }
+
+  /** Chamada pelo componente pai para atualizar o formulário ao abrir o modal */
+  abrirModalComTarefa(tarefa: Tarefa | null): void {
+    this.tarefa = tarefa;
+    if (this.formTarefa) {
+      this.formTarefa.reset({
+        titulo: tarefa?.titulo || '',
+        descricao: tarefa?.descricao || '',
+        dataVencimento: tarefa?.dataVencimento || '',
+        membros: tarefa?.membros ? tarefa.membros.join(', ') : '',
+        statusExecucao: tarefa?.statusExecucao || 'A Fazer',
+        flag: tarefa?.flag || 'Normal'
+      });
+    }
   }
 
   salvarTarefa(): void {
@@ -32,23 +54,29 @@ export class CriartarefasComponent implements OnInit {
 
     const formValue = this.formTarefa.value;
 
-    const novaTarefa: Tarefa = {
+    const tarefaParaSalvar: Tarefa = {
+      ...this.tarefa, // mantém id se for edição
       titulo: formValue.titulo,
       descricao: formValue.descricao,
       dataVencimento: formValue.dataVencimento,
       membros: formValue.membros
-        ? formValue.membros.split(',').map((m: string) => m.trim())
-        : [],
+      ? formValue.membros.split(',').map((m: string) => m.trim())
+      : [],
+
       statusExecucao: formValue.statusExecucao,
       flag: formValue.flag
     };
 
-    this.tarefasService.criar(novaTarefa).subscribe({
-      next: (tarefaCriada) => {
-        this.salvar.emit(tarefaCriada);  // envia para o pai
+    const operacao$ = this.tarefa?.id
+      ? this.tarefasService.atualizar(this.tarefa.id, tarefaParaSalvar)
+      : this.tarefasService.criar(tarefaParaSalvar);
+
+    operacao$.subscribe({
+      next: (tarefaSalva) => {
+        this.salvar.emit(tarefaSalva);
         this.fecharModal();
       },
-      error: (err) => console.error('Erro ao criar tarefa:', err)
+      error: (err) => console.error('Erro ao salvar tarefa:', err)
     });
   }
 
@@ -57,10 +85,14 @@ export class CriartarefasComponent implements OnInit {
   }
 
   private fecharModal(): void {
-    this.formTarefa.reset({
-      statusExecucao: 'A Fazer',
-      flag: 'Normal'
-    });
-    this.fechar.emit();
+    this.fechando = true;
+    setTimeout(() => {
+      this.formTarefa.reset({
+        statusExecucao: 'A Fazer',
+        flag: 'Normal'
+      });
+      this.fechar.emit();
+      this.fechando = false;
+    }, 300);
   }
 }

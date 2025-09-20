@@ -1,5 +1,5 @@
-<div class="modal-backdrop">
-  <div class="modal-content">
+<div class="modal-backdrop" [ngClass]="{'fechando': fechando}">
+  <div class="modal-content" [ngClass]="{'fechando': fechando}">
     <h2>Criar Nova Tarefa</h2>
 
     <form [formGroup]="formTarefa" (ngSubmit)="salvarTarefa()">

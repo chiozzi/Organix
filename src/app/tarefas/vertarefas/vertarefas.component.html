@@ -4,27 +4,44 @@
       <h2>{{ tarefa?.titulo }}</h2>
     </div>
 
-    <hr class="linha1">
+    <hr class="linha1" />
 
     <div class="modal-body">
-      <p><strong>Vencimento:</strong> {{ tarefa?.dataVencimento | date:'dd/MM/yyyy' }}</p>
-      <p><strong>Status:</strong> 
-        <span [ngClass]="tarefaStatusClass(tarefa?.flag)">
-          {{ tarefa?.statusExecucao }}
-        </span>
-      </p>
-      <p><strong>Membros:</strong></p>
-      <div class="membros">
-        <i class="fas fa-user-circle" *ngFor="let membro of tarefa?.membros">{{ membro }}</i>
-      </div>
-      <p><strong>Descrição:</strong> {{ tarefa?.descricao }}</p>
+
+      <!-- Bloco de informações -->
+      <section class="info-bloco">
+        <h4>📅 Informações</h4>
+        <p><strong>Vencimento:</strong> {{ tarefa?.dataVencimento | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Status:</strong>
+          <span class="status" [ngClass]="tarefaStatusClass(tarefa?.flag)">
+            {{ tarefa?.statusExecucao }}
+          </span>
+        </p>
+      </section>
+
+      <!-- Bloco de membros -->
+      <section class="info-bloco">
+        <h4>👥 Membros</h4>
+        <div class="membros">
+          <span class="membro" *ngFor="let membro of tarefa?.membros">
+            <i class="fas fa-user-circle"></i> {{ membro }}
+          </span>
+        </div>
+      </section>
+
+      <!-- Bloco de descrição -->
+      <section class="info-bloco">
+        <h4>📝 Descrição</h4>
+        <p>{{ tarefa?.descricao || 'Sem descrição' }}</p>
+      </section>
+
     </div>
 
-    <hr class="linha2">
+    <hr class="linha2" />
 
     <div class="modal-footer">
       <button class="btn-editar" (click)="editarTarefa()">
-        Editar informações <i class="fas fa-edit" style="margin-left: 6px;"></i>
+        Editar informações <i class="fas fa-edit"></i>
       </button>
       <button class="btn-fechar" (click)="fecharModal()">Fechar</button>
     </div>

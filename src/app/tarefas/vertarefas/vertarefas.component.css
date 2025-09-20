@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5); /* fundo fixo, não animado */
+  background: rgba(0,0,0,0.5); /* fundo fixo */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@
 }
 
 .modal-content {
-  background: #f9f9f9; /* tom mais suave que branco */
+  background: #f9f9f9;
   padding: 25px 30px;
   border-radius: 15px;
   width: 60%;
@@ -40,23 +40,62 @@
   margin-top: 20px;
 }
 
+.info-bloco {
+  margin-bottom: 20px;
+}
+
+.info-bloco h4 {
+  margin-bottom: 8px;
+  font-size: 1.1em;
+  color: #444;
+}
+
 .modal-body p {
-  margin: 12px 0;
+  margin: 8px 0;
   color: #555;
   line-height: 1.4;
 }
 
-.modal-body .membros i {
-  font-size: 1.3em;
-  margin-right: 8px;
+/* Status */
+.status {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9em;
+  display: inline-block;
+}
+.status.normal   { background: #e6f7ff; color: #007bff; }
+.status.pendente { background: #fff3cd; color: #856404; }
+.status.urgente  { background: #f8d7da; color: #721c24; }
+.status.atraso   { background: #f5c6cb; color: #a94442; }
+
+/* Membros */
+.membros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.membro {
+  display: flex;
+  align-items: center;
+  background: #f1f1f1;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  color: #333;
+}
+.membro i {
+  margin-right: 6px;
+  font-size: 1.2em;
   color: #007bff;
 }
 
+/* Footer */
 .modal-footer {
   margin-top: 25px;
   display: flex;
-  justify-content: space-between; /* botão esquerdo e direito */
-  align-items: center;
+  gap: 12px;
+  justify-content: flex-end;
 }
 
 .btn-fechar, .btn-editar {
@@ -74,11 +113,9 @@
   display: flex;
   align-items: center;
 }
-
 .btn-editar i {
   margin-left: 6px;
 }
-
 .btn-editar:hover {
   background: #0066A1;
 }
@@ -87,12 +124,11 @@
   background: #d9534f;
   color: white;
 }
-
 .btn-fechar:hover {
   background: #c9302c;
 }
 
-/* Animação do modal apenas */
+/* Animação */
 @keyframes modalFadeIn {
   from { opacity: 0; transform: scale(0.95) translateY(-20px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }
@@ -107,8 +143,6 @@
   margin-top: 30px;
   margin-bottom: -7px;
 }
-
 .linha2 {
   margin: 7px;
 }
-  

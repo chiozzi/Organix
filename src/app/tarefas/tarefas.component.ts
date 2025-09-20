@@ -11,8 +11,9 @@ export class TarefasComponent implements OnInit {
   tarefas: Tarefa[] = [];
   tarefaSelecionada: Tarefa | null = null;
 
-  // controle do modal de criação
+  // Controle do modal de criação/edição
   exibirCriarTarefa = false;
+  tarefaParaEdicao: Tarefa | null = null;
 
   constructor(private tarefasService: TarefasService) {}
 
@@ -29,66 +30,66 @@ export class TarefasComponent implements OnInit {
     });
   }
 
-  // === Getters para separar por statusExecucao ===
-
-  /** A Fazer (tarefas ainda não iniciadas) */
+  // === Getters por statusExecucao ===
   get tarefasAFazer(): Tarefa[] {
     return this.tarefas.filter(t => t.statusExecucao === 'A Fazer');
   }
-
-  /** Em Atraso */
   get tarefasEmAtraso(): Tarefa[] {
     return this.tarefas.filter(t => t.statusExecucao === 'Em Atraso');
   }
-
-  /** Em Andamento (tarefas já iniciadas ou em andamento) */
   get tarefasEmAndamento(): Tarefa[] {
     return this.tarefas.filter(
       t => t.statusExecucao === 'Em Andamento' || t.statusExecucao === 'A Fazer'
     );
   }
-
-  /** Concluídas */
   get tarefasConcluidas(): Tarefa[] {
     return this.tarefas.filter(t => t.statusExecucao === 'Concluido');
   }
 
   // === Modal de detalhes ===
-
   abrirModal(tarefa: Tarefa): void {
     this.tarefaSelecionada = tarefa;
   }
-
   fecharModal(): void {
     this.tarefaSelecionada = null;
   }
 
-  // === Modal de criação ===
-
+  // === Modal de criação/edição ===
   abrirCriarModal(): void {
+    this.tarefaParaEdicao = null; // Criar nova tarefa
     this.exibirCriarTarefa = true;
   }
-
   fecharCriarModal(): void {
     this.exibirCriarTarefa = false;
+    this.tarefaParaEdicao = null;
   }
 
-  /** Recebe uma nova tarefa criada no modal e atualiza a lista */
-  tarefaCriada(novaTarefa: Tarefa): void {
+  // Recebe nova tarefa criada ou editada
+  tarefaCriada(tarefa: Tarefa): void {
     this.fecharCriarModal();
-    if (!novaTarefa) return;
+    if (!tarefa) return;
 
-    // adiciona na lista em memória para refletir imediatamente na UI
-    this.tarefas.push(novaTarefa);
+    const index = this.tarefas.findIndex(t => t.id === tarefa.id);
+    if (index >= 0) {
+      // Atualiza tarefa existente
+      this.tarefas[index] = tarefa;
+    } else {
+      // Adiciona nova tarefa
+      this.tarefas.push(tarefa);
+    }
   }
 
-  // === Edição ===
-
+  // === Edição via modal de visualização ===
   editarTarefa(tarefa: Tarefa): void {
-    if (!tarefa.id) return;
-    this.tarefasService.atualizar(tarefa.id, tarefa).subscribe({
-      next: () => this.carregarTarefas(),
-      error: (err) => console.error('Erro ao editar tarefa:', err)
+    // Fecha modal de visualização e abre modal de criação para edição
+    this.fecharModal();
+    this.tarefaParaEdicao = { ...tarefa }; // Cria cópia para edição
+    this.exibirCriarTarefa = true;
+
+    // Garante que o formulário seja preenchido imediatamente
+    setTimeout(() => {
+      const modalCriar = document.querySelector('app-criartarefas') as any;
+      modalCriar?.abrirModalComTarefa(this.tarefaParaEdicao);
     });
   }
 }
