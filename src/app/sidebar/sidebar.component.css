@@ -157,7 +157,7 @@
 /* Item ativo (conciliação) */
 .menu a.active {
   background-color: #ffffff; /* branco do primeiro código */
-  color: #00807d;            /* cor do texto do primeiro código */
+  color: #0049d7;            /* cor do texto do primeiro código */
   font-weight: 700;
   box-shadow: 0 0 10px rgba(0,0,0,0.2); /* sombra do primeiro código */
   transform: translateX(4px); /* mantido do segundo código */

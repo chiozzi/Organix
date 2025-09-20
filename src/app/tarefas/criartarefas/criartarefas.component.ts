@@ -12,17 +12,11 @@ export class CriartarefasComponent implements OnInit {
   @Output() salvar = new EventEmitter<Tarefa>();
   @Output() fechar = new EventEmitter<void>();
 
-  tarefas: Tarefa[] = [];
   formTarefa!: FormGroup;
-
-  exibirCriarTarefa = false;
 
   constructor(private tarefasService: TarefasService) {}
 
   ngOnInit(): void {
-    this.carregarTarefas();
-
-    // Inicializa o formulário reativo com valores padronizados
     this.formTarefa = new FormGroup({
       titulo: new FormControl('', Validators.required),
       descricao: new FormControl(''),
@@ -31,26 +25,6 @@ export class CriartarefasComponent implements OnInit {
       statusExecucao: new FormControl('A Fazer', Validators.required),
       flag: new FormControl('Normal', Validators.required)
     });
-  }
-
-  carregarTarefas(): void {
-    this.tarefasService.listar().subscribe({
-      next: dados => this.tarefas = dados || [],
-      error: err => console.error('Erro ao carregar tarefas:', err)
-    });
-  }
-
-  abrirCriarModal(): void {
-    this.exibirCriarTarefa = true;
-  }
-
-  fecharCriarModal(): void {
-    this.exibirCriarTarefa = false;
-    this.formTarefa.reset({
-      statusExecucao: 'A Fazer',
-      flag: 'Normal'
-    });
-    this.fechar.emit();
   }
 
   salvarTarefa(): void {
@@ -69,45 +43,24 @@ export class CriartarefasComponent implements OnInit {
       flag: formValue.flag
     };
 
-    // Chama o serviço para criar no backend
     this.tarefasService.criar(novaTarefa).subscribe({
       next: (tarefaCriada) => {
-        this.tarefas.push(tarefaCriada);      // adiciona na lista local
-        this.salvar.emit(tarefaCriada);       // emite para o pai
-        this.fecharCriarModal();              // fecha o modal
+        this.salvar.emit(tarefaCriada);  // envia para o pai
+        this.fecharModal();
       },
       error: (err) => console.error('Erro ao criar tarefa:', err)
     });
   }
 
   cancelar(): void {
-    this.fecharCriarModal();
+    this.fecharModal();
   }
 
-  // Getters por status
-  get tarefasAFazer(): Tarefa[] {
-    return this.tarefas.filter(t => t.statusExecucao === 'A Fazer');
-  }
-
-  get tarefasEmAtraso(): Tarefa[] {
-    return this.tarefas.filter(t => t.statusExecucao === 'Em Atraso');
-  }
-
-  get tarefasEmAndamento(): Tarefa[] {
-    return this.tarefas.filter(t => t.statusExecucao === 'Em Andamento');
-  }
-
-  get tarefasConcluidas(): Tarefa[] {
-    return this.tarefas.filter(t => t.statusExecucao === 'Concluido');
-  }
-
-  // Edição de tarefas
-  editarTarefa(tarefa: Tarefa): void {
-    if (!tarefa.id) return;
-
-    this.tarefasService.atualizar(tarefa.id, tarefa).subscribe({
-      next: () => this.carregarTarefas(),
-      error: err => console.error('Erro ao editar tarefa:', err)
+  private fecharModal(): void {
+    this.formTarefa.reset({
+      statusExecucao: 'A Fazer',
+      flag: 'Normal'
     });
+    this.fechar.emit();
   }
 }

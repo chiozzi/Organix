@@ -12,8 +12,6 @@ import { PerfilComponent } from './perfil/perfil.component';
 const routes: Routes = [
   { path: '', component: HomeComponent }, // rota inicial
   { path: 'tarefas', component: TarefasComponent },
-  { path: 'criartarefas', component: CriartarefasComponent },
-  { path: 'vertarefas', component: VertarefasComponent },
   { path: 'calendario', component: CalendarioComponent },
   { path: 'equipes', component: EquipesComponent },
   { path: 'chat', component: ChatComponent},
