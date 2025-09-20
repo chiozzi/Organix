@@ -103,22 +103,3 @@
   font-size: 0.85rem;
   color: #e0e0e0;
 }
-
-/* RESPONSIVIDADE */
-@media (max-width: 1024px) {
-  .footer-bottom-links {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-  }
-}
-
-@media (max-width: 768px) {
-  .footer-container {
-    grid-template-rows: auto;
-    gap: 30px;
-  }
-  .footer-bottom-links {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-}
