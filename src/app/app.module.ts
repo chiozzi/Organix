@@ -16,6 +16,7 @@ import { EquipesComponent } from './equipes/equipes.component';
 import { CalendarioComponent } from './calendario/calendario.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { ChatComponent } from './chat/chat.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ChatComponent } from './chat/chat.component';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DragDropModule
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]
