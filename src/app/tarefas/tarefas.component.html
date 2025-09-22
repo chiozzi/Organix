@@ -1,24 +1,24 @@
 <div class="container">
-  <h2>Projects & Teams</h2>
+  <h2>Painel de Tarefas</h2>
 
   <div class="projeto">
-    <h3>Projeto: Minhas Tarefas</h3>
+    <h3>Projeto Atual: Minhas Tarefas</h3>
 
     <div class="kanban">
 
-      <!-- Em Atraso -->
+      <!-- Atrasadas -->
       <div class="kanban-col"
            cdkDropList
            id="atraso"
            [cdkDropListData]="tarefasEmAtrasoArray"
            [cdkDropListConnectedTo]="['afazer','emandamento','concluidas']"
            (cdkDropListDropped)="drop($event, 'Em Atraso')">
-        <h4>Em atraso</h4>
+        <h4>⏰ Atrasadas</h4>
         <div class="kanban-cards">
           <div class="card" *ngFor="let tarefa of tarefasEmAtrasoArray" cdkDrag (click)="abrirModal(tarefa)">
             <div class="card-header">
               <h3>{{ tarefa.titulo }}</h3>
-              <span class="status-badge" [ngClass]="tarefa.flag">{{ tarefa.flag }}</span>
+<span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
             </div>
             <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
             <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
@@ -27,19 +27,19 @@
         </div>
       </div>
 
-      <!-- A Fazer -->
+      <!-- Pendentes -->
       <div class="kanban-col"
            cdkDropList
            id="afazer"
            [cdkDropListData]="tarefasAFazerArray"
            [cdkDropListConnectedTo]="['atraso','emandamento','concluidas']"
            (cdkDropListDropped)="drop($event, 'A Fazer')">
-        <h4>A Fazer</h4>
+        <h4>📝 Pendentes</h4>
         <div class="kanban-cards">
           <div class="card" *ngFor="let tarefa of tarefasAFazerArray" cdkDrag (click)="abrirModal(tarefa)">
             <div class="card-header">
               <h3>{{ tarefa.titulo }}</h3>
-              <span class="status-badge" [ngClass]="tarefa.flag">{{ tarefa.flag }}</span>
+<span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
             </div>
             <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
             <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
@@ -48,19 +48,19 @@
         </div>
       </div>
 
-      <!-- Em Andamento -->
+      <!-- Em Progresso -->
       <div class="kanban-col"
            cdkDropList
            id="emandamento"
            [cdkDropListData]="tarefasEmAndamentoArray"
            [cdkDropListConnectedTo]="['atraso','afazer','concluidas']"
            (cdkDropListDropped)="drop($event, 'Em Andamento')">
-        <h4>Em Andamento</h4>
+        <h4>⚙️ Em Progresso</h4>
         <div class="kanban-cards">
           <div class="card" *ngFor="let tarefa of tarefasEmAndamentoArray" cdkDrag (click)="abrirModal(tarefa)">
             <div class="card-header">
               <h3>{{ tarefa.titulo }}</h3>
-              <span class="status-badge" [ngClass]="tarefa.flag">{{ tarefa.flag }}</span>
+<span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
             </div>
             <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
             <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
@@ -76,12 +76,12 @@
            [cdkDropListData]="tarefasConcluidasArray"
            [cdkDropListConnectedTo]="['atraso','afazer','emandamento']"
            (cdkDropListDropped)="drop($event, 'Concluido')">
-        <h4>Concluídas</h4>
+        <h4>✅ Concluídas</h4>
         <div class="kanban-cards">
-          <div class="card concluidas" *ngFor="let tarefa of tarefasConcluidasArray" cdkDrag (click)="abrirModal(tarefa)">
+          <div class="card" *ngFor="let tarefa of tarefasConcluidasArray" cdkDrag (click)="abrirModal(tarefa)">
             <div class="card-header">
               <h3>{{ tarefa.titulo }}</h3>
-              <span class="status-badge" [ngClass]="tarefa.flag">{{ tarefa.flag }}</span>
+<span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
             </div>
             <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
             <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>

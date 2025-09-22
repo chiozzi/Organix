@@ -7,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.css'
 })
 export class FooterComponent {
+ exibirSobreNos = false;
 
+  abrirSobreNos(event: Event) {
+    event.preventDefault(); // impede reload da página
+    this.exibirSobreNos = true;
+  }
+
+  fecharSobreNos() {
+    this.exibirSobreNos = false;
+  }
 }

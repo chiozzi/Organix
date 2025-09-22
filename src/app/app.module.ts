@@ -17,6 +17,7 @@ import { CalendarioComponent } from './calendario/calendario.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { ChatComponent } from './chat/chat.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { SobrenosComponent } from './footer/sobrenos/sobrenos.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     EquipesComponent,
     CalendarioComponent,
     PerfilComponent,
-    ChatComponent
+    ChatComponent,
+    SobrenosComponent
   ],
   imports: [
     BrowserModule,

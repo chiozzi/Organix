@@ -1,34 +1,18 @@
 <footer class="footer">
   <div class="footer-container">
-    <!-- SOBRE NÓS -->
-    <div class="footer-section about">
-      <h3>Sobre Nós</h3>
-      <p>
-        A Organix nasceu para transformar a maneira como pessoas, equipes e
-        organizações gerenciam suas tarefas. Inspirada pelo conceito de união
-        e equilíbrio presente em nossa logo, acreditamos que produtividade real
-        surge quando todos trabalham em harmonia.
-      </p>
-      <p>
-        Nossa plataforma oferece ferramentas simples e poderosas para organizar
-        atividades, compartilhar responsabilidades e acompanhar resultados, seja
-        em empresas, escolas ou no uso pessoal. Cada recurso foi pensado para
-        criar fluxos de trabalho conectados, onde colaboração e clareza caminham
-        lado a lado.
-      </p>
-    </div>
 
     <!-- LINHA DE 4 COLUNAS -->
     <div class="footer-bottom-links">
+      
       <!-- Links Úteis -->
       <div class="footer-subsection">
         <h3>Links Úteis</h3>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Tarefas</a></li>
-          <li><a href="#">Calendário</a></li>
-          <li><a href="#">Equipes</a></li>
-          <li><a href="#">Chat</a></li>
+          <li><a href="/src/app/home/home.component.html">Home</a></li>
+          <li><a href="/src/app/tarefas/tarefas.component.html">Tarefas</a></li>
+          <li><a href="/src/app/calendario/calendario.component.html">Calendário</a></li>
+          <li><a href="/src/app/equipes/equipes.component.html">Equipes</a></li>
+          <li><a href="/src/app/chat/chat.component.html">Chat</a></li>
         </ul>
       </div>
 
@@ -36,6 +20,7 @@
       <div class="footer-subsection">
         <h3>Links Institucionais</h3>
         <ul>
+          <li><a href="#" (click)="abrirSobreNos($event)">Sobre Nós</a></li>
           <li><a href="#">Política de Privacidade</a></li>
           <li><a href="#">Termos de Uso</a></li>
           <li><a href="#">Cookies</a></li>

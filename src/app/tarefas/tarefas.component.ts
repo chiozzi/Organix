@@ -17,7 +17,6 @@ export class TarefasComponent implements OnInit {
   exibirCriarTarefa = false;
   tarefaParaEdicao: Tarefa | null = null;
 
-  // Arrays separados por status
   tarefasAFazerArray: Tarefa[] = [];
   tarefasEmAtrasoArray: Tarefa[] = [];
   tarefasEmAndamentoArray: Tarefa[] = [];
@@ -39,12 +38,24 @@ export class TarefasComponent implements OnInit {
     });
   }
 
-  separarPorStatus(): void {
-    this.tarefasAFazerArray = this.tarefas.filter(t => t.statusExecucao === 'A Fazer');
-    this.tarefasEmAtrasoArray = this.tarefas.filter(t => t.statusExecucao === 'Em Atraso');
-    this.tarefasEmAndamentoArray = this.tarefas.filter(t => t.statusExecucao === 'Em Andamento');
-    this.tarefasConcluidasArray = this.tarefas.filter(t => t.statusExecucao === 'Concluido');
-  }
+separarPorStatus(): void {
+  const hoje = new Date();
+
+  this.tarefas.forEach(t => {
+    if (t.statusExecucao !== 'Concluido' && t.dataVencimento) {
+      const vencimento = new Date(t.dataVencimento);
+      if (vencimento < hoje) {
+        t.flag = 'Atrasado';
+      }
+    }
+  });
+
+  this.tarefasAFazerArray = this.tarefas.filter(t => t.statusExecucao === 'A Fazer');
+  this.tarefasEmAtrasoArray = this.tarefas.filter(t => t.statusExecucao === 'Em Atraso');
+  this.tarefasEmAndamentoArray = this.tarefas.filter(t => t.statusExecucao === 'Em Andamento');
+  this.tarefasConcluidasArray = this.tarefas.filter(t => t.statusExecucao === 'Concluido');
+}
+  
 
   abrirModal(tarefa: Tarefa): void {
     this.tarefaSelecionada = tarefa;
@@ -101,6 +112,16 @@ export class TarefasComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+    }
+  }
+
+  /** Retorna a classe de cor da flag */
+  corFlag(flag: string): string {
+    switch (flag.toLowerCase()) {
+      case 'urgente': return 'urgente';
+      case 'em atraso': return 'atrasado';
+      case 'pendente': return 'pendente';
+      default: return 'normal';
     }
   }
 }
