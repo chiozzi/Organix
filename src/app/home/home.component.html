@@ -1,1 +1,102 @@
-<p>home works!</p>
+<div class="home-container">
+  <!-- Saudação -->
+  <div class="welcome">
+    <h2>Bem-vindo, {{ usuario }} 👋</h2>
+    <p>Hoje você tem {{ tarefasHoje.length }} tarefas e 1 reunião.</p>
+  </div>
+
+  <!-- Título das Estatísticas -->
+  <div class="section tarefas-title">
+    <h3>Minhas Tarefas</h3>
+  </div>
+
+  <!-- Estatísticas -->
+  <div class="stats-grid">
+    <div class="stat-card" *ngFor="let stat of stats" [style.borderLeftColor]="stat.cor">
+      <i [class]="stat.icone"></i>
+      <div>
+        <h3>{{ stat.valor }}</h3>
+        <p>{{ stat.titulo }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Atalhos Rápidos -->
+  <div class="section">
+    <h3>Atalhos Rápidos</h3>
+    <div class="atalhos-grid">
+      <button class="atalho atalho-destaque">
+        <i class="fa fa-plus"></i>
+        <span>Nova Tarefa</span>
+      </button>
+      <button class="atalho atalho-destaque">
+        <i class="fa fa-plus"></i>
+        <span>Nova Reunião</span>
+      </button>
+      <button class="atalho">
+        <i class="fa fa-calendar"></i>
+        <span>Ver Calendário</span>
+      </button>
+      <button class="atalho">
+        <i class="fa fa-users"></i>
+        <span>Ver Minhas Equipes</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Conteúdo principal: Tarefas e Reunião -->
+  <div class="main-grid">
+    <!-- Tarefas de Hoje -->
+    <div class="section">
+      <h3>Tarefas de Hoje</h3>
+      <ul class="lista-tarefas">
+        <li *ngFor="let tarefa of tarefasHoje">
+          <i class="fa fa-tasks"></i>
+          <span>{{ tarefa.titulo }}</span>
+          <small>{{ tarefa.hora }}</small>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Próxima Reunião -->
+    <div class="section">
+      <h3>Próxima Reunião</h3>
+      <div class="reuniao-card">
+        <i class="fa fa-handshake"></i>
+        <div>
+          <p><strong>{{ proximaReuniao.titulo }}</strong></p>
+          <p>{{ proximaReuniao.data }} às {{ proximaReuniao.hora }}</p>
+          <p><em>{{ proximaReuniao.local }}</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensagens e Notificações -->
+  <div class="bottom-grid">
+    <!-- Notificações -->
+    <div class="section scrollable-box">
+      <h3>Notificações</h3>
+      <div class="notificacoes scrollable-inner">
+        <div class="notificacao" *ngFor="let n of notificacoes">
+          <i class="fa fa-bell"></i>
+          <span>{{ n.mensagem }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensagens -->
+    <div class="section scrollable-box">
+      <h3>Novas Mensagens</h3>
+      <div class="mensagens scrollable-inner">
+        <div class="mensagem" *ngFor="let m of mensagens">
+          <i class="fa fa-user-circle"></i>
+          <div>
+            <strong>{{ m.remetente }}</strong>
+            <p>{{ m.texto }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

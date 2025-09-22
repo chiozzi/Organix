@@ -1,42 +1,53 @@
-<div class="modal-backdrop" [ngClass]="{'fechando': fechando}">
+<div class="modal-overlay" [ngClass]="{'fechando': fechando}">
   <div class="modal-content" [ngClass]="{'fechando': fechando}">
-    <h2>Criar Nova Tarefa</h2>
+    <div class="modal-header">
+      <h2>{{ tarefa ? 'Atualizar Tarefa' : 'Criar Nova Tarefa' }}</h2>
+    </div>
 
-    <form [formGroup]="formTarefa" (ngSubmit)="salvarTarefa()">
+    <hr class="linha1" />
 
-      <label for="titulo">Título</label>
-      <input id="titulo" type="text" formControlName="titulo" required />
+    <div class="modal-body">
+      <form [formGroup]="formTarefa" (ngSubmit)="salvarTarefa()">
 
-      <label for="dataVencimento">Data de Vencimento</label>
-      <input id="dataVencimento" type="date" formControlName="dataVencimento" />
+        <section class="info-bloco">
+          <h4>📝 Informações</h4>
 
-      <label for="descricao">Descrição</label>
-      <textarea id="descricao" formControlName="descricao"></textarea>
+          <label>Título</label>
+          <input type="text" formControlName="titulo" placeholder="Digite o título" />
 
-      <label for="membros">Membros (separados por vírgula)</label>
-      <input id="membros" type="text" formControlName="membros" />
+          <label>Data de Vencimento</label>
+          <input type="date" formControlName="dataVencimento" />
 
-      <label for="statusExecucao">Status de Execução</label>
-      <select id="statusExecucao" formControlName="statusExecucao">
-        <option value="A Fazer">A Fazer</option>
-        <option value="Em Atraso">Em Atraso</option>
-        <option value="Em Andamento">Em Andamento</option>
-        <option value="Concluido">Concluído</option>
-      </select>
+          <label>Descrição</label>
+          <textarea rows="3" formControlName="descricao" placeholder="Detalhes da tarefa"></textarea>
 
-      <label for="flag">Flags</label>
-      <select id="flag" formControlName="flag">
-        <option value="Normal">Normal</option>
-        <option value="Pendente">Pendente</option>
-        <option value="Urgente">Urgente</option>
-        <option value="Atrasado">Atrasado</option>
-      </select>
+          <label>Membros (separados por vírgula)</label>
+          <input type="text" formControlName="membros" placeholder="Ex: João, Maria" />
 
-      <div class="modal-buttons">
-        <button type="submit" [disabled]="formTarefa.invalid">Salvar</button>
-        <button type="button" (click)="cancelar()">Cancelar</button>
-      </div>
+          <label>Status</label>
+          <select formControlName="statusExecucao">
+            <option value="A Fazer">A Fazer</option>
+            <option value="Em Atraso">Em Atraso</option>
+            <option value="Em Andamento">Em Andamento</option>
+            <option value="Concluido">Concluído</option>
+          </select>
 
-    </form>
+          <label>Prioridade</label>
+          <select formControlName="flag">
+            <option value="Normal">Normal</option>
+            <option value="Pendente">Pendente</option>
+            <option value="Urgente">Urgente</option>
+            <option value="Atrasado">Atrasado</option>
+          </select>
+        </section>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-fechar" (click)="cancelar()">Cancelar</button>
+          <button type="submit" class="btn-editar" [disabled]="formTarefa.invalid">
+            {{ tarefa ? 'Atualizar' : 'Salvar' }}
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

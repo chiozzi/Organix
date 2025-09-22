@@ -146,10 +146,11 @@ html, body {
   color: #fff;
 }
 
-.Urgente { background: #d32f2f; }
-.Atrasado { background: #f57c00; }
+.Urgente { background: #f57c00; }
+.Atrasado { background: #d32f2f; }
 .Pendente { background: #fbc02d; color: #000; }
 .Normal   { background: #9e9e9e; }
+
 
 /* ===== Botão flutuante ===== */
 .btn-flutuante {
