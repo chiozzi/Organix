@@ -18,7 +18,7 @@
           <div class="card" *ngFor="let tarefa of tarefasEmAtrasoArray" cdkDrag (click)="abrirModal(tarefa)">
             <div class="card-header">
               <h3>{{ tarefa.titulo }}</h3>
-<span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
+              <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
             </div>
             <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
             <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
@@ -39,7 +39,7 @@
           <div class="card" *ngFor="let tarefa of tarefasAFazerArray" cdkDrag (click)="abrirModal(tarefa)">
             <div class="card-header">
               <h3>{{ tarefa.titulo }}</h3>
-<span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
+              <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
             </div>
             <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
             <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
@@ -60,7 +60,7 @@
           <div class="card" *ngFor="let tarefa of tarefasEmAndamentoArray" cdkDrag (click)="abrirModal(tarefa)">
             <div class="card-header">
               <h3>{{ tarefa.titulo }}</h3>
-<span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
+              <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
             </div>
             <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
             <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
@@ -81,7 +81,7 @@
           <div class="card" *ngFor="let tarefa of tarefasConcluidasArray" cdkDrag (click)="abrirModal(tarefa)">
             <div class="card-header">
               <h3>{{ tarefa.titulo }}</h3>
-<span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
+              <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
             </div>
             <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
             <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
@@ -97,11 +97,12 @@
     <i class="fas fa-plus"></i>
   </button>
 
-  <app-vertarefas 
-    *ngIf="tarefaSelecionada"  
+  <app-vertarefas
+    *ngIf="tarefaSelecionada"
     [tarefa]="tarefaSelecionada"
     (fechar)="fecharModal()"
-    (editar)="editarTarefa($event)">
+    (editar)="editarTarefa($event)"
+    (concluir)="moverParaConcluidas($event)">
   </app-vertarefas>
 
   <app-criartarefas

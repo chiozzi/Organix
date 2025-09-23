@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TarefasComponent } from './tarefas/tarefas.component';
-import { CriartarefasComponent } from './tarefas/criartarefas/criartarefas.component';
-import { VertarefasComponent } from './tarefas/vertarefas/vertarefas.component';
 import { HomeComponent } from './home/home.component';
 import { CalendarioComponent } from './calendario/calendario.component';
 import { EquipesComponent } from './equipes/equipes.component';

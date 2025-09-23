@@ -22,31 +22,19 @@ export class CriartarefasComponent implements OnInit {
     this.inicializarFormulario();
   }
 
-  /** Calcula a flag automaticamente */
-  calcularFlag(tarefa: Tarefa): 'Normal' | 'Pendente' | 'Urgente' | 'Atrasado' {
-    if (!tarefa.dataVencimento) return 'Normal';
-
-    const hoje = new Date();
-    const vencimento = new Date(tarefa.dataVencimento);
-    const diffDias = Math.ceil((vencimento.getTime() - hoje.getTime()) / (1000 * 60 * 60 * 24));
-
-    if (diffDias < 0) return 'Atrasado';
-    if (diffDias <= 2) return 'Urgente';
-    if (diffDias <= 5) return 'Pendente';
-    return 'Normal';
-  }
-
+  /** Inicializa ou reseta o formulário, preenchendo se for edição */
   inicializarFormulario(): void {
     this.formTarefa = new FormGroup({
       titulo: new FormControl(this.tarefa?.titulo || '', Validators.required),
       descricao: new FormControl(this.tarefa?.descricao || ''),
-      dataVencimento: new FormControl(this.tarefa?.dataVencimento || '', Validators.required),
+      dataVencimento: new FormControl(this.tarefa?.dataVencimento || ''),
       membros: new FormControl(this.tarefa?.membros ? this.tarefa.membros.join(', ') : ''),
-      statusExecucao: new FormControl(this.tarefa?.statusExecucao || 'A Fazer', Validators.required)
-      // flag removido do formulário porque agora é automático
+      statusExecucao: new FormControl(this.tarefa?.statusExecucao || 'A Fazer', Validators.required),
+      flag: new FormControl(this.tarefa?.flag || 'Normal', Validators.required)
     });
   }
 
+  /** Chamada pelo componente pai para atualizar o formulário ao abrir o modal */
   abrirModalComTarefa(tarefa: Tarefa | null): void {
     this.tarefa = tarefa;
     if (this.formTarefa) {
@@ -55,7 +43,8 @@ export class CriartarefasComponent implements OnInit {
         descricao: tarefa?.descricao || '',
         dataVencimento: tarefa?.dataVencimento || '',
         membros: tarefa?.membros ? tarefa.membros.join(', ') : '',
-        statusExecucao: tarefa?.statusExecucao || 'A Fazer'
+        statusExecucao: tarefa?.statusExecucao || 'A Fazer',
+        flag: tarefa?.flag || 'Normal'
       });
     }
   }
@@ -71,14 +60,12 @@ export class CriartarefasComponent implements OnInit {
       descricao: formValue.descricao,
       dataVencimento: formValue.dataVencimento,
       membros: formValue.membros
-        ? formValue.membros.split(',').map((m: string) => m.trim())
-        : [],
-      statusExecucao: formValue.statusExecucao,
-      flag: 'Normal' // será sobrescrito abaixo
-    };
+      ? formValue.membros.split(',').map((m: string) => m.trim())
+      : [],
 
-    // Calcula flag automaticamente
-    tarefaParaSalvar.flag = this.calcularFlag(tarefaParaSalvar);
+      statusExecucao: formValue.statusExecucao,
+      flag: formValue.flag
+    };
 
     const operacao$ = this.tarefa?.id
       ? this.tarefasService.atualizar(this.tarefa.id, tarefaParaSalvar)
@@ -101,7 +88,8 @@ export class CriartarefasComponent implements OnInit {
     this.fechando = true;
     setTimeout(() => {
       this.formTarefa.reset({
-        statusExecucao: 'A Fazer'
+        statusExecucao: 'A Fazer',
+        flag: 'Normal'
       });
       this.fechar.emit();
       this.fechando = false;

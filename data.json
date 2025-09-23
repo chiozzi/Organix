@@ -54,8 +54,7 @@
         "Lucas"
       ],
       "dataVencimento": "2025-09-15",
-      "statusExecucao": "Concluido",
-      "flag": "Normal"
+      "statusExecucao": "Concluido"
     },
     {
       "id": 6,
@@ -178,8 +177,7 @@
         "Ana"
       ],
       "dataVencimento": "2025-09-18",
-      "statusExecucao": "Em Atraso",
-      "flag": "Atrasado"
+      "statusExecucao": "Concluido"
     },
     {
       "id": 17,
@@ -189,8 +187,7 @@
         "Carlos"
       ],
       "dataVencimento": "2025-09-17",
-      "statusExecucao": "Em Atraso",
-      "flag": "Urgente"
+      "statusExecucao": "Concluido"
     },
     {
       "id": 18,
@@ -212,8 +209,7 @@
         "Lucas"
       ],
       "dataVencimento": "2025-09-15",
-      "statusExecucao": "Em Atraso",
-      "flag": "Atrasado"
+      "statusExecucao": "Concluido"
     },
     {
       "id": 20,
@@ -246,8 +242,7 @@
         "Pedro"
       ],
       "dataVencimento": "2025-09-10",
-      "statusExecucao": "Concluido",
-      "flag": "Pendente"
+      "statusExecucao": "Concluido"
     },
     {
       "id": 23,

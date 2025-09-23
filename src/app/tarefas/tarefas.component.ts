@@ -10,6 +10,7 @@ type StatusTarefa = 'A Fazer' | 'Em Atraso' | 'Em Andamento' | 'Concluido';
   templateUrl: './tarefas.component.html',
   styleUrl: './tarefas.component.css'
 })
+
 export class TarefasComponent implements OnInit {
   tarefas: Tarefa[] = [];
   tarefaSelecionada: Tarefa | null = null;
@@ -38,24 +39,23 @@ export class TarefasComponent implements OnInit {
     });
   }
 
-separarPorStatus(): void {
-  const hoje = new Date();
+  separarPorStatus(): void {
+    const hoje = new Date();
 
-  this.tarefas.forEach(t => {
-    if (t.statusExecucao !== 'Concluido' && t.dataVencimento) {
-      const vencimento = new Date(t.dataVencimento);
-      if (vencimento < hoje) {
-        t.flag = 'Atrasado';
+    this.tarefas.forEach(t => {
+      if (t.statusExecucao !== 'Concluido' && t.dataVencimento) {
+        const vencimento = new Date(t.dataVencimento);
+        if (vencimento < hoje) {
+          t.flag = 'Atrasado';
+        }
       }
-    }
-  });
+    });
 
-  this.tarefasAFazerArray = this.tarefas.filter(t => t.statusExecucao === 'A Fazer');
-  this.tarefasEmAtrasoArray = this.tarefas.filter(t => t.statusExecucao === 'Em Atraso');
-  this.tarefasEmAndamentoArray = this.tarefas.filter(t => t.statusExecucao === 'Em Andamento');
-  this.tarefasConcluidasArray = this.tarefas.filter(t => t.statusExecucao === 'Concluido');
-}
-  
+    this.tarefasAFazerArray = this.tarefas.filter(t => t.statusExecucao === 'A Fazer');
+    this.tarefasEmAtrasoArray = this.tarefas.filter(t => t.statusExecucao === 'Em Atraso');
+    this.tarefasEmAndamentoArray = this.tarefas.filter(t => t.statusExecucao === 'Em Andamento');
+    this.tarefasConcluidasArray = this.tarefas.filter(t => t.statusExecucao === 'Concluido');
+  }
 
   abrirModal(tarefa: Tarefa): void {
     this.tarefaSelecionada = tarefa;
@@ -106,13 +106,38 @@ separarPorStatus(): void {
     } else {
       const item = event.previousContainer.data[event.previousIndex];
       item.statusExecucao = statusDestino;
+
+      if (statusDestino === 'Concluido') {
+        item.flag = 'Normal';
+      }
+
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
+
+      if (item.id) {
+        this.tarefasService.atualizar(item.id, item).subscribe({
+          next: (tarefaAtualizada) => {
+            const index = this.tarefas.findIndex(t => t.id === tarefaAtualizada.id);
+            if (index >= 0) {
+              this.tarefas[index] = tarefaAtualizada;
+            }
+          },
+          error: (err) => console.error('Erro ao atualizar tarefa:', err)
+        });
+      }
     }
+  }
+
+  moverParaConcluidas(tarefa: Tarefa) {
+    this.tarefasAFazerArray = this.tarefasAFazerArray.filter(t => t.id !== tarefa.id);
+    this.tarefasEmAtrasoArray = this.tarefasEmAtrasoArray.filter(t => t.id !== tarefa.id);
+    this.tarefasEmAndamentoArray = this.tarefasEmAndamentoArray.filter(t => t.id !== tarefa.id);
+
+    this.tarefasConcluidasArray.push(tarefa);
   }
 
   /** Retorna a classe de cor da flag */

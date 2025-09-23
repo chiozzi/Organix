@@ -145,10 +145,10 @@ html, body {
 }
 
 /* Cores fixas das flags */
-.status-badge.urgente { background-color: red; }
-.status-badge.atrasado { background-color: orange; }
+.status-badge.urgente { background-color: orange; }
+.status-badge.atrasado { background-color: red; }
 .status-badge.pendente { background-color: yellow; color: black; }
-.status-badge.normal { background-color: green; }
+.status-badge.normal { background-color: #0080D7; }
 
 /* ===== Botão flutuante ===== */
 .btn-flutuante {
