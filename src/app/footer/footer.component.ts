@@ -7,14 +7,35 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.css'
 })
 export class FooterComponent {
- exibirSobreNos = false;
+  // Controle dos modais
+  exibirSobreNos = false;
+  exibirPolitica = false;
+  exibirTermos = false;
+  exibirCookies = false;
+  exibirFAQ = false;
+  exibirCentralAjuda = false;
 
-  abrirSobreNos(event: Event) {
-    event.preventDefault(); // impede reload da página
-    this.exibirSobreNos = true;
+  abrirModal(modal: string, event: Event) {
+    event.preventDefault();
+    switch(modal) {
+      case 'sobre': this.exibirSobreNos = true; break;
+      case 'politica': this.exibirPolitica = true; break;
+      case 'termos': this.exibirTermos = true; break;
+      case 'cookies': this.exibirCookies = true; break;
+      case 'faq': this.exibirFAQ = true; break;
+      case 'central': this.exibirCentralAjuda = true; break;
+    }
   }
 
-  fecharSobreNos() {
-    this.exibirSobreNos = false;
+  fecharModal(modal: string) {
+    switch(modal) {
+      case 'sobre': this.exibirSobreNos = false; break;
+      case 'politica': this.exibirPolitica = false; break;
+      case 'termos': this.exibirTermos = false; break;
+      case 'cookies': this.exibirCookies = false; break;
+      case 'faq': this.exibirFAQ = false; break;
+      case 'central': this.exibirCentralAjuda = false; break;
+    }
   }
 }
+

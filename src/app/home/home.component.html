@@ -12,7 +12,10 @@
 
   <!-- Estatísticas -->
   <div class="stats-grid">
-    <div class="stat-card" *ngFor="let stat of stats" [style.borderLeftColor]="stat.cor">
+    <div class="stat-card" 
+         *ngFor="let stat of stats" 
+         [style.borderLeftColor]="stat.cor"
+         (click)="irParaTarefas()">
       <i [class]="stat.icone"></i>
       <div>
         <h3>{{ stat.valor }}</h3>
@@ -25,7 +28,7 @@
   <div class="section">
     <h3>Atalhos Rápidos</h3>
     <div class="atalhos-grid">
-      <button class="atalho atalho-destaque">
+      <button class="atalho atalho-destaque" (click)="irParaTarefas()">
         <i class="fa fa-plus"></i>
         <span>Nova Tarefa</span>
       </button>
@@ -33,11 +36,11 @@
         <i class="fa fa-plus"></i>
         <span>Nova Reunião</span>
       </button>
-      <button class="atalho">
+      <button class="atalho" (click)="irParaCalendario()">
         <i class="fa fa-calendar"></i>
         <span>Ver Calendário</span>
       </button>
-      <button class="atalho">
+      <button class="atalho" (click)="irParaEquipes()">
         <i class="fa fa-users"></i>
         <span>Ver Minhas Equipes</span>
       </button>
@@ -47,10 +50,10 @@
   <!-- Conteúdo principal: Tarefas e Reunião -->
   <div class="main-grid">
     <!-- Tarefas de Hoje -->
-    <div class="section">
+    <div class="section tarefas-de-hoje">
       <h3>Tarefas de Hoje</h3>
       <ul class="lista-tarefas">
-        <li *ngFor="let tarefa of tarefasHoje">
+        <li *ngFor="let tarefa of tarefasHoje" (click)="irParaTarefas()">
           <i class="fa fa-tasks"></i>
           <span>{{ tarefa.titulo }}</span>
           <small>{{ tarefa.hora }}</small>
@@ -61,7 +64,7 @@
     <!-- Próxima Reunião -->
     <div class="section">
       <h3>Próxima Reunião</h3>
-      <div class="reuniao-card">
+      <div class="reuniao-card" (click)="irParaCalendario()">
         <i class="fa fa-handshake"></i>
         <div>
           <p><strong>{{ proximaReuniao.titulo }}</strong></p>
@@ -100,3 +103,5 @@
     </div>
   </div>
 </div>
+
+

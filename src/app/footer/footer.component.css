@@ -1,8 +1,8 @@
+/* ===================== FOOTER ===================== */
 .footer {
-  background-color: #0080d7;
-  color: #ffffff;
+  background-color: #0080D7;
+  color: #FFFFFF;
   padding: 50px 20px 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .footer-container {
@@ -13,27 +13,7 @@
   gap: 40px;
 }
 
-/* Sobre Nós */
-.footer-section.about {
-  grid-column: 1 / -1;
-}
-
-.footer-section h3 {
-  font-size: 1.25rem;
-  margin-bottom: 15px;
-  border-left: 4px solid #ffffff;
-  padding-left: 8px;
-  font-weight: 600;
-  color: #ffffff;
-}
-
-.footer-section p,
-.footer-section ul {
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-/* LINHA DE 4 COLUNAS (alinhamento perfeito com Sobre Nós) */
+/* LINHA DE 4 COLUNAS (Links úteis, Institucionais, Fale Conosco, Suporte) */
 .footer-bottom-links {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -41,11 +21,11 @@
   align-items: start;
 }
 
-/* Subcategorias */
+/* SUBCATEGORIAS */
 .footer-subsection h3 {
   font-size: 1.1rem;
   margin-bottom: 10px;
-  border-left: 4px solid #ffffff;
+  border-left: 4px solid #FFFFFF;
   padding-left: 8px;
 }
 
@@ -60,13 +40,13 @@
 }
 
 .footer-subsection ul li a {
-  color: #ffffff;
+  color: #FFFFFF;
   text-decoration: underline;
   transition: color 0.3s;
 }
 
 .footer-subsection ul li a:hover {
-  color: #d0e8ff;
+  color: #006bb3;
   text-decoration: none;
 }
 
@@ -80,17 +60,17 @@
 }
 
 .footer-subsection i {
-  color: #ffffff;
+  color: #FFFFFF;
   font-size: 1rem;
 }
 
 .footer-subsection a {
-  color: #ffffff;
+  color: #FFFFFF;
   text-decoration: underline;
 }
 
 .footer-subsection a:hover {
-  color: #d0e8ff;
+  color: #006bb3;
   text-decoration: none;
 }
 
@@ -102,4 +82,70 @@
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   font-size: 0.85rem;
   color: #e0e0e0;
+}
+
+/* ===================== MODAIS ===================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #006bb3; /* fundo azul escuro */
+  color: #FFFFFF;            /* texto branco */
+  padding: 25px 30px;
+  border-radius: 12px;
+  width: 60%;
+  max-width: 700px;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  position: relative;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #FFFFFF; /* título branco */
+}
+
+.modal-content p,
+.modal-content li,
+.modal-content ol li {
+  color: #FFFFFF;
+  line-height: 1.5;
+}
+
+/* Botão de fechar modal */
+.modal-content button {
+  margin-top: 20px;
+  padding: 8px 16px;
+  background-color: #0080D7; /* azul principal */
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal-content button:hover {
+  background-color: #006bb3; /* azul escuro */
+}
+
+/* ===================== LISTAS DENTRO DO MODAL ===================== */
+.modal-content ul, 
+.modal-content ol {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.modal-content ol li {
+  margin-bottom: 10px;
 }

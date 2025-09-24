@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Tarefa, TarefasService } from './tarefas.service';
+import { Flag, Tarefa, TarefasService } from './tarefas.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
-type StatusTarefa = 'A Fazer' | 'Em Atraso' | 'Em Andamento' | 'Concluido';
+// tarefas.service.ts
+export enum StatusExecucao {
+  AFazer = 'A Fazer',
+  EmAtraso = 'Em Atraso',
+  EmAndamento = 'Em Andamento',
+  Concluido = 'Concluido'
+}
+
 
 @Component({
   selector: 'app-tarefas',
@@ -10,11 +17,13 @@ type StatusTarefa = 'A Fazer' | 'Em Atraso' | 'Em Andamento' | 'Concluido';
   templateUrl: './tarefas.component.html',
   styleUrl: './tarefas.component.css'
 })
-
 export class TarefasComponent implements OnInit {
+
+  StatusExecucao = StatusExecucao;
+  Flag = Flag;
+
   tarefas: Tarefa[] = [];
   tarefaSelecionada: Tarefa | null = null;
-
   exibirCriarTarefa = false;
   tarefaParaEdicao: Tarefa | null = null;
 
@@ -32,7 +41,11 @@ export class TarefasComponent implements OnInit {
   carregarTarefas(): void {
     this.tarefasService.listar().subscribe({
       next: (dados) => {
-        this.tarefas = dados || [];
+        this.tarefas = (dados || []).map(t => ({
+          ...t,
+          statusExecucao: t.statusExecucao || StatusExecucao.AFazer,
+          flag: t.statusExecucao === StatusExecucao.Concluido ? Flag.Concluido : (t.flag || Flag.Normal)
+        }));
         this.separarPorStatus();
       },
       error: (err) => console.error('Erro ao carregar tarefas:', err)
@@ -43,18 +56,19 @@ export class TarefasComponent implements OnInit {
     const hoje = new Date();
 
     this.tarefas.forEach(t => {
-      if (t.statusExecucao !== 'Concluido' && t.dataVencimento) {
+      if (t.statusExecucao !== StatusExecucao.Concluido && t.dataVencimento) {
         const vencimento = new Date(t.dataVencimento);
         if (vencimento < hoje) {
-          t.flag = 'Atrasado';
+          t.flag = Flag.Atrasado;
+          t.statusExecucao = StatusExecucao.EmAtraso;
         }
       }
     });
 
-    this.tarefasAFazerArray = this.tarefas.filter(t => t.statusExecucao === 'A Fazer');
-    this.tarefasEmAtrasoArray = this.tarefas.filter(t => t.statusExecucao === 'Em Atraso');
-    this.tarefasEmAndamentoArray = this.tarefas.filter(t => t.statusExecucao === 'Em Andamento');
-    this.tarefasConcluidasArray = this.tarefas.filter(t => t.statusExecucao === 'Concluido');
+    this.tarefasAFazerArray = this.tarefas.filter(t => t.statusExecucao === StatusExecucao.AFazer);
+    this.tarefasEmAtrasoArray = this.tarefas.filter(t => t.statusExecucao === StatusExecucao.EmAtraso);
+    this.tarefasEmAndamentoArray = this.tarefas.filter(t => t.statusExecucao === StatusExecucao.EmAndamento);
+    this.tarefasConcluidasArray = this.tarefas.filter(t => t.statusExecucao === StatusExecucao.Concluido);
   }
 
   abrirModal(tarefa: Tarefa): void {
@@ -79,6 +93,9 @@ export class TarefasComponent implements OnInit {
     this.fecharCriarModal();
     if (!tarefa) return;
 
+    // Força flag Concluido se status for Concluido
+    tarefa.flag = tarefa.statusExecucao === StatusExecucao.Concluido ? Flag.Concluido : (tarefa.flag || Flag.Normal);
+
     const index = this.tarefas.findIndex(t => t.id === tarefa.id);
     if (index >= 0) {
       this.tarefas[index] = tarefa;
@@ -100,15 +117,16 @@ export class TarefasComponent implements OnInit {
     });
   }
 
-  drop(event: CdkDragDrop<Tarefa[]>, statusDestino: StatusTarefa) {
+  drop(event: CdkDragDrop<Tarefa[]>, statusDestino: StatusExecucao) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       const item = event.previousContainer.data[event.previousIndex];
       item.statusExecucao = statusDestino;
 
-      if (statusDestino === 'Concluido') {
-        item.flag = 'Normal';
+      // Força flag Concluido se status for Concluido
+      if (statusDestino === StatusExecucao.Concluido) {
+        item.flag = Flag.Concluido;
       }
 
       transferArrayItem(
@@ -122,9 +140,7 @@ export class TarefasComponent implements OnInit {
         this.tarefasService.atualizar(item.id, item).subscribe({
           next: (tarefaAtualizada) => {
             const index = this.tarefas.findIndex(t => t.id === tarefaAtualizada.id);
-            if (index >= 0) {
-              this.tarefas[index] = tarefaAtualizada;
-            }
+            if (index >= 0) this.tarefas[index] = tarefaAtualizada;
           },
           error: (err) => console.error('Erro ao atualizar tarefa:', err)
         });
@@ -137,16 +153,30 @@ export class TarefasComponent implements OnInit {
     this.tarefasEmAtrasoArray = this.tarefasEmAtrasoArray.filter(t => t.id !== tarefa.id);
     this.tarefasEmAndamentoArray = this.tarefasEmAndamentoArray.filter(t => t.id !== tarefa.id);
 
+    tarefa.statusExecucao = StatusExecucao.Concluido;
+    tarefa.flag = Flag.Concluido;
+
     this.tarefasConcluidasArray.push(tarefa);
+
+    if (tarefa.id) {
+      this.tarefasService.atualizar(tarefa.id, tarefa).subscribe({
+        next: (tarefaAtualizada) => {
+          const index = this.tarefas.findIndex(t => t.id === tarefaAtualizada.id);
+          if (index >= 0) this.tarefas[index] = tarefaAtualizada;
+        },
+        error: (err) => console.error('Erro ao atualizar tarefa:', err)
+      });
+    }
   }
 
-  /** Retorna a classe de cor da flag */
-  corFlag(flag: string): string {
-    switch (flag.toLowerCase()) {
-      case 'urgente': return 'urgente';
-      case 'em atraso': return 'atrasado';
-      case 'pendente': return 'pendente';
+  corFlag(flag?: Flag): string {
+    switch (flag) {
+      case Flag.Urgente: return 'urgente';
+      case Flag.Atrasado: return 'atrasado';
+      case Flag.Pendente: return 'pendente';
+      case Flag.Concluido: return 'concluido';
       default: return 'normal';
     }
   }
 }
+

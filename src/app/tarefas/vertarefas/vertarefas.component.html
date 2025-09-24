@@ -41,11 +41,16 @@
 
     <hr class="linha2" />
 
-    <!-- Footer com todos os botões -->
+    <!-- Footer com botões à esquerda -->
     <div class="modal-footer">
-      <button class="btn-concluir" (click)="concluirTarefa()">
+      <!-- Botão concluir só aparece se não estiver concluída -->
+      <button 
+        class="btn-concluir" 
+        *ngIf="tarefa?.statusExecucao !== StatusExecucao.Concluido" 
+        (click)="concluirTarefa()">
         <i class="fas fa-check"></i> Concluir
       </button>
+
       <button class="btn-editar" (click)="editarTarefa()">
         Editar informações <i class="fas fa-edit"></i>
       </button>

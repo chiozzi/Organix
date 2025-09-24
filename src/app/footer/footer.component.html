@@ -1,69 +1,129 @@
 <footer class="footer">
   <div class="footer-container">
- 
+
     <!-- LINHA DE 4 COLUNAS -->
     <div class="footer-bottom-links">
-     
+
       <!-- Links Úteis -->
-      <!-- Links Úteis -->
-<div class="footer-subsection">
-  <h3>Links Úteis</h3>
-  <ul>
-    <li><a routerLink="/home">Home</a></li>
-    <li><a routerLink="/tarefas">Tarefas</a></li>
-    <li><a routerLink="/calendario">Calendário</a></li>
-    <li><a routerLink="/equipes">Equipes</a></li>
-    <li><a routerLink="/chat">Chat</a></li>
-  </ul>
-</div>
- 
- 
+      <div class="footer-subsection">
+        <h3>Links Úteis</h3>
+        <ul>
+          <li><a routerLink="/home">Home</a></li>
+          <li><a routerLink="/tarefas">Tarefas</a></li>
+          <li><a routerLink="/calendario">Calendário</a></li>
+          <li><a routerLink="/equipes">Equipes</a></li>
+          <li><a routerLink="/chat">Chat</a></li>
+        </ul>
+      </div>
+
       <!-- Links Institucionais -->
       <div class="footer-subsection">
         <h3>Links Institucionais</h3>
         <ul>
-          <li><a href="#" (click)="abrirSobreNos($event)">Sobre Nós</a></li>
-          <li><a href="#">Política de Privacidade</a></li>
-          <li><a href="#">Termos de Uso</a></li>
-          <li><a href="#">Cookies</a></li>
+          <li><a href="#" (click)="abrirModal('sobre', $event)">Sobre Nós</a></li>
+          <li><a href="#" (click)="abrirModal('politica', $event)">Política de Privacidade</a></li>
+          <li><a href="#" (click)="abrirModal('termos', $event)">Termos de Uso</a></li>
+          <li><a href="#" (click)="abrirModal('cookies', $event)">Cookies</a></li>
         </ul>
       </div>
- 
+
       <!-- Fale Conosco -->
       <div class="footer-subsection">
         <h3>Fale Conosco</h3>
-        <p>
-          <i class="fas fa-envelope"></i>
-          <a href="mailto:contato&#64;organix.com">contato&#64;organix.com</a>
-        </p>
-        <p>
-          <i class="fab fa-linkedin"></i>
-          <a href="https://linkedin.com/company/organix" target="_blank">linkedin.com/company/organix</a>
-        </p>
-        <p>
-          <i class="fab fa-instagram"></i>
-          <a href="https://instagram.com/organix_oficial" target="_blank">&#64;organix_oficial</a>
-        </p>
-        <p>
-          <i class="fab fa-whatsapp"></i>
-          <a href="https://wa.me/559999999999" target="_blank">(99) 99999-9999</a>
-        </p>
+        <p><i class="fas fa-envelope"></i><a href="mailto:contato&#64;organix.com">contato&#64;organix.com</a></p>
+        <p><i class="fab fa-linkedin"></i><a href="https://linkedin.com/company/organix" target="_blank">linkedin.com/company/organix</a></p>
+        <p><i class="fab fa-instagram"></i><a href="https://instagram.com/organix_oficial" target="_blank">&#64;organix_oficial</a></p>
+        <p><i class="fab fa-whatsapp"></i><a href="https://wa.me/559999999999" target="_blank">(99) 99999-9999</a></p>
       </div>
- 
+
       <!-- Suporte -->
       <div class="footer-subsection">
         <h3>Suporte</h3>
         <ul>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Central de Ajuda</a></li>
+          <li><a href="#" (click)="abrirModal('faq', $event)">FAQ</a></li>
+          <li><a href="#" (click)="abrirModal('central', $event)">Central de Ajuda</a></li>
         </ul>
       </div>
+
     </div>
   </div>
- 
+
   <div class="footer-bottom">
     <p>© 2025 Organix • Todos os direitos reservados</p>
   </div>
+
+  <!-- MODAIS -->
+
+  <!-- Sobre Nós -->
+  <div *ngIf="exibirSobreNos" class="modal-overlay" (click)="fecharModal('sobre')">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>Sobre Nós</h2>
+      <p>
+        O <strong>Organix</strong> é uma plataforma dedicada à gestão de tarefas e produtividade, oferecendo ferramentas para facilitar a organização das atividades diárias de equipes e indivíduos. Com uma interface intuitiva e fácil de usar, o Organix permite a criação e acompanhamento de tarefas de forma prática, colaborativa e eficaz. Nossa missão é proporcionar soluções que otimizem o tempo e aumentem a eficiência. Além disso, contamos com integração com calendários, chats e ferramentas de comunicação para que sua equipe trabalhe de forma mais conectada. Desde o início, nosso compromisso tem sido oferecer uma plataforma acessível e sempre em evolução para atender às necessidades dos nossos usuários.
+      </p>
+      <button (click)="fecharModal('sobre')">Fechar</button>
+    </div>
+  </div>
+
+  <!-- Política de Privacidade -->
+  <div *ngIf="exibirPolitica" class="modal-overlay" (click)="fecharModal('politica')">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>Política de Privacidade</h2>
+      <p>
+        Nós respeitamos a sua privacidade. As informações coletadas nesta plataforma são usadas apenas para melhorar a experiência do usuário e oferecer nossos serviços de forma segura. Nenhum dado pessoal é compartilhado com terceiros sem o seu consentimento, exceto quando exigido por lei. Ao utilizar o site, você concorda com estas práticas.
+      </p>
+      <button (click)="fecharModal('politica')">Fechar</button>
+    </div>
+  </div>
+
+  <!-- Termos de Uso -->
+  <div *ngIf="exibirTermos" class="modal-overlay" (click)="fecharModal('termos')">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>Termos de Uso</h2>
+      <p>
+        Ao acessar e utilizar este site, você concorda em cumprir todas as regras aqui descritas. É proibido usar a plataforma para atividades ilegais ou que violem direitos de terceiros. Podemos atualizar estes termos a qualquer momento, por isso recomendamos a leitura periódica.
+      </p>
+      <button (click)="fecharModal('termos')">Fechar</button>
+    </div>
+  </div>
+
+  <!-- Cookies -->
+  <div *ngIf="exibirCookies" class="modal-overlay" (click)="fecharModal('cookies')">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>Política de Cookies</h2>
+      <p>
+        Utilizamos cookies para melhorar o desempenho do site, analisar tráfego e personalizar conteúdo. Você pode optar por desativar os cookies no seu navegador, mas algumas funções podem não funcionar corretamente sem eles.
+      </p>
+      <button (click)="fecharModal('cookies')">Fechar</button>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div *ngIf="exibirFAQ" class="modal-overlay" (click)="fecharModal('faq')">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>FAQ</h2>
+      <ol>
+        <li><strong>Como crio uma nova tarefa?</strong> Para criar uma tarefa, clique em “Nova Tarefa” no menu principal, preencha o título, a descrição e defina a data de vencimento. Em seguida, clique em Salvar.</li>
+        <li><strong>Posso editar ou excluir uma tarefa depois de criada?</strong> Sim. Abra a tarefa desejada e use os botões Editar ou Excluir para fazer alterações ou removê-la.</li>
+        <li><strong>É possível adicionar membros à minha equipe?</strong> Sim. Acesse a aba Equipes, clique em Adicionar Membro e insira o e-mail da pessoa que deseja convidar.</li>
+        <li><strong>Como recebo notificações de prazos?</strong> Você pode ativar as notificações nas Configurações da Conta. Assim, receberá lembretes por e-mail ou no próprio aplicativo.</li>
+        <li><strong>Meus dados estão seguros?</strong> Sim. Utilizamos criptografia e boas práticas de segurança para proteger todas as informações cadastradas.</li>
+        <li><strong>O Organix funciona em dispositivos móveis?</strong> Sim. O sistema é responsivo e pode ser acessado tanto em computadores quanto em smartphones e tablets.</li>
+        <li><strong>Há custos para usar a plataforma?</strong> Para fins de demonstração escolar, o uso é gratuito. Em um cenário real, poderiam existir planos gratuitos e pagos.</li>
+      </ol>
+      <button (click)="fecharModal('faq')">Fechar</button>
+    </div>
+  </div>
+
+  <!-- Central de Ajuda -->
+  <div *ngIf="exibirCentralAjuda" class="modal-overlay" (click)="fecharModal('central')">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>Central de Ajuda</h2>
+      <p>
+        Precisa de mais suporte ou não encontrou sua resposta no FAQ? Fale diretamente com nossa equipe enviando um e-mail para <strong>contato&#64;organix.com</strong>. Responderemos o mais rápido possível para garantir que você aproveite ao máximo todas as funcionalidades do Organix.
+      </p>
+      <button (click)="fecharModal('central')">Fechar</button>
+    </div>
+  </div>
+
 </footer>
- 
-  

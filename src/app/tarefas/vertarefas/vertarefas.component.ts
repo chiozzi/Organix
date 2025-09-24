@@ -1,12 +1,12 @@
-  import { Component, EventEmitter, Input, Output } from '@angular/core';
-  import { Tarefa, TarefasService } from '../tarefas.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Flag, StatusExecucao, Tarefa, TarefasService } from '../tarefas.service';
 
-  @Component({
-    selector: 'app-vertarefas',
-    standalone: false,
-    templateUrl: './vertarefas.component.html',
-    styleUrl: './vertarefas.component.css'
-  })
+@Component({
+  selector: 'app-vertarefas',
+  standalone: false,
+  templateUrl: './vertarefas.component.html',
+  styleUrl: './vertarefas.component.css'
+})
 export class VertarefasComponent {
   @Input() tarefa: Tarefa | null = null;
   @Output() fechar = new EventEmitter<void>();
@@ -15,7 +15,11 @@ export class VertarefasComponent {
 
   fechando = false;
 
-  constructor(private tarefasService: TarefasService  ) {}
+  // Expor enums no template
+  StatusExecucao = StatusExecucao;
+  Flag = Flag;
+
+  constructor(private tarefasService: TarefasService) {}
 
   fecharModal() {
     this.fechando = true;
@@ -26,32 +30,34 @@ export class VertarefasComponent {
   }
 
   editarTarefa() {
-    if (this.tarefa) {
-      this.editar.emit(this.tarefa);
-    }
+    if (this.tarefa) this.editar.emit(this.tarefa);
   }
 
   concluirTarefa() {
-    if (this.tarefa && this.tarefa.id) {
-      this.tarefasService.concluir(this.tarefa.id, this.tarefa).subscribe({
-        next: (tarefaAtualizada) => {
-          this.concluir.emit(tarefaAtualizada);
-          this.fecharModal();
-        },
-        error: (err) => {
-          console.error('Erro ao concluir tarefa:', err);
-        }
-      });
-    }
+    if (!this.tarefa || !this.tarefa.id) return;
+
+    const tarefaAtualizada: Tarefa = {
+      ...this.tarefa,
+      statusExecucao: StatusExecucao.Concluido,
+      flag: Flag.Concluido
+    };
+
+    this.tarefasService.atualizar(this.tarefa.id, tarefaAtualizada).subscribe({
+      next: (t) => {
+        this.concluir.emit(t);
+        this.fecharModal();
+      },
+      error: (err) => console.error('Erro ao concluir tarefa:', err)
+    });
   }
 
-  /** Retorna a classe CSS baseada no flag */
-  tarefaStatusClass(flag: Tarefa['flag'] | undefined): string {
+  tarefaStatusClass(flag?: Flag): string {
     switch (flag) {
-      case 'Atrasado': return 'status atraso';
-      case 'Urgente':  return 'status urgente';
-      case 'Pendente': return 'status pendente';
-      case 'Normal':   return 'status normal';
+      case Flag.Atrasado: return 'status atraso';
+      case Flag.Urgente: return 'status urgente';
+      case Flag.Pendente: return 'status pendente';
+      case Flag.Concluido: return 'status concluido';
+      case Flag.Normal: return 'status normal';
       default: return '';
     }
   }

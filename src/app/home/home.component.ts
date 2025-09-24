@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,25 +10,14 @@ import { Component } from '@angular/core';
 export class HomeComponent {
   usuario = 'Bruno';
 
-  // Notificações (todas azuis)
-  notificacoes = [
-    { mensagem: 'Você tem 3 tarefas atrasadas.' },
-    { mensagem: 'Projeto X foi atualizado.' },
-    { mensagem: 'Você concluiu 5 tarefas esta semana! 🎉' },
-    { mensagem: 'Uma nova reunião foi marcada para amanhã.' },
-    { mensagem: 'Seu colega comentou em uma tarefa.' },
-    { mensagem: 'Você recebeu 2 novas mensagens no chat.' }
-  ];
+  constructor(private router: Router) {}
 
-  // Atalhos rápidos
-  atalhos = [
-    { titulo: 'Nova Tarefa', icone: 'fa fa-plus', rota: '/tarefas' },
-    { titulo: 'Nova Reunião', icone: 'fa fa-handshake', rota: '/reunioes' },
-    { titulo: 'Calendário', icone: 'fa fa-calendar', rota: '/calendario' },
-    { titulo: 'Chat', icone: 'fa fa-comments', rota: '/chat' }
-  ];
+  // Funções de navegação
+  irParaTarefas() { this.router.navigate(['/tarefas']); }
+  irParaCalendario() { this.router.navigate(['/calendario']); }
+  irParaEquipes() { this.router.navigate(['/equipes']); }
 
-  // Estatísticas (reformulado)
+  // Estatísticas
   stats = [
     { titulo: 'Concluídas', valor: 12, icone: 'fa fa-check-circle', cor: '#4caf50' },
     { titulo: 'Atrasadas', valor: 3, icone: 'fa fa-exclamation-triangle', cor: '#f44336' },
@@ -49,9 +39,22 @@ export class HomeComponent {
     local: 'Google Meet'
   };
 
-  // Novas mensagens
+  // Notificações
+  notificacoes = [
+    { mensagem: 'Você tem 3 tarefas atrasadas.' },
+    { mensagem: 'Projeto X foi atualizado.' },
+    { mensagem: 'Você concluiu 5 tarefas esta semana! 🎉' },
+    { mensagem: 'Uma nova reunião foi marcada para amanhã.' },
+    { mensagem: 'Seu colega comentou em uma tarefa.' },
+    { mensagem: 'Você recebeu 2 novas mensagens no chat.' }
+  ];
+
+  // Mensagens
   mensagens = [
     { remetente: 'Ana', texto: 'Oi, pode revisar o documento?' },
-    { remetente: 'Carlos', texto: 'Conseguiu ver o bug que comentei?' }
+    { remetente: 'Carlos', texto: 'Conseguiu ver o bug que comentei?' },
+    { remetente: 'Marcos', texto: 'Qual o status do projeto?' },
+    { remetente: 'Juliana', texto: 'Vamos marcar reunião para amanhã?' },
+    { remetente: 'Felipe', texto: 'Recebi seu e-mail, obrigado!' }
   ];
 }

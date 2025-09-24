@@ -12,7 +12,7 @@
            id="atraso"
            [cdkDropListData]="tarefasEmAtrasoArray"
            [cdkDropListConnectedTo]="['afazer','emandamento','concluidas']"
-           (cdkDropListDropped)="drop($event, 'Em Atraso')">
+           (cdkDropListDropped)="drop($event, StatusExecucao.EmAtraso)">
         <h4>⏰ Atrasadas</h4>
         <div class="kanban-cards">
           <div class="card" *ngFor="let tarefa of tarefasEmAtrasoArray" cdkDrag (click)="abrirModal(tarefa)">
@@ -33,7 +33,7 @@
            id="afazer"
            [cdkDropListData]="tarefasAFazerArray"
            [cdkDropListConnectedTo]="['atraso','emandamento','concluidas']"
-           (cdkDropListDropped)="drop($event, 'A Fazer')">
+           (cdkDropListDropped)="drop($event, StatusExecucao.AFazer)">
         <h4>📝 Pendentes</h4>
         <div class="kanban-cards">
           <div class="card" *ngFor="let tarefa of tarefasAFazerArray" cdkDrag (click)="abrirModal(tarefa)">
@@ -54,7 +54,7 @@
            id="emandamento"
            [cdkDropListData]="tarefasEmAndamentoArray"
            [cdkDropListConnectedTo]="['atraso','afazer','concluidas']"
-           (cdkDropListDropped)="drop($event, 'Em Andamento')">
+           (cdkDropListDropped)="drop($event, StatusExecucao.EmAndamento)">
         <h4>⚙️ Em Progresso</h4>
         <div class="kanban-cards">
           <div class="card" *ngFor="let tarefa of tarefasEmAndamentoArray" cdkDrag (click)="abrirModal(tarefa)">
@@ -75,7 +75,7 @@
            id="concluidas"
            [cdkDropListData]="tarefasConcluidasArray"
            [cdkDropListConnectedTo]="['atraso','afazer','emandamento']"
-           (cdkDropListDropped)="drop($event, 'Concluido')">
+           (cdkDropListDropped)="drop($event, StatusExecucao.Concluido)">
         <h4>✅ Concluídas</h4>
         <div class="kanban-cards">
           <div class="card" *ngFor="let tarefa of tarefasConcluidasArray" cdkDrag (click)="abrirModal(tarefa)">
@@ -93,10 +93,12 @@
     </div>
   </div>
 
+  <!-- Botão flutuante para criar tarefa -->
   <button class="btn-flutuante" (click)="abrirCriarModal()">
     <i class="fas fa-plus"></i>
   </button>
 
+  <!-- Modal de visualização/edição da tarefa -->
   <app-vertarefas
     *ngIf="tarefaSelecionada"
     [tarefa]="tarefaSelecionada"
@@ -105,6 +107,7 @@
     (concluir)="moverParaConcluidas($event)">
   </app-vertarefas>
 
+  <!-- Modal de criação/edição de tarefas -->
   <app-criartarefas
     *ngIf="exibirCriarTarefa"
     [tarefa]="tarefaParaEdicao"

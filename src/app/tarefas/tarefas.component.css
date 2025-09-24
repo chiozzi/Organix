@@ -119,19 +119,18 @@ html, body {
   font-size: 15px;
   font-weight: bold;
   color: #222;
-  white-space: nowrap;
+  white-space: normal;   /* permite quebra */
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Texto do card */
 .card p {
   margin: 4px 0;
   font-size: 13px;
   color: #555;
+  white-space: normal;   /* quebra de linha permitida */
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 /* ===== Badges de status ===== */
@@ -149,6 +148,7 @@ html, body {
 .status-badge.atrasado { background-color: red; }
 .status-badge.pendente { background-color: yellow; color: black; }
 .status-badge.normal { background-color: #0080D7; }
+.status.concluido { background-color: #2fa533;  color: white; }
 
 /* ===== Botão flutuante ===== */
 .btn-flutuante {
@@ -194,11 +194,23 @@ html, body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 15px;
+  align-items: stretch;  /* deixa os cards alinhados */
 }
 
 .kanban-col.concluidas .card {
   width: 100%;
-  min-height: 140px;
+  min-height: 160px;     /* altura mínima igual às outras */
+  height: 100%;          /* todos crescem juntos */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.kanban-col.concluidas .card h3,
+.kanban-col.concluidas .card p {
+  white-space: normal;   /* quebra normal */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ===== Responsividade ===== */
