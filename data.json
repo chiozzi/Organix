@@ -8,8 +8,8 @@
         "Ana"
       ],
       "dataVencimento": "2025-09-25",
-      "statusExecucao": "Em Andamento",
-      "flag": "Urgente"
+      "statusExecucao": "Em Atraso",
+      "flag": "Atrasado"
     },
     {
       "id": 2,
@@ -43,7 +43,7 @@
         "Fernanda"
       ],
       "dataVencimento": "2025-10-02",
-      "statusExecucao": "A Fazer",
+      "statusExecucao": "Em Andamento",
       "flag": "Pendente"
     },
     {
@@ -54,8 +54,8 @@
         "Lucas"
       ],
       "dataVencimento": "2025-09-15",
-      "statusExecucao": "A Fazer",
-      "flag": "Concluído"
+      "statusExecucao": "Em Atraso",
+      "flag": "Atrasado"
     },
     {
       "id": 6,
@@ -65,8 +65,8 @@
         "Ana"
       ],
       "dataVencimento": "2025-09-26",
-      "statusExecucao": "A Fazer",
-      "flag": "Pendente"
+      "statusExecucao": "Em Atraso",
+      "flag": "Atrasado"
     },
     {
       "id": 7,
@@ -78,8 +78,8 @@
         "Bianca"
       ],
       "dataVencimento": "2025-09-27",
-      "statusExecucao": "Em Atraso",
-      "flag": "Normal"
+      "statusExecucao": "Em Andamento",
+      "flag": "Urgente"
     },
     {
       "id": 8,
@@ -89,8 +89,8 @@
         "Lucas"
       ],
       "dataVencimento": "2025-09-28",
-      "statusExecucao": "A Fazer",
-      "flag": "Normal"
+      "statusExecucao": "Concluido",
+      "flag": "Concluido"
     },
     {
       "id": 10,
@@ -100,8 +100,8 @@
         "Fernanda"
       ],
       "dataVencimento": "2025-09-30",
-      "statusExecucao": "A Fazer",
-      "flag": "Normal"
+      "statusExecucao": "Em Andamento",
+      "flag": "Pendente"
     },
     {
       "id": 11,
@@ -112,8 +112,8 @@
         "Lucas"
       ],
       "dataVencimento": "2025-10-01",
-      "statusExecucao": "Em Andamento",
-      "flag": "Urgente"
+      "statusExecucao": "A Fazer",
+      "flag": "Pendente"
     },
     {
       "id": 12,
@@ -123,8 +123,8 @@
         "Carlos"
       ],
       "dataVencimento": "2025-10-02",
-      "statusExecucao": "Em Andamento",
-      "flag": "Normal"
+      "statusExecucao": "A Fazer",
+      "flag": "Pendente"
     },
     {
       "id": 13,
@@ -134,8 +134,8 @@
         "Pedro"
       ],
       "dataVencimento": "2025-10-03",
-      "statusExecucao": "Em Atraso",
-      "flag": "Normal"
+      "statusExecucao": "A Fazer",
+      "flag": "Pendente"
     },
     {
       "id": 14,
@@ -146,8 +146,8 @@
         "Fernanda"
       ],
       "dataVencimento": "2025-10-04",
-      "statusExecucao": "Em Andamento",
-      "flag": "Urgente"
+      "statusExecucao": "A Fazer",
+      "flag": "Pendente"
     },
     {
       "id": 15,
@@ -157,8 +157,8 @@
         "Lucas"
       ],
       "dataVencimento": "2025-10-05",
-      "statusExecucao": "Concluido",
-      "flag": "Concluído"
+      "statusExecucao": "A Fazer",
+      "flag": "Pendente"
     },
     {
       "id": 16,
@@ -168,7 +168,8 @@
         "Ana"
       ],
       "dataVencimento": "2025-09-18",
-      "statusExecucao": "Concluido"
+      "statusExecucao": "Em Atraso",
+      "flag": "Atrasado"
     },
     {
       "id": 17,
@@ -178,8 +179,8 @@
         "Carlos"
       ],
       "dataVencimento": "2025-09-25",
-      "statusExecucao": "Em Andamento",
-      "flag": "Urgente"
+      "statusExecucao": "Em Atraso",
+      "flag": "Atrasado"
     },
     {
       "id": 18,
@@ -190,8 +191,8 @@
         "Fernanda"
       ],
       "dataVencimento": "2025-09-16",
-      "statusExecucao": "Concluido",
-      "flag": "Concluído"
+      "statusExecucao": "Em Atraso",
+      "flag": "Atrasado"
     },
     {
       "id": 19,
@@ -201,7 +202,8 @@
         "Lucas"
       ],
       "dataVencimento": "2025-09-15",
-      "statusExecucao": "Concluido"
+      "statusExecucao": "Em Atraso",
+      "flag": "Atrasado"
     },
     {
       "id": 20,
@@ -212,7 +214,7 @@
       ],
       "dataVencimento": "2025-09-14",
       "statusExecucao": "Em Atraso",
-      "flag": "Normal"
+      "flag": "Atrasado"
     },
     {
       "id": 21,
@@ -224,7 +226,7 @@
       ],
       "dataVencimento": "2025-09-12",
       "statusExecucao": "Concluido",
-      "flag": "Normal"
+      "flag": "Concluido"
     },
     {
       "id": 23,
@@ -236,7 +238,7 @@
       ],
       "dataVencimento": "2025-09-11",
       "statusExecucao": "Concluido",
-      "flag": "Normal"
+      "flag": "Concluído"
     },
     {
       "id": 24,

@@ -46,7 +46,7 @@
 }
 
 .footer-subsection ul li a:hover {
-  color: #006bb3;
+  color: #d3d3d3;
   text-decoration: none;
 }
 
@@ -63,6 +63,19 @@
   color: #FFFFFF;
   font-size: 1rem;
 }
+
+/* Faz os links do Fale Conosco ficarem iguais aos outros no hover */
+.footer-subsection p a {
+  color: #FFFFFF;
+  text-decoration: underline; /* igual aos links das listas */
+  transition: color 0.3s;
+}
+
+.footer-subsection p a:hover {
+  color: #d3d3d3; /* mesma cor do hover dos links de lista */
+  text-decoration: none;     /* igual aos outros */
+}
+
 
 .footer-subsection a {
   color: #FFFFFF;
@@ -127,17 +140,20 @@
 .modal-content button {
   margin-top: 20px;
   padding: 8px 16px;
-  background-color: #0080D7; /* azul principal */
-  color: #FFFFFF;
+  background-color: #ffffff; /* azul principal */
   border: none;
+  color: #00497d;            /* texto branco */
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
+  transition: all 0.3s;      /* transição suave igual aos links */
 }
 
 .modal-content button:hover {
-  background-color: #006bb3; /* azul escuro */
+  background-color: #0080D7; /* fundo branco */
+  color: #ffffff;            /* texto azul escuro */
 }
+
 
 /* ===================== LISTAS DENTRO DO MODAL ===================== */
 .modal-content ul, 

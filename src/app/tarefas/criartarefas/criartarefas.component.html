@@ -16,7 +16,9 @@
           <input type="text" formControlName="titulo" placeholder="Digite o título" />
 
           <label>Data de Vencimento</label>
-          <input type="date" formControlName="dataVencimento" />
+          <input type="date" formControlName="dataVencimento" [min]="hoje"
+        />
+
 
           <label>Descrição</label>
           <textarea rows="3" formControlName="descricao" placeholder="Detalhes da tarefa"></textarea>

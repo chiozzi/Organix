@@ -55,6 +55,5 @@ export class HomeComponent {
     { remetente: 'Carlos', texto: 'Conseguiu ver o bug que comentei?' },
     { remetente: 'Marcos', texto: 'Qual o status do projeto?' },
     { remetente: 'Juliana', texto: 'Vamos marcar reunião para amanhã?' },
-    { remetente: 'Felipe', texto: 'Recebi seu e-mail, obrigado!' }
   ];
 }

@@ -4,16 +4,16 @@
     <h2>Bem-vindo, {{ usuario }} 👋</h2>
     <p>Hoje você tem {{ tarefasHoje.length }} tarefas e 1 reunião.</p>
   </div>
-
+ 
   <!-- Título das Estatísticas -->
   <div class="section tarefas-title">
     <h3>Minhas Tarefas</h3>
   </div>
-
+ 
   <!-- Estatísticas -->
   <div class="stats-grid">
-    <div class="stat-card" 
-         *ngFor="let stat of stats" 
+    <div class="stat-card"
+         *ngFor="let stat of stats"
          [style.borderLeftColor]="stat.cor"
          (click)="irParaTarefas()">
       <i [class]="stat.icone"></i>
@@ -23,7 +23,7 @@
       </div>
     </div>
   </div>
-
+ 
   <!-- Atalhos Rápidos -->
   <div class="section">
     <h3>Atalhos Rápidos</h3>
@@ -46,7 +46,7 @@
       </button>
     </div>
   </div>
-
+ 
   <!-- Conteúdo principal: Tarefas e Reunião -->
   <div class="main-grid">
     <!-- Tarefas de Hoje -->
@@ -60,7 +60,7 @@
         </li>
       </ul>
     </div>
-
+ 
     <!-- Próxima Reunião -->
     <div class="section">
       <h3>Próxima Reunião</h3>
@@ -74,7 +74,7 @@
       </div>
     </div>
   </div>
-
+ 
   <!-- Mensagens e Notificações -->
   <div class="bottom-grid">
     <!-- Notificações -->
@@ -87,7 +87,7 @@
         </div>
       </div>
     </div>
-
+ 
     <!-- Mensagens -->
     <div class="section scrollable-box">
       <h3>Novas Mensagens</h3>
@@ -103,5 +103,5 @@
     </div>
   </div>
 </div>
-
-
+ 
+ 

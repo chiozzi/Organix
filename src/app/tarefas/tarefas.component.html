@@ -1,131 +1,108 @@
 <div class="container">
   <h2>Painel de Tarefas</h2>
+  <div class="kanban">
 
-  <div class="projeto">
-    <h3>Minhas Tarefas</h3>
-
-    <div class="kanban">
-
-      <!-- Atrasadas -->
-      <div class="kanban-col"
-           cdkDropList
-           id="atraso"
-           [cdkDropListData]="tarefasEmAtrasoArray"
-           [cdkDropListConnectedTo]="['afazer','emandamento','concluidas']"
-           (cdkDropListDropped)="drop($event, StatusExecucao.EmAtraso)">
-        <h4>⏰ Em atraso</h4>
-        <div class="kanban-cards">
-          <div class="card" *ngFor="let tarefa of tarefasEmAtrasoArray" cdkDrag (click)="abrirModal(tarefa)">
-            <div class="card-header">
-              <h3>{{ tarefa.titulo }}</h3>
-              <span *ngIf="tarefa.flag && tarefa.flag !== Flag.Concluido"
-                    class="status-badge {{ tarefa.flag | lowercase }}">
-                {{ tarefa.flag }}
-              </span>
-            </div>
-            <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
-            <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
-            <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
+    <!-- Em atraso -->
+    <div class="kanban-col"
+         cdkDropList
+         id="atraso"
+         [cdkDropListData]="tarefasEmAtraso"
+         [cdkDropListConnectedTo]="['afazer','emandamento','concluidas']"
+         (cdkDropListDropped)="drop($event, StatusExecucao.EmAtraso)">
+      <h4>⏰ Em atraso</h4>
+      <div class="kanban-cards">
+        <div class="card" *ngFor="let tarefa of tarefasEmAtraso" cdkDrag (click)="abrirModal(tarefa)">
+          <div class="card-header">
+            <h3>{{ tarefa.titulo }}</h3>
+            <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
           </div>
+          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+          <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+          <p><strong>Status:</strong> Em Atraso</p>
         </div>
       </div>
-
-      <!-- Pendentes -->
-      <div class="kanban-col"
-           cdkDropList
-           id="afazer"
-           [cdkDropListData]="tarefasAFazerArray"
-           [cdkDropListConnectedTo]="['atraso','emandamento','concluidas']"
-           (cdkDropListDropped)="drop($event, StatusExecucao.AFazer)">
-        <h4>📝 A fazer</h4>
-        <div class="kanban-cards">
-          <div class="card" *ngFor="let tarefa of tarefasAFazerArray" cdkDrag (click)="abrirModal(tarefa)">
-            <div class="card-header">
-              <h3>{{ tarefa.titulo }}</h3>
-              <span *ngIf="tarefa.flag && tarefa.flag !== Flag.Concluido"
-                    class="status-badge {{ tarefa.flag | lowercase }}">
-                {{ tarefa.flag }}
-              </span>
-            </div>
-            <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
-            <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
-            <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Em Progresso -->
-      <div class="kanban-col"
-           cdkDropList
-           id="emandamento"
-           [cdkDropListData]="tarefasEmAndamentoArray"
-           [cdkDropListConnectedTo]="['atraso','afazer','concluidas']"
-           (cdkDropListDropped)="drop($event, StatusExecucao.EmAndamento)">
-        <h4>⚙️ Em andamento</h4>
-        <div class="kanban-cards">
-          <div class="card" *ngFor="let tarefa of tarefasEmAndamentoArray" cdkDrag (click)="abrirModal(tarefa)">
-            <div class="card-header">
-              <h3>{{ tarefa.titulo }}</h3>
-              <span *ngIf="tarefa.flag && tarefa.flag !== Flag.Concluido"
-                    class="status-badge {{ tarefa.flag | lowercase }}">
-                {{ tarefa.flag }}
-              </span>
-            </div>
-            <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
-            <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
-            <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Concluídas -->
-      <div class="kanban-col concluidas"
-           cdkDropList
-           id="concluidas"
-           [cdkDropListData]="tarefasConcluidasArray"
-           [cdkDropListConnectedTo]="['atraso','afazer','emandamento']"
-           (cdkDropListDropped)="drop($event, StatusExecucao.Concluido)">
-        <h4>✅ Concluídas</h4>
-        <div class="kanban-cards">
-          <div class="card" *ngFor="let tarefa of tarefasConcluidasArray" cdkDrag (click)="abrirModal(tarefa)">
-            <div class="card-header">
-              <h3>{{ tarefa.titulo }}</h3>
-              <!-- 🔹 Não mostra flag se for concluída -->
-              <span *ngIf="tarefa.flag && tarefa.flag !== Flag.Concluido"
-                    class="status-badge {{ tarefa.flag | lowercase }}">
-                {{ tarefa.flag }}
-              </span>
-            </div>
-            <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
-            <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
-            <p><strong>Status:</strong> {{ tarefa.statusExecucao }}</p>
-          </div>
-        </div>
-      </div>
-
     </div>
+
+    <!-- A fazer -->
+    <div class="kanban-col"
+         cdkDropList
+         id="afazer"
+         [cdkDropListData]="tarefasAFazer"
+         [cdkDropListConnectedTo]="['atraso','emandamento','concluidas']"
+         (cdkDropListDropped)="drop($event, StatusExecucao.AFazer)">
+      <h4>📝 A fazer</h4>
+      <div class="kanban-cards">
+        <div class="card" *ngFor="let tarefa of tarefasAFazer" cdkDrag (click)="abrirModal(tarefa)">
+          <div class="card-header">
+            <h3>{{ tarefa.titulo }}</h3>
+            <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
+          </div>
+          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+          <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+          <p><strong>Status:</strong> A Fazer</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Em andamento -->
+    <div class="kanban-col"
+         cdkDropList
+         id="emandamento"
+         [cdkDropListData]="tarefasEmAndamento"
+         [cdkDropListConnectedTo]="['atraso','afazer','concluidas']"
+         (cdkDropListDropped)="drop($event, StatusExecucao.EmAndamento)">
+      <h4>⚙️ Em andamento</h4>
+      <div class="kanban-cards">
+        <div class="card" *ngFor="let tarefa of tarefasEmAndamento" cdkDrag (click)="abrirModal(tarefa)">
+          <div class="card-header">
+            <h3>{{ tarefa.titulo }}</h3>
+            <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
+          </div>
+          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+          <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+          <p><strong>Status:</strong> Em Andamento</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Concluídas -->
+    <div class="kanban-col concluidas"
+         cdkDropList
+         id="concluidas"
+         [cdkDropListData]="tarefasConcluidas"
+         [cdkDropListConnectedTo]="['atraso','afazer','emandamento']"
+         (cdkDropListDropped)="drop($event, StatusExecucao.Concluido)">
+      <h4>✅ Concluídas</h4>
+      <div class="kanban-cards">
+        <div class="card" *ngFor="let tarefa of tarefasConcluidas" cdkDrag (click)="abrirModal(tarefa)">
+          <div class="card-header">
+            <h3>{{ tarefa.titulo }}</h3>
+            <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
+          </div>
+          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+          <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+          <p><strong>Status:</strong> Concluído</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Botão flutuante para criar tarefa -->
-  <button class="btn-flutuante" (click)="abrirCriarModal()">
-    <i class="fas fa-plus"></i>
-  </button>
+  <button class="btn-flutuante" (click)="abrirCriarModal()"><i class="fas fa-plus"></i></button>
 
-  <!-- Modal de visualização/edição da tarefa -->
   <app-vertarefas
     *ngIf="tarefaSelecionada"
     [tarefa]="tarefaSelecionada"
     (fechar)="fecharModal()"
-    (editar)="editarTarefa($event)"
+    (editar)="abrirCriarModal($event)"
     (concluir)="moverParaConcluidas($event)"
     (excluir)="removerTarefa($event)">
   </app-vertarefas>
 
-  <!-- Modal de criação/edição de tarefas -->
   <app-criartarefas
     *ngIf="exibirCriarTarefa"
     [tarefa]="tarefaParaEdicao"
-    (fechar)="fecharCriarModal()"
-    (salvar)="tarefaCriada($event)">
+    (salvar)="tarefaCriadaOuAtualizada($event)"
+    (fechar)="exibirCriarTarefa=false">
   </app-criartarefas>
 </div>

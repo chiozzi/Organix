@@ -15,18 +15,23 @@ export class CriartarefasComponent implements OnInit {
 
   formTarefa!: FormGroup;
   fechando = false;
+  hoje: string = ''; // variável para min no input
 
   constructor(private tarefasService: TarefasService) {}
 
   ngOnInit(): void {
     this.inicializarFormulario();
+
+    // define hoje em formato YYYY-MM-DD
+    const hojeDate = new Date();
+    this.hoje = hojeDate.toISOString().split('T')[0];
   }
 
   inicializarFormulario(): void {
     this.formTarefa = new FormGroup({
       titulo: new FormControl(this.tarefa?.titulo || '', Validators.required),
       descricao: new FormControl(this.tarefa?.descricao || ''),
-      dataVencimento: new FormControl(this.tarefa?.dataVencimento || ''),
+      dataVencimento: new FormControl(this.tarefa?.dataVencimento || '', Validators.required),
       membros: new FormControl(this.tarefa?.membros ? this.tarefa.membros.join(', ') : ''),
       statusExecucao: new FormControl(this.tarefa?.statusExecucao || StatusExecucao.AFazer, Validators.required),
       flag: new FormControl(this.tarefa?.flag || Flag.Normal, Validators.required)
@@ -51,6 +56,16 @@ export class CriartarefasComponent implements OnInit {
     if (this.formTarefa.invalid) return;
 
     const formValue = this.formTarefa.value;
+
+    // validação extra de data
+    const hojeDate = new Date(this.hoje);
+    const dataSelecionada = new Date(formValue.dataVencimento);
+
+    if (dataSelecionada < hojeDate) {
+      alert('Não é permitido criar tarefa em datas anteriores a hoje.');
+      return;
+    }
+
     const tarefaParaSalvar: Tarefa = {
       ...this.tarefa,
       titulo: formValue.titulo,
@@ -90,3 +105,4 @@ export class CriartarefasComponent implements OnInit {
     }, 300);
   }
 }
+
