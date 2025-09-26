@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 export enum StatusExecucao {
   AFazer = 'A Fazer',
   EmAtraso = 'Em Atraso',
   EmAndamento = 'Em Andamento',
-  Concluido = 'Concluido' // <- padronizado
+  Concluido = 'Concluido'
 }
 
 export enum Flag {
@@ -14,7 +14,7 @@ export enum Flag {
   Pendente = 'Pendente',
   Urgente = 'Urgente',
   Atrasado = 'Atrasado',
-  Concluido = 'Concluído'  // ✅ novo valor
+  Concluido = 'Concluído'
 }
 
 export interface Tarefa {
@@ -35,32 +35,61 @@ export class TarefasService {
 
   constructor(private http: HttpClient) {}
 
+  private atualizarFlag(tarefa: Tarefa, forcarStatus?: StatusExecucao): Tarefa {
+  // 🔹 Se o status foi forçado pelo card, usamos ele
+  let status = forcarStatus ?? tarefa.statusExecucao;
+
+  // 🔹 Se está concluído, sempre mantém flag de concluído
+  if (status === StatusExecucao.Concluido) {
+    return { ...tarefa, statusExecucao: status, flag: Flag.Concluido };
+  }
+
+  if (!tarefa.dataVencimento) {
+    return { ...tarefa, statusExecucao: status, flag: Flag.Normal };
+  }
+
+  const hoje = new Date();
+  const vencimento = new Date(tarefa.dataVencimento);
+  const diffDias = Math.floor((vencimento.getTime() - hoje.getTime()) / (1000 * 60 * 60 * 24));
+  const diffMeses = diffDias / 30;
+
+  // 🔹 Regras de flag pela data
+  if (diffMeses >= 1) {
+    return { ...tarefa, statusExecucao: status, flag: Flag.Normal };
+  }
+  if (diffDias < 0) {
+    return { ...tarefa, statusExecucao: StatusExecucao.EmAtraso, flag: Flag.Atrasado };
+  }
+  if (diffDias === 0) {
+    return { ...tarefa, statusExecucao: StatusExecucao.EmAndamento, flag: Flag.Urgente };
+  }
+  return { ...tarefa, statusExecucao: StatusExecucao.AFazer, flag: Flag.Pendente };
+}
+
+
   listar(): Observable<Tarefa[]> {
-    return this.http.get<Tarefa[]>(this.apiUrl);
+    return this.http.get<Tarefa[]>(this.apiUrl).pipe(
+      map(tarefas => tarefas.map(t => this.atualizarFlag(t)))
+    );
   }
 
   buscarPorId(id: number): Observable<Tarefa> {
-    return this.http.get<Tarefa>(`${this.apiUrl}/${id}`);
+    return this.http.get<Tarefa>(`${this.apiUrl}/${id}`).pipe(
+      map(t => this.atualizarFlag(t))
+    );
   }
 
   criar(tarefa: Tarefa): Observable<Tarefa> {
-    return this.http.post<Tarefa>(this.apiUrl, tarefa);
+    const tarefaAtualizada = this.atualizarFlag(tarefa);
+    return this.http.post<Tarefa>(this.apiUrl, tarefaAtualizada);
   }
 
   atualizar(id: number, tarefa: Tarefa): Observable<Tarefa> {
-    return this.http.put<Tarefa>(`${this.apiUrl}/${id}`, tarefa);
+    const tarefaAtualizada = this.atualizarFlag(tarefa);
+    return this.http.put<Tarefa>(`${this.apiUrl}/${id}`, tarefaAtualizada);
   }
 
   remover(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
-
-  concluir(id: number, tarefa: Tarefa): Observable<Tarefa> {
-    const concluida: Tarefa = {
-      ...tarefa,
-      statusExecucao: StatusExecucao.Concluido,
-      flag: undefined
-    };
-    return this.atualizar(id, concluida);
   }
 }

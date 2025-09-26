@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Tarefa, TarefasService } from '../tarefas.service';
+import { Tarefa, TarefasService, StatusExecucao, Flag } from '../tarefas.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './criartarefas.component.css'
 })
 export class CriartarefasComponent implements OnInit {
-  @Input() tarefa: Tarefa | null = null; // tarefa para edição, null = criar nova
+  @Input() tarefa: Tarefa | null = null;
   @Output() salvar = new EventEmitter<Tarefa>();
   @Output() fechar = new EventEmitter<void>();
 
@@ -22,19 +22,17 @@ export class CriartarefasComponent implements OnInit {
     this.inicializarFormulario();
   }
 
-  /** Inicializa ou reseta o formulário, preenchendo se for edição */
   inicializarFormulario(): void {
     this.formTarefa = new FormGroup({
       titulo: new FormControl(this.tarefa?.titulo || '', Validators.required),
       descricao: new FormControl(this.tarefa?.descricao || ''),
       dataVencimento: new FormControl(this.tarefa?.dataVencimento || ''),
       membros: new FormControl(this.tarefa?.membros ? this.tarefa.membros.join(', ') : ''),
-      statusExecucao: new FormControl(this.tarefa?.statusExecucao || 'A Fazer', Validators.required),
-      flag: new FormControl(this.tarefa?.flag || 'Normal', Validators.required)
+      statusExecucao: new FormControl(this.tarefa?.statusExecucao || StatusExecucao.AFazer, Validators.required),
+      flag: new FormControl(this.tarefa?.flag || Flag.Normal, Validators.required)
     });
   }
 
-  /** Chamada pelo componente pai para atualizar o formulário ao abrir o modal */
   abrirModalComTarefa(tarefa: Tarefa | null): void {
     this.tarefa = tarefa;
     if (this.formTarefa) {
@@ -43,8 +41,8 @@ export class CriartarefasComponent implements OnInit {
         descricao: tarefa?.descricao || '',
         dataVencimento: tarefa?.dataVencimento || '',
         membros: tarefa?.membros ? tarefa.membros.join(', ') : '',
-        statusExecucao: tarefa?.statusExecucao || 'A Fazer',
-        flag: tarefa?.flag || 'Normal'
+        statusExecucao: tarefa?.statusExecucao || StatusExecucao.AFazer,
+        flag: tarefa?.flag || Flag.Normal
       });
     }
   }
@@ -53,16 +51,12 @@ export class CriartarefasComponent implements OnInit {
     if (this.formTarefa.invalid) return;
 
     const formValue = this.formTarefa.value;
-
     const tarefaParaSalvar: Tarefa = {
-      ...this.tarefa, // mantém id se for edição
+      ...this.tarefa,
       titulo: formValue.titulo,
       descricao: formValue.descricao,
       dataVencimento: formValue.dataVencimento,
-      membros: formValue.membros
-      ? formValue.membros.split(',').map((m: string) => m.trim())
-      : [],
-
+      membros: formValue.membros ? formValue.membros.split(',').map((m: string) => m.trim()) : [],
       statusExecucao: formValue.statusExecucao,
       flag: formValue.flag
     };
@@ -88,8 +82,8 @@ export class CriartarefasComponent implements OnInit {
     this.fechando = true;
     setTimeout(() => {
       this.formTarefa.reset({
-        statusExecucao: 'A Fazer',
-        flag: 'Normal'
+        statusExecucao: StatusExecucao.AFazer,
+        flag: Flag.Normal
       });
       this.fechar.emit();
       this.fechando = false;

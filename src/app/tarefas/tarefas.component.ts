@@ -18,7 +18,6 @@ export enum StatusExecucao {
   styleUrl: './tarefas.component.css'
 })
 export class TarefasComponent implements OnInit {
-
   StatusExecucao = StatusExecucao;
   Flag = Flag;
 
@@ -93,8 +92,7 @@ export class TarefasComponent implements OnInit {
     this.fecharCriarModal();
     if (!tarefa) return;
 
-    // Força flag Concluido se status for Concluido
-    tarefa.flag = tarefa.statusExecucao === StatusExecucao.Concluido ? Flag.Concluido : (tarefa.flag || Flag.Normal);
+    this.atualizarFlag(tarefa);
 
     const index = this.tarefas.findIndex(t => t.id === tarefa.id);
     if (index >= 0) {
@@ -117,56 +115,81 @@ export class TarefasComponent implements OnInit {
     });
   }
 
-  drop(event: CdkDragDrop<Tarefa[]>, statusDestino: StatusExecucao) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      const item = event.previousContainer.data[event.previousIndex];
-      item.statusExecucao = statusDestino;
-
-      // Força flag Concluido se status for Concluido
-      if (statusDestino === StatusExecucao.Concluido) {
-        item.flag = Flag.Concluido;
-      }
-
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-
-      if (item.id) {
-        this.tarefasService.atualizar(item.id, item).subscribe({
-          next: (tarefaAtualizada) => {
-            const index = this.tarefas.findIndex(t => t.id === tarefaAtualizada.id);
-            if (index >= 0) this.tarefas[index] = tarefaAtualizada;
-          },
-          error: (err) => console.error('Erro ao atualizar tarefa:', err)
-        });
-      }
-    }
-  }
-
-  moverParaConcluidas(tarefa: Tarefa) {
-    this.tarefasAFazerArray = this.tarefasAFazerArray.filter(t => t.id !== tarefa.id);
-    this.tarefasEmAtrasoArray = this.tarefasEmAtrasoArray.filter(t => t.id !== tarefa.id);
-    this.tarefasEmAndamentoArray = this.tarefasEmAndamentoArray.filter(t => t.id !== tarefa.id);
+  moverParaConcluidas(tarefa: Tarefa): void {
+    if (!tarefa) return;
 
     tarefa.statusExecucao = StatusExecucao.Concluido;
-    tarefa.flag = Flag.Concluido;
+    this.atualizarFlag(tarefa);
 
-    this.tarefasConcluidasArray.push(tarefa);
+    this.tarefasService.atualizar(tarefa.id!, tarefa).subscribe({
+      next: (tarefaAtualizada) => {
+        const index = this.tarefas.findIndex(t => t.id === tarefaAtualizada.id);
+        if (index >= 0) this.tarefas[index] = tarefaAtualizada;
+        this.separarPorStatus();
+      },
+      error: (err) => console.error('Erro ao concluir tarefa:', err)
+    });
+  }
 
-    if (tarefa.id) {
-      this.tarefasService.atualizar(tarefa.id, tarefa).subscribe({
-        next: (tarefaAtualizada) => {
-          const index = this.tarefas.findIndex(t => t.id === tarefaAtualizada.id);
-          if (index >= 0) this.tarefas[index] = tarefaAtualizada;
-        },
-        error: (err) => console.error('Erro ao atualizar tarefa:', err)
-      });
+  drop(event: CdkDragDrop<Tarefa[]>, novoStatus: StatusExecucao) {
+  if (event.previousContainer === event.container) {
+    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  } else {
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex,
+    );
+  }
+
+  const tarefa = event.container.data[event.currentIndex];
+  if (tarefa?.id) {
+    const tarefaAtualizada: Tarefa = {
+      ...tarefa,
+      statusExecucao: novoStatus
+      // não seta flag aqui, o service já resolve
+    };
+
+    this.tarefasService.atualizar(tarefa.id, tarefaAtualizada).subscribe({
+      next: (t) => console.log('Tarefa atualizada:', t),
+      error: (err) => console.error('Erro ao mover tarefa:', err)
+    });
+  }
+}
+
+
+
+  removerTarefa(tarefaRemovida: Tarefa): void {
+    if (!tarefaRemovida.id) return;
+
+    this.tarefasService.remover(tarefaRemovida.id).subscribe({
+      next: () => {
+        this.tarefas = this.tarefas.filter(t => t.id !== tarefaRemovida.id);
+        this.separarPorStatus();
+        if (this.tarefaSelecionada?.id === tarefaRemovida.id) this.fecharModal();
+      },
+      error: (err) => console.error('Erro ao remover tarefa:', err)
+    });
+  }
+
+  /** Atualiza a flag da tarefa conforme status e data de vencimento */
+  atualizarFlag(tarefa: Tarefa): void {
+    if (tarefa.statusExecucao === StatusExecucao.Concluido) {
+      tarefa.flag = Flag.Concluido;
+      return;
     }
+
+    if (tarefa.dataVencimento) {
+      const hoje = new Date();
+      const vencimento = new Date(tarefa.dataVencimento);
+      if (vencimento < hoje) {
+        tarefa.flag = Flag.Atrasado;
+        return;
+      }
+    }
+
+    tarefa.flag = Flag.Normal; // default para tarefas não concluídas e não atrasadas
   }
 
   corFlag(flag?: Flag): string {
@@ -179,4 +202,6 @@ export class TarefasComponent implements OnInit {
     }
   }
 }
+
+
 

@@ -8,8 +8,8 @@
         "Ana"
       ],
       "dataVencimento": "2025-09-25",
-      "statusExecucao": "A Fazer",
-      "flag": "Pendente"
+      "statusExecucao": "Em Andamento",
+      "flag": "Urgente"
     },
     {
       "id": 2,
@@ -20,8 +20,8 @@
         "João"
       ],
       "dataVencimento": "2025-09-19",
-      "statusExecucao": "Concluido",
-      "flag": "Normal"
+      "statusExecucao": "Em Atraso",
+      "flag": "Atrasado"
     },
     {
       "id": 3,
@@ -30,9 +30,9 @@
       "membros": [
         "Mariana"
       ],
-      "dataVencimento": "2025-09-21",
-      "statusExecucao": "Concluido",
-      "flag": "Concluído"
+      "dataVencimento": "2025-09-11",
+      "statusExecucao": "Em Atraso",
+      "flag": "Atrasado"
     },
     {
       "id": 4,
@@ -43,8 +43,8 @@
         "Fernanda"
       ],
       "dataVencimento": "2025-10-02",
-      "statusExecucao": "Em Andamento",
-      "flag": "Normal"
+      "statusExecucao": "A Fazer",
+      "flag": "Pendente"
     },
     {
       "id": 5,
@@ -54,7 +54,8 @@
         "Lucas"
       ],
       "dataVencimento": "2025-09-15",
-      "statusExecucao": "Concluido"
+      "statusExecucao": "A Fazer",
+      "flag": "Concluído"
     },
     {
       "id": 6,
@@ -64,8 +65,8 @@
         "Ana"
       ],
       "dataVencimento": "2025-09-26",
-      "statusExecucao": "Concluido",
-      "flag": "Concluído"
+      "statusExecucao": "A Fazer",
+      "flag": "Pendente"
     },
     {
       "id": 7,
@@ -73,11 +74,12 @@
       "descricao": "Definir tarefas para próxima semana",
       "membros": [
         "Carlos",
-        "Mariana"
+        "Mariana",
+        "Bianca"
       ],
       "dataVencimento": "2025-09-27",
-      "statusExecucao": "A Fazer",
-      "flag": "Urgente"
+      "statusExecucao": "Em Atraso",
+      "flag": "Normal"
     },
     {
       "id": 8,
@@ -89,17 +91,6 @@
       "dataVencimento": "2025-09-28",
       "statusExecucao": "A Fazer",
       "flag": "Normal"
-    },
-    {
-      "id": 9,
-      "titulo": "Testar módulo de login",
-      "descricao": "Criar casos de teste unitários",
-      "membros": [
-        "Pedro"
-      ],
-      "dataVencimento": "2025-09-29",
-      "statusExecucao": "A Fazer",
-      "flag": "Pendente"
     },
     {
       "id": 10,
@@ -143,8 +134,8 @@
         "Pedro"
       ],
       "dataVencimento": "2025-10-03",
-      "statusExecucao": "Em Andamento",
-      "flag": "Pendente"
+      "statusExecucao": "Em Atraso",
+      "flag": "Normal"
     },
     {
       "id": 14,
@@ -166,8 +157,8 @@
         "Lucas"
       ],
       "dataVencimento": "2025-10-05",
-      "statusExecucao": "Em Andamento",
-      "flag": "Normal"
+      "statusExecucao": "Concluido",
+      "flag": "Concluído"
     },
     {
       "id": 16,
@@ -186,8 +177,9 @@
       "membros": [
         "Carlos"
       ],
-      "dataVencimento": "2025-09-17",
-      "statusExecucao": "Concluido"
+      "dataVencimento": "2025-09-25",
+      "statusExecucao": "Em Andamento",
+      "flag": "Urgente"
     },
     {
       "id": 18,
@@ -198,8 +190,8 @@
         "Fernanda"
       ],
       "dataVencimento": "2025-09-16",
-      "statusExecucao": "Em Atraso",
-      "flag": "Atrasado"
+      "statusExecucao": "Concluido",
+      "flag": "Concluído"
     },
     {
       "id": 19,
@@ -235,16 +227,6 @@
       "flag": "Normal"
     },
     {
-      "id": 22,
-      "titulo": "Entrega do projeto teste",
-      "descricao": "Testes unitários completos",
-      "membros": [
-        "Pedro"
-      ],
-      "dataVencimento": "2025-09-10",
-      "statusExecucao": "Concluido"
-    },
-    {
       "id": 23,
       "titulo": "Treinamento de equipe",
       "descricao": "Capacitação em novas ferramentas",
@@ -278,17 +260,6 @@
       "dataVencimento": "2025-09-14",
       "statusExecucao": "Concluido",
       "flag": "Pendente"
-    },
-    {
-      "titulo": "aaaaaaaaaaaaaaaa",
-      "descricao": "dsadsad",
-      "dataVencimento": "31233-12-23",
-      "membros": [
-        "eu"
-      ],
-      "statusExecucao": "A Fazer",
-      "flag": "Atrasado",
-      "id": 26
     }
   ]
 }

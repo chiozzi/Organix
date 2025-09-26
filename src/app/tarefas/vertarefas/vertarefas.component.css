@@ -1,3 +1,4 @@
+/* ===== Modal Overlay ===== */
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -8,6 +9,7 @@
   z-index: 1000;
 }
 
+/* ===== Modal Content ===== */
 .modal-content {
   background: #f9f9f9;
   padding: 25px 30px;
@@ -27,12 +29,14 @@
   animation: modalFadeOut 0.3s ease-in-out forwards;
 }
 
+/* ===== Modal Header ===== */
 .modal-header h2 {
   margin: 0;
   font-size: 1.8em;
   color: #333;
 }
 
+/* ===== Modal Body ===== */
 .modal-body {
   margin-top: 20px;
 }
@@ -53,7 +57,7 @@
   line-height: 1.4;
 }
 
-/* Status */
+/* ===== Status ===== */
 .status {
   padding: 4px 10px;
   border-radius: 6px;
@@ -61,18 +65,19 @@
   font-size: 0.9em;
   display: inline-block;
 }
+
 .status.normal   { background: #e6f7ff; color: #007bff; }
 .status.pendente { background: #fff3cd; color: #856404; }
 .status.urgente  { background: #f8d7da; color: #721c24; }
 .status.atraso   { background: #f5c6cb; color: #a94442; }
-.status.concluido { background: #d4edda; color: #155724; }
 
-/* Membros */
+/* ===== Membros ===== */
 .membros {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
+
 .membro {
   display: flex;
   align-items: center;
@@ -82,13 +87,14 @@
   font-size: 0.9em;
   color: #333;
 }
+
 .membro i {
   margin-right: 6px;
   font-size: 1.2em;
   color: #007bff;
 }
 
-/* Footer — alinhado à esquerda (v1) */
+/* ===== Footer (botões à esquerda) ===== */
 .modal-footer {
   margin-top: 25px;
   display: flex;
@@ -96,40 +102,54 @@
   justify-content: flex-start;
 }
 
-/* Botões */
+/* ===== Botões ===== */
 .btn-concluir,
 .btn-editar,
-.btn-fechar {
+.btn-excluir {
   border: none;
   padding: 10px 18px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.95em;
-  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   gap: 6px;
+  transition: background 0.2s ease;
 }
 
-.btn-concluir {
-  background-color: #28a745; /* cor v2 */
-  color: white;
-}
-.btn-concluir:hover { background-color: #218838; }
-
+/* Concluir e Editar */
+.btn-concluir,
 .btn-editar {
   background: #0080D7;
   color: white;
 }
-.btn-editar:hover { background: #0066A1; }
 
-.btn-fechar {
+.btn-concluir:hover,
+.btn-editar:hover {
+  background: #0066A1;
+}
+
+/* Excluir */
+.btn-excluir {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
   background: #d9534f;
   color: white;
 }
-.btn-fechar:hover { background: #c9302c; }
 
-/* Botão fechar no topo */
+.btn-excluir:hover {
+  background: #c9302c;
+}
+
+/* Ícone antes do texto */
+.btn-concluir i,
+.btn-editar i,
+.btn-excluir i {
+  order: 0;
+}
+
+/* ===== Botão fechar no topo ===== */
 .btn-fechar-topo {
   position: absolute;
   top: 12px;
@@ -141,24 +161,28 @@
   color: #666;
   transition: color 0.2s ease;
 }
+
 .btn-fechar-topo:hover {
   color: #d9534f;
 }
 
-/* Animações */
+/* ===== Animações ===== */
 @keyframes modalFadeIn {
   from { opacity: 0; transform: scale(0.95) translateY(-20px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }
 }
+
 @keyframes modalFadeOut {
   from { opacity: 1; transform: scale(1) translateY(0); }
   to   { opacity: 0; transform: scale(0.95) translateY(-20px); }
 }
 
+/* ===== Linhas horizontais ===== */
 .linha1 {
   margin-top: 30px;
   margin-bottom: -7px;
 }
+
 .linha2 {
-  margin: 7px;
+  margin: 7px 0;
 }

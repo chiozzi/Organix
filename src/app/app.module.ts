@@ -39,7 +39,7 @@ import { SobrenosComponent } from './footer/sobrenos/sobrenos.component';
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

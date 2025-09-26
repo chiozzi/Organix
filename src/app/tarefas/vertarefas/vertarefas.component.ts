@@ -8,14 +8,13 @@ import { Flag, StatusExecucao, Tarefa, TarefasService } from '../tarefas.service
   styleUrl: './vertarefas.component.css'
 })
 export class VertarefasComponent {
-  @Input() tarefa: Tarefa | null = null;
+  @Input() tarefa?: Tarefa;
   @Output() fechar = new EventEmitter<void>();
   @Output() editar = new EventEmitter<Tarefa>();
   @Output() concluir = new EventEmitter<Tarefa>();
+  @Output() excluir = new EventEmitter<Tarefa>();
 
   fechando = false;
-
-  // Expor enums no template
   StatusExecucao = StatusExecucao;
   Flag = Flag;
 
@@ -33,21 +32,48 @@ export class VertarefasComponent {
     if (this.tarefa) this.editar.emit(this.tarefa);
   }
 
+
   concluirTarefa() {
-    if (!this.tarefa || !this.tarefa.id) return;
+  if (!this.tarefa?.id) return;
 
-    const tarefaAtualizada: Tarefa = {
-      ...this.tarefa,
-      statusExecucao: StatusExecucao.Concluido,
-      flag: Flag.Concluido
-    };
+  const tarefaAtualizada: Tarefa = {
+    ...this.tarefa,
+    statusExecucao: StatusExecucao.Concluido
+    // não precisa setar flag, o service já resolve
+  };
 
-    this.tarefasService.atualizar(this.tarefa.id, tarefaAtualizada).subscribe({
-      next: (t) => {
-        this.concluir.emit(t);
+  this.tarefasService.atualizar(this.tarefa.id, tarefaAtualizada).subscribe({
+    next: (t) => {
+      this.concluir.emit(t);
+      this.fecharModal();
+    },
+    error: (err: any) => console.error('Erro ao concluir tarefa:', err)
+  });
+}
+
+
+  excluirTarefa() {
+    if (!this.tarefa?.id) return;
+
+    const confirmDelete = confirm('Tem certeza que deseja excluir esta tarefa?');
+    if (!confirmDelete) return;
+
+    const tarefaTemporaria = { ...this.tarefa };
+
+    this.tarefasService.remover(this.tarefa.id).subscribe({
+      next: () => {
+        this.excluir.emit(this.tarefa);
         this.fecharModal();
+
+        const desfazer = confirm('Tarefa excluída com sucesso! Deseja desfazer?');
+        if (desfazer) {
+          this.tarefasService.criar(tarefaTemporaria).subscribe({
+            next: () => alert('Tarefa restaurada com sucesso!'),
+            error: (err) => console.error('Erro ao restaurar tarefa:', err)
+          });
+        }
       },
-      error: (err) => console.error('Erro ao concluir tarefa:', err)
+      error: (err) => console.error('Erro ao excluir tarefa:', err)
     });
   }
 
@@ -62,3 +88,5 @@ export class VertarefasComponent {
     }
   }
 }
+
+
