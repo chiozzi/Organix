@@ -1,6 +1,9 @@
 <div class="modal-overlay" [ngClass]="{'fechando': fechando}">
   <div class="modal-content" [ngClass]="{'fechando': fechando}">
     <div class="modal-header">
+
+          <button class="btn-fechar-topo" (click)="fecharModal()">&times;</button>
+
       <h2>{{ tarefa ? 'Atualizar Tarefa' : 'Criar Nova Tarefa' }}</h2>
     </div>
 
@@ -22,9 +25,6 @@
 
           <label>Descrição</label>
           <textarea rows="3" formControlName="descricao" placeholder="Detalhes da tarefa"></textarea>
-
-          <label>Membros (separados por vírgula)</label>
-          <input type="text" formControlName="membros" placeholder="Ex: João, Maria" />
 
           <label>Status</label>
           <select formControlName="statusExecucao">

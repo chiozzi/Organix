@@ -71,28 +71,6 @@
 .status.urgente  { background: #f8d7da; color: #721c24; }
 .status.atraso   { background: #f5c6cb; color: #a94442; }
 
-/* ===== Membros ===== */
-.membros {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.membro {
-  display: flex;
-  align-items: center;
-  background: #f1f1f1;
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-size: 0.9em;
-  color: #333;
-}
-
-.membro i {
-  margin-right: 6px;
-  font-size: 1.2em;
-  color: #007bff;
-}
 
 /* ===== Footer (botões à esquerda) ===== */
 .modal-footer {

@@ -109,6 +109,18 @@
   cursor: not-allowed;
 }
 
+.btn-fechar-topo {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s ease;
+}
+
 .btn-fechar {
   background: #d9534f;
   color: white;

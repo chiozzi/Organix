@@ -8,6 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './criartarefas.component.html',
   styleUrl: './criartarefas.component.css'
 })
+
 export class CriartarefasComponent implements OnInit {
   @Input() tarefa: Tarefa | null = null;
   @Output() salvar = new EventEmitter<Tarefa>();
@@ -15,14 +16,12 @@ export class CriartarefasComponent implements OnInit {
 
   formTarefa!: FormGroup;
   fechando = false;
-  hoje: string = ''; // variável para min no input
+  hoje: string = '';
 
   constructor(private tarefasService: TarefasService) {}
 
   ngOnInit(): void {
     this.inicializarFormulario();
-
-    // define hoje em formato YYYY-MM-DD
     const hojeDate = new Date();
     this.hoje = hojeDate.toISOString().split('T')[0];
   }
@@ -32,7 +31,6 @@ export class CriartarefasComponent implements OnInit {
       titulo: new FormControl(this.tarefa?.titulo || '', Validators.required),
       descricao: new FormControl(this.tarefa?.descricao || ''),
       dataVencimento: new FormControl(this.tarefa?.dataVencimento || '', Validators.required),
-      membros: new FormControl(this.tarefa?.membros ? this.tarefa.membros.join(', ') : ''),
       statusExecucao: new FormControl(this.tarefa?.statusExecucao || StatusExecucao.AFazer, Validators.required),
       flag: new FormControl(this.tarefa?.flag || Flag.Normal, Validators.required)
     });
@@ -45,7 +43,6 @@ export class CriartarefasComponent implements OnInit {
         titulo: tarefa?.titulo || '',
         descricao: tarefa?.descricao || '',
         dataVencimento: tarefa?.dataVencimento || '',
-        membros: tarefa?.membros ? tarefa.membros.join(', ') : '',
         statusExecucao: tarefa?.statusExecucao || StatusExecucao.AFazer,
         flag: tarefa?.flag || Flag.Normal
       });
@@ -56,8 +53,6 @@ export class CriartarefasComponent implements OnInit {
     if (this.formTarefa.invalid) return;
 
     const formValue = this.formTarefa.value;
-
-    // validação extra de data
     const hojeDate = new Date(this.hoje);
     const dataSelecionada = new Date(formValue.dataVencimento);
 
@@ -71,9 +66,9 @@ export class CriartarefasComponent implements OnInit {
       titulo: formValue.titulo,
       descricao: formValue.descricao,
       dataVencimento: formValue.dataVencimento,
-      membros: formValue.membros ? formValue.membros.split(',').map((m: string) => m.trim()) : [],
       statusExecucao: formValue.statusExecucao,
-      flag: formValue.flag
+      flag: formValue.flag,
+      ordem: this.tarefa?.ordem ?? 0
     };
 
     const operacao$ = this.tarefa?.id
@@ -89,20 +84,15 @@ export class CriartarefasComponent implements OnInit {
     });
   }
 
-  cancelar(): void {
-    this.fecharModal();
-  }
+  cancelar(): void { this.fecharModal(); }
 
-  private fecharModal(): void {
+  fecharModal() {
     this.fechando = true;
     setTimeout(() => {
-      this.formTarefa.reset({
-        statusExecucao: StatusExecucao.AFazer,
-        flag: Flag.Normal
-      });
       this.fechar.emit();
       this.fechando = false;
     }, 300);
   }
 }
+
 

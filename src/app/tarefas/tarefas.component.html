@@ -11,7 +11,12 @@
          (cdkDropListDropped)="drop($event, StatusExecucao.EmAtraso)">
       <h4>⏰ Em atraso</h4>
       <div class="kanban-cards">
-        <div class="card" *ngFor="let tarefa of tarefasEmAtraso" cdkDrag (click)="abrirModal(tarefa)">
+      <div 
+        class="card" 
+        *ngFor="let tarefa of tarefasEmAtraso" 
+        cdkDrag 
+        [cdkDragDisabled]="tarefa.flag === Flag.Atrasado" 
+        (click)="abrirModal(tarefa)">
           <div class="card-header">
             <h3>{{ tarefa.titulo }}</h3>
             <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>

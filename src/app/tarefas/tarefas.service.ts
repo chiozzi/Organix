@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 export enum StatusExecucao {
   AFazer = 'A Fazer',
@@ -11,8 +11,8 @@ export enum StatusExecucao {
 
 export enum Flag {
   Normal = 'Normal',
-  Pendente = 'Pendente',
   Urgente = 'Urgente',
+  Pendente = 'Pendente',
   Atrasado = 'Atrasado',
   Concluido = 'Concluido'
 }
@@ -20,26 +20,24 @@ export enum Flag {
 export interface Tarefa {
   id?: number;
   titulo: string;
-  descricao?: string;
-  membros?: string[];
-  dataVencimento?: string;
-  statusExecucao?: StatusExecucao;
-  flag?: Flag;
+  descricao: string;
+  dataVencimento: string;
+  statusExecucao: StatusExecucao;
+  flag: Flag;
+  ordem: number;
 }
 
-@Injectable({ providedIn: 'root' })
+
+@Injectable({
+  providedIn: 'root'
+})
 export class TarefasService {
-  private readonly apiUrl = 'http://localhost:3000/tarefas';
+  private apiUrl = 'http://localhost:3000/tarefas';
 
   constructor(private http: HttpClient) {}
 
-  // 🔹 Apenas listar, sem recalcular flag/status
   listar(): Observable<Tarefa[]> {
     return this.http.get<Tarefa[]>(this.apiUrl);
-  }
-
-  buscarPorId(id: number): Observable<Tarefa> {
-    return this.http.get<Tarefa>(`${this.apiUrl}/${id}`);
   }
 
   criar(tarefa: Tarefa): Observable<Tarefa> {
@@ -50,12 +48,15 @@ export class TarefasService {
     return this.http.put<Tarefa>(`${this.apiUrl}/${id}`, tarefa);
   }
 
-  // 🔹 Atualiza apenas o STATUS, sem mexer nas flags
-  atualizarStatus(id: number, novoStatus: StatusExecucao): Observable<Tarefa> {
-    return this.http.patch<Tarefa>(`${this.apiUrl}/${id}`, { statusExecucao: novoStatus });
-  }
-
   remover(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  atualizarStatus(id: number, status: StatusExecucao): Observable<Tarefa> {
+    return this.http.patch<Tarefa>(`${this.apiUrl}/${id}`, { statusExecucao: status });
+  }
+
+  atualizarOrdem(id: number, ordem: number): Observable<Tarefa> {
+    return this.http.patch<Tarefa>(`${this.apiUrl}/${id}`, { ordem });
   }
 }
