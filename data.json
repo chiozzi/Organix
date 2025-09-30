@@ -48,7 +48,7 @@
       "dataVencimento": "2025-10-02",
       "statusExecucao": "Em Andamento",
       "flag": "Pendente",
-      "ordem": 0
+      "ordem": 1
     },
     {
       "id": 5,
@@ -110,7 +110,7 @@
       "dataVencimento": "2025-09-30",
       "statusExecucao": "A Fazer",
       "flag": "Pendente",
-      "ordem": 0
+      "ordem": 2
     },
     {
       "id": 11,
@@ -123,7 +123,7 @@
       "dataVencimento": "2025-10-01",
       "statusExecucao": "A Fazer",
       "flag": "Pendente",
-      "ordem": 1
+      "ordem": 0
     },
     {
       "id": 12,
@@ -135,7 +135,7 @@
       "dataVencimento": "2025-10-02",
       "statusExecucao": "A Fazer",
       "flag": "Pendente",
-      "ordem": 1
+      "ordem": 3
     },
     {
       "id": 13,
@@ -145,9 +145,9 @@
         "Pedro"
       ],
       "dataVencimento": "2025-10-03",
-      "statusExecucao": "Em Andamento",
+      "statusExecucao": "A Fazer",
       "flag": "Pendente",
-      "ordem": 2
+      "ordem": 1
     },
     {
       "id": 14,
@@ -160,7 +160,7 @@
       "dataVencimento": "2025-10-04",
       "statusExecucao": "Em Andamento",
       "flag": "Pendente",
-      "ordem": 3
+      "ordem": 2
     },
     {
       "id": 15,
@@ -172,7 +172,7 @@
       "dataVencimento": "2025-10-05",
       "statusExecucao": "Em Andamento",
       "flag": "Pendente",
-      "ordem": 4
+      "ordem": 3
     },
     {
       "id": 16,
@@ -271,7 +271,7 @@
       "dataVencimento": "2025-09-13",
       "statusExecucao": "Em Andamento",
       "flag": "Normal",
-      "ordem": 2
+      "ordem": 0
     },
     {
       "id": 25,
