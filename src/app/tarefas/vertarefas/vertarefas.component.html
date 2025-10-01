@@ -1,7 +1,6 @@
 <div class="modal-overlay" [ngClass]="{'fechando': fechando}">
   <div class="modal-content" [ngClass]="{'fechando': fechando}">
 
-    <!-- Botão fechar no topo -->
     <button class="btn-fechar-topo" (click)="fecharModal()">&times;</button>
 
     <div class="modal-header">
@@ -11,28 +10,24 @@
     <hr class="linha1" />
 
     <div class="modal-body">
-      <!-- Bloco de informações -->
+      <!-- Informações da tarefa -->
       <section class="info-bloco">
         <h4>📅 Informações</h4>
         <p><strong>Vencimento:</strong> {{ tarefa?.dataVencimento | date:'dd/MM/yyyy' }}</p>
-        
         <p><strong>Status:</strong>
           <span class="status" [ngClass]="tarefaStatusClass(tarefa?.flag)">
             {{ tarefa?.statusExecucao }}
           </span>
         </p>
-
-        <!-- Exibe flag separada (se existir e não for concluído) -->
-        <p *ngIf="tarefa?.flag && tarefa?.flag !== Flag.Concluido">
-          <strong>⚑ Flag:</strong> 
+        <p *ngIf="tarefa?.flag">
+          <strong>⚑ Flag:</strong>
           <span class="status" [ngClass]="tarefaStatusClass(tarefa?.flag)">
             {{ tarefa?.flag }}
           </span>
         </p>
       </section>
 
-    
-      <!-- Bloco de descrição -->
+      <!-- Descrição -->
       <section class="info-bloco">
         <h4>📝 Descrição</h4>
         <p>{{ tarefa?.descricao || 'Sem descrição' }}</p>
@@ -41,20 +36,18 @@
 
     <hr class="linha2" />
 
-    <!-- Footer com botões à esquerda -->
     <div class="modal-footer">
-      <button class="btn-concluir" *ngIf="tarefa?.statusExecucao !== StatusExecucao.Concluido" (click)="concluirTarefa()"> 
-        Concluir <i class="fas fa-check"></i> 
+      <button class="btn-concluir" *ngIf="tarefa?.statusExecucao !== StatusExecucao.Concluido" (click)="concluirTarefa()">
+        Concluir <i class="fas fa-check"></i>
       </button>
 
-      <button class="btn-editar" (click)="editarTarefa()"> 
-        Editar informações <i class="fas fa-edit"></i> 
+      <button class="btn-editar" (click)="editarTarefa()">
+        Editar informações <i class="fas fa-edit"></i>
       </button>
     </div>
 
-    <!-- Botão de excluir -->
-    <button class="btn-excluir" (click)="excluirTarefa()"> 
-      Excluir <i class="fas fa-trash"></i> 
+    <button class="btn-excluir" (click)="excluirTarefa()">
+      Excluir <i class="fas fa-trash"></i>
     </button>
 
   </div>

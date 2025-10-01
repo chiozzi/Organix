@@ -70,7 +70,7 @@
 .status.pendente { background: #fff3cd; color: #856404; }
 .status.urgente  { background: #f8d7da; color: #721c24; }
 .status.atraso   { background: #f5c6cb; color: #a94442; }
-
+.status.concluido { background: #28a745; color: white; } /* NOVO: flag concluído */
 
 /* ===== Footer (botões à esquerda) ===== */
 .modal-footer {

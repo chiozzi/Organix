@@ -1,6 +1,13 @@
 <div class="sidebar-container" [class.collapsed]="!isOpen">
   <nav class="sidebar" [class.collapsed]="!isOpen">
 
+    <!-- LOGO 
+    <div class="sidebar-logo">
+      <img src="../../../public/logo branca oficiall nome.png" alt="Logo Aberta" class="logo-open" />
+      <img src="../../../public/logo branca oficiall logotipo.png" alt="Logo Fechada" class="logo-closed" />
+    </div>
+    -->
+
     <!-- Header com toggle fixo -->
     <div class="sidebar-header">
       <button class="toggle-btn" (click)="toggleSidebar()" aria-label="Abrir/Fechar menu">
@@ -8,9 +15,7 @@
       </button>
     </div>
 
-
-
-
+    <!-- Menu -->
     <ul class="menu">
       <li>
         <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
@@ -18,28 +23,24 @@
           <span *ngIf="isOpen">Home</span>
         </a>
       </li>
-
       <li>
         <a [routerLink]="['/tarefas']" routerLinkActive="active">
           <i class="fas fa-tasks icon"></i>
           <span *ngIf="isOpen">Tarefas</span>
         </a>
       </li>
-
       <li>
         <a [routerLink]="['/calendario']" routerLinkActive="active">
           <i class="fas fa-calendar-alt icon"></i>
           <span *ngIf="isOpen">Calendário</span>
         </a>
       </li>
-
       <li>
         <a [routerLink]="['/equipes']" routerLinkActive="active">
           <i class="fas fa-users icon"></i>
           <span *ngIf="isOpen">Equipes</span>
         </a>
       </li>
-
       <li>
         <a [routerLink]="['/chat']" routerLinkActive="active">
           <i class="fas fa-comments icon"></i>
@@ -48,6 +49,7 @@
       </li>
     </ul>
 
+    <!-- Footer perfil -->
     <div class="profile-footer">
       <a [routerLink]="['/perfil']" routerLinkActive="active">
         <div class="profile-pic">

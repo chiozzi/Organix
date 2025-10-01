@@ -4,9 +4,6 @@
       "id": 1,
       "titulo": "Ler capítulo do livro",
       "descricao": "Capítulo 5 de Estruturas de Dados",
-      "membros": [
-        "Ana"
-      ],
       "dataVencimento": "2025-09-25",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
@@ -16,10 +13,6 @@
       "id": 2,
       "titulo": "Corrigir bugs do sistema",
       "descricao": "Correção de falhas no módulo de autenticação",
-      "membros": [
-        "Carlos",
-        "João"
-      ],
       "dataVencimento": "2025-09-19",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
@@ -29,9 +22,6 @@
       "id": 3,
       "titulo": "Preparar apresentação",
       "descricao": "Slides para reunião com diretoria",
-      "membros": [
-        "Mariana"
-      ],
       "dataVencimento": "2025-09-11",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
@@ -41,22 +31,15 @@
       "id": 4,
       "titulo": "Desenvolver API de produtos",
       "descricao": "Endpoints REST para listagem e cadastro",
-      "membros": [
-        "Pedro",
-        "Fernanda"
-      ],
       "dataVencimento": "2025-10-02",
-      "statusExecucao": "Em Andamento",
+      "statusExecucao": "A Fazer",
       "flag": "Pendente",
-      "ordem": 1
+      "ordem": 0
     },
     {
       "id": 5,
       "titulo": "Entrega do relatório mensal",
       "descricao": "Relatório de indicadores de performance",
-      "membros": [
-        "Lucas"
-      ],
       "dataVencimento": "2025-09-15",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
@@ -66,9 +49,6 @@
       "id": 6,
       "titulo": "Estudar Angular",
       "descricao": "Revisar componentes e serviços",
-      "membros": [
-        "Ana"
-      ],
       "dataVencimento": "2025-09-26",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
@@ -78,11 +58,6 @@
       "id": 7,
       "titulo": "Planejar sprint",
       "descricao": "Definir tarefas para próxima semana",
-      "membros": [
-        "Carlos",
-        "Mariana",
-        "Bianca"
-      ],
       "dataVencimento": "2025-09-27",
       "statusExecucao": "Em Atraso",
       "flag": "Urgente",
@@ -92,36 +67,26 @@
       "id": 8,
       "titulo": "Revisar documentação",
       "descricao": "Atualizar readme do projeto",
-      "membros": [
-        "Lucas"
-      ],
       "dataVencimento": "2025-09-28",
       "statusExecucao": "Concluido",
       "flag": "Concluido",
-      "ordem": 0
+      "ordem": 3
     },
     {
       "id": 10,
       "titulo": "Pesquisar novas bibliotecas",
       "descricao": "Avaliar alternativas para otimização",
-      "membros": [
-        "Fernanda"
-      ],
       "dataVencimento": "2025-09-30",
       "statusExecucao": "A Fazer",
       "flag": "Pendente",
-      "ordem": 2
+      "ordem": 1
     },
     {
       "id": 11,
       "titulo": "Implementar componente de gráfico",
       "descricao": "Exibir indicadores no dashboard",
-      "membros": [
-        "Ana",
-        "Lucas"
-      ],
       "dataVencimento": "2025-10-01",
-      "statusExecucao": "A Fazer",
+      "statusExecucao": "Em Andamento",
       "flag": "Pendente",
       "ordem": 0
     },
@@ -129,23 +94,17 @@
       "id": 12,
       "titulo": "Integrar API externa",
       "descricao": "Consumir dados do sistema parceiro",
-      "membros": [
-        "Carlos"
-      ],
       "dataVencimento": "2025-10-02",
-      "statusExecucao": "A Fazer",
+      "statusExecucao": "Concluido",
       "flag": "Pendente",
-      "ordem": 3
+      "ordem": 1
     },
     {
       "id": 13,
       "titulo": "Refatorar código legado",
       "descricao": "Melhorar performance e legibilidade",
-      "membros": [
-        "Pedro"
-      ],
       "dataVencimento": "2025-10-03",
-      "statusExecucao": "A Fazer",
+      "statusExecucao": "Em Andamento",
       "flag": "Pendente",
       "ordem": 1
     },
@@ -153,10 +112,6 @@
       "id": 14,
       "titulo": "Criar testes automatizados",
       "descricao": "Cobertura de 80% do código",
-      "membros": [
-        "Mariana",
-        "Fernanda"
-      ],
       "dataVencimento": "2025-10-04",
       "statusExecucao": "Em Andamento",
       "flag": "Pendente",
@@ -166,21 +121,15 @@
       "id": 15,
       "titulo": "Atualizar base de dados",
       "descricao": "Migrar tabelas antigas",
-      "membros": [
-        "Lucas"
-      ],
       "dataVencimento": "2025-10-05",
       "statusExecucao": "Em Andamento",
       "flag": "Pendente",
-      "ordem": 3
+      "ordem": 4
     },
     {
       "id": 16,
       "titulo": "Enviar feedback para equipe",
       "descricao": "Revisar entregas da última sprint",
-      "membros": [
-        "Ana"
-      ],
       "dataVencimento": "2025-09-18",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
@@ -190,9 +139,6 @@
       "id": 17,
       "titulo": "Atualizar planilha financeira",
       "descricao": "Registrar despesas do mês",
-      "membros": [
-        "Carlos"
-      ],
       "dataVencimento": "2025-09-25",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
@@ -202,10 +148,6 @@
       "id": 18,
       "titulo": "Revisar contrato de fornecedores",
       "descricao": "Checar cláusulas de renovação",
-      "membros": [
-        "Pedro",
-        "Fernanda"
-      ],
       "dataVencimento": "2025-09-16",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
@@ -215,9 +157,6 @@
       "id": 19,
       "titulo": "Corrigir falhas no sistema de vendas",
       "descricao": "Relatórios não estão sendo gerados",
-      "membros": [
-        "Lucas"
-      ],
       "dataVencimento": "2025-09-15",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
@@ -227,9 +166,6 @@
       "id": 20,
       "titulo": "Organizar arquivos antigos",
       "descricao": "Arquivar documentos e backups",
-      "membros": [
-        "Mariana"
-      ],
       "dataVencimento": "2025-09-14",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
@@ -239,52 +175,37 @@
       "id": 21,
       "titulo": "Reunião com clientes",
       "descricao": "Apresentação de resultados",
-      "membros": [
-        "Ana",
-        "Carlos"
-      ],
       "dataVencimento": "2025-09-12",
       "statusExecucao": "Concluido",
       "flag": "Concluido",
-      "ordem": 1
+      "ordem": 2
     },
     {
       "id": 23,
       "titulo": "Treinamento de equipe",
       "descricao": "Capacitação em novas ferramentas",
-      "membros": [
-        "Mariana",
-        "Fernanda"
-      ],
       "dataVencimento": "2025-09-11",
       "statusExecucao": "Concluido",
       "flag": "Concluído",
-      "ordem": 2
+      "ordem": 0
     },
     {
       "id": 24,
       "titulo": "Publicar relatório anual",
       "descricao": "Divulgação para diretoria",
-      "membros": [
-        "Lucas"
-      ],
       "dataVencimento": "2025-09-13",
       "statusExecucao": "Em Andamento",
       "flag": "Normal",
-      "ordem": 0
+      "ordem": 3
     },
     {
       "id": 25,
       "titulo": "Backup completo do sistema",
       "descricao": "Salvar dados críticos",
-      "membros": [
-        "Carlos",
-        "Pedro"
-      ],
       "dataVencimento": "2025-09-14",
-      "statusExecucao": "Concluido",
+      "statusExecucao": "A Fazer",
       "flag": "Pendente",
-      "ordem": 3
+      "ordem": 2
     }
   ]
 }

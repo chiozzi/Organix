@@ -11,20 +11,18 @@ import { CriartarefasComponent } from './criartarefas/criartarefas.component';
   styleUrl: './tarefas.component.css'
 })  
 export class TarefasComponent implements OnInit {
-  tarefas: Tarefa[] = [];
-  tarefaSelecionada: Tarefa | null = null;
-  tarefaParaEdicao: Tarefa | null = null;
-  exibirCriarTarefa = false;
 
-  tarefasAFazer: Tarefa[] = [];
   tarefasEmAtraso: Tarefa[] = [];
+  tarefasAFazer: Tarefa[] = [];
   tarefasEmAndamento: Tarefa[] = [];
   tarefasConcluidas: Tarefa[] = [];
 
+  tarefaSelecionada: Tarefa | null = null;
+  exibirCriarTarefa = false;
+  tarefaParaEdicao: Tarefa | null = null;
+
   StatusExecucao = StatusExecucao;
   Flag = Flag;
-
-  @ViewChild(CriartarefasComponent) criarTarefaChild!: CriartarefasComponent;
 
   constructor(private tarefasService: TarefasService) {}
 
@@ -33,111 +31,117 @@ export class TarefasComponent implements OnInit {
   }
 
   carregarTarefas(): void {
-    this.tarefasService.listar().subscribe({
-      next: dados => { 
-        this.tarefas = dados; 
-        this.separarPorStatus(); 
-      },
-      error: err => console.error('Erro ao carregar tarefas:', err)
-    });
-  }
-
-  separarPorStatus(): void {
-    this.tarefasAFazer = this.tarefas
-      .filter(t => t.statusExecucao === StatusExecucao.AFazer)
-      .sort((a,b) => (a.ordem ?? 0) - (b.ordem ?? 0));
-
-    this.tarefasEmAtraso = this.tarefas
-      .filter(t => t.statusExecucao === StatusExecucao.EmAtraso)
-      .sort((a,b) => (a.ordem ?? 0) - (b.ordem ?? 0));
-
-    this.tarefasEmAndamento = this.tarefas
-      .filter(t => t.statusExecucao === StatusExecucao.EmAndamento)
-      .sort((a,b) => (a.ordem ?? 0) - (b.ordem ?? 0));
-
-    this.tarefasConcluidas = this.tarefas
-      .filter(t => t.statusExecucao === StatusExecucao.Concluido)
-      .sort((a,b) => (a.ordem ?? 0) - (b.ordem ?? 0));
-  }
-
-  abrirCriarModal(tarefa?: Tarefa) {
-    this.tarefaParaEdicao = tarefa ? { ...tarefa } : null;
-    this.exibirCriarTarefa = true;
-    setTimeout(() => this.criarTarefaChild?.abrirModalComTarefa(this.tarefaParaEdicao));
-  }
-
-  tarefaCriadaOuAtualizada(tarefa: Tarefa) {
-    const index = this.tarefas.findIndex(t => t.id === tarefa.id);
-    if (index >= 0) this.tarefas[index] = tarefa;
-    else this.tarefas.push(tarefa);
-
-    this.separarPorStatus();
-    this.salvarOrdemGlobal();
-  }
-
-  drop(event: CdkDragDrop<Tarefa[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-      // atualiza status
-      const tarefa = event.container.data[event.currentIndex];
-      tarefa.statusExecucao = this.getStatusDoContainer(event.container.id);
-    }
-
-    this.salvarOrdemGlobal();
-  }
-
-  getStatusDoContainer(containerId: string): StatusExecucao {
-    switch(containerId) {
-      case 'AFazer': return StatusExecucao.AFazer;
-      case 'EmAtraso': return StatusExecucao.EmAtraso;
-      case 'EmAndamento': return StatusExecucao.EmAndamento;
-      case 'Concluido': return StatusExecucao.Concluido;
-      default: return StatusExecucao.AFazer;
-    }
-  }
-
-  salvarOrdemGlobal() {
-    const todasColunas = [
-      { tarefas: this.tarefasAFazer, status: StatusExecucao.AFazer },
-      { tarefas: this.tarefasEmAtraso, status: StatusExecucao.EmAtraso },
-      { tarefas: this.tarefasEmAndamento, status: StatusExecucao.EmAndamento },
-      { tarefas: this.tarefasConcluidas, status: StatusExecucao.Concluido }
-    ];
-
-    todasColunas.forEach(coluna => {
-      coluna.tarefas.forEach((tarefa, index) => {
-        tarefa.ordem = index;
-        if (!tarefa.id) return;
-        this.tarefasService.atualizar(tarefa.id, tarefa).subscribe({
-          next: () => {},
-          error: err => console.error('Erro ao salvar ordem:', err)
-        });
+    this.tarefasService.listar().subscribe(tarefas => {
+      tarefas.forEach(t => {
+        t.flag = this.definirFlagAutomaticamente(t);
       });
+
+      this.tarefasEmAtraso    = tarefas.filter(t => t.statusExecucao === StatusExecucao.EmAtraso);
+      this.tarefasAFazer      = tarefas.filter(t => t.statusExecucao === StatusExecucao.AFazer);
+      this.tarefasEmAndamento = tarefas.filter(t => t.statusExecucao === StatusExecucao.EmAndamento);
+      this.tarefasConcluidas  = tarefas.filter(t => t.statusExecucao === StatusExecucao.Concluido);
     });
   }
 
-  removerTarefa(tarefa: Tarefa) {
-    if (!tarefa.id) return;
-    this.tarefasService.remover(tarefa.id).subscribe({
-      next: () => {
-        this.tarefas = this.tarefas.filter(t => t.id !== tarefa.id);
-        this.separarPorStatus();
-        this.salvarOrdemGlobal();
-      },
-      error: err => console.error('Erro ao remover tarefa:', err)
-    });
+  abrirModal(tarefa: Tarefa): void {
+    this.tarefaSelecionada = tarefa;
   }
 
-  abrirModal(tarefa: Tarefa) { this.tarefaSelecionada = tarefa; }
-  fecharModal() { this.tarefaSelecionada = null; }
+  fecharModal(): void {
+    this.tarefaSelecionada = null;
+  }
+
+  abrirCriarModal(tarefa?: Tarefa): void {
+    this.tarefaParaEdicao = tarefa || null;
+    this.exibirCriarTarefa = true;
+  }
+
+  tarefaCriadaOuAtualizada(tarefa: Tarefa): void {
+    this.exibirCriarTarefa = false;
+    this.carregarTarefas();
+  }
+
+  removerTarefa(tarefa: Tarefa): void {
+    this.carregarTarefas();
+  }
+
+  /** 🔹 Função para definir flag automaticamente */
+  private definirFlagAutomaticamente(tarefa: Tarefa): Flag {
+    const hoje = new Date();
+    const vencimento = new Date(tarefa.dataVencimento);
+
+    // Se já está concluído, flag sempre concluído
+    if (tarefa.statusExecucao === StatusExecucao.Concluido) {
+      return Flag.Concluido;
+    }
+
+    // Se já passou da data
+    if (vencimento < hoje) {
+      return Flag.Atrasado;
+    }
+
+    // Se vence em até 2 dias
+    const diffDias = Math.ceil((vencimento.getTime() - hoje.getTime()) / (1000 * 60 * 60 * 24));
+    if (diffDias <= 2) {
+      return Flag.Urgente;
+    }
+
+    // Se está a fazer e longe do prazo
+    if (tarefa.statusExecucao === StatusExecucao.AFazer) {
+      return Flag.Pendente;
+    }
+
+    return Flag.Normal;
+  }
+
+  drop(event: CdkDragDrop<Tarefa[]>): void {
+  const tarefa = event.item.data as Tarefa;
+  const novaColuna = event.container.id as StatusExecucao;
+
+  if (!tarefa.id) return;
+
+  // 🔹 Mover visualmente no front
+  if (event.previousContainer === event.container) {
+    // mesma coluna → só reordena
+    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  } else {
+    // coluna diferente → remove de uma e adiciona na outra
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+  }
+
+  // 🔹 Atualizar tarefa com novo status e flag
+  const tarefaAtualizada: Tarefa = {
+    ...tarefa,
+    statusExecucao: novaColuna,
+    flag: this.definirFlagAutomaticamente({ ...tarefa, statusExecucao: novaColuna }),
+    ordem: event.currentIndex // salva a posição dentro da coluna
+  };
+
+  // 🔹 Atualiza no backend
+  this.tarefasService.atualizar(tarefa.id, tarefaAtualizada).subscribe({
+    next: () => console.log('Tarefa atualizada com sucesso'),
+    error: (err) => console.error('Erro ao mover tarefa:', err)
+  });
+
+  // 🔹 Reordena todas as tarefas da coluna e salva no backend
+  event.container.data.forEach((t, index) => {
+    if (t.id) {
+      this.tarefasService.atualizarOrdem(t.id, index).subscribe();
+    }
+  });
 }
+
+
+
+}
+
+
+
 
 
 

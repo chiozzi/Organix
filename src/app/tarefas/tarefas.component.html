@@ -2,18 +2,19 @@
   <h2>Painel de Tarefas</h2>
   <div class="kanban">
 
+
     <!-- Em atraso -->
     <div class="kanban-col"
-         cdkDropList
-         id="EmAtraso"
-         [cdkDropListData]="tarefasEmAtraso"
-         [cdkDropListConnectedTo]="['AFazer','EmAndamento','Concluido']"
-         (cdkDropListDropped)="drop($event)">
+        cdkDropList
+        id="EmAtraso"
+        [cdkDropListData]="tarefasEmAtraso"
+        [cdkDropListConnectedTo]="['AFazer','EmAndamento','Concluido']"
+        (cdkDropListDropped)="drop($event)">
       <h4>⏰ Em atraso</h4>
       <div class="kanban-cards">
         <div class="card" *ngFor="let tarefa of tarefasEmAtraso" cdkDrag
-             [cdkDragDisabled]="tarefa.flag === Flag.Atrasado" 
-             (click)="abrirModal(tarefa)">
+            [cdkDragDisabled]="tarefa.flag === Flag.Atrasado" 
+            (click)="abrirModal(tarefa)">
           <div class="card-header">
             <h3>{{ tarefa.titulo }}</h3>
             <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
@@ -24,6 +25,7 @@
         </div>
       </div>
     </div>
+
 
     <!-- A fazer -->
     <div class="kanban-col"
@@ -68,12 +70,12 @@
     </div>
 
     <!-- Concluídas -->
-    <div class="kanban-col"
-         cdkDropList
-         id="Concluido"
-         [cdkDropListData]="tarefasConcluidas"
-         [cdkDropListConnectedTo]="['EmAtraso','AFazer','EmAndamento']"
-         (cdkDropListDropped)="drop($event)">
+    <div class="kanban-col concluidas"
+        cdkDropList
+        id="Concluido"
+        [cdkDropListData]="tarefasConcluidas"
+        [cdkDropListConnectedTo]="['EmAtraso','AFazer','EmAndamento']"
+        (cdkDropListDropped)="drop($event)">
       <h4>✅ Concluídas</h4>
       <div class="kanban-cards">
         <div class="card" *ngFor="let tarefa of tarefasConcluidas" cdkDrag (click)="abrirModal(tarefa)">

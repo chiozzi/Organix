@@ -8,7 +8,7 @@ import { Flag, StatusExecucao, Tarefa, TarefasService } from '../tarefas.service
   styleUrl: './vertarefas.component.css'
 })
 export class VertarefasComponent {
-  @Input() tarefa?: Tarefa;
+  @Input() tarefa: Tarefa | null | undefined;
   @Output() fechar = new EventEmitter<void>();
   @Output() editar = new EventEmitter<Tarefa>();
   @Output() concluir = new EventEmitter<Tarefa>();
@@ -29,40 +29,39 @@ export class VertarefasComponent {
   }
 
   editarTarefa() {
-    if (this.tarefa) this.editar.emit(this.tarefa);
+    if (!this.tarefa) return;
+    this.editar.emit(this.tarefa);
   }
 
-
   concluirTarefa() {
-  if (!this.tarefa?.id) return;
+    if (!this.tarefa || !this.tarefa.id) return;
 
-  const tarefaAtualizada: Tarefa = {
-    ...this.tarefa,
-    statusExecucao: StatusExecucao.Concluido
-    // não precisa setar flag, o service já resolve
-  };
+    const tarefaAtualizada: Tarefa = {
+      ...this.tarefa,
+      statusExecucao: StatusExecucao.Concluido,
+      flag: Flag.Concluido
+    };
 
-  this.tarefasService.atualizar(this.tarefa.id, tarefaAtualizada).subscribe({
-    next: (t) => {
-      this.concluir.emit(t);
-      this.fecharModal();
-    },
-    error: (err: any) => console.error('Erro ao concluir tarefa:', err)
-  });
-}
-
+    this.tarefasService.atualizar(this.tarefa.id, tarefaAtualizada).subscribe({
+      next: (t: Tarefa) => {
+        this.concluir.emit(t);
+        this.fecharModal();
+      },
+      error: (err: any) => console.error('Erro ao concluir tarefa:', err)
+    });
+  }
 
   excluirTarefa() {
-    if (!this.tarefa?.id) return;
+    if (!this.tarefa || !this.tarefa.id) return;
 
     const confirmDelete = confirm('Tem certeza que deseja excluir esta tarefa?');
     if (!confirmDelete) return;
 
-    const tarefaTemporaria = { ...this.tarefa };
+    const tarefaTemporaria: Tarefa = { ...this.tarefa };
 
     this.tarefasService.remover(this.tarefa.id).subscribe({
       next: () => {
-        this.excluir.emit(this.tarefa);
+        this.excluir.emit(this.tarefa!); // já garantimos que não é null
         this.fecharModal();
 
         const desfazer = confirm('Tarefa excluída com sucesso! Deseja desfazer?');

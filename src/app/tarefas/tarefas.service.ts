@@ -27,7 +27,6 @@ export interface Tarefa {
   ordem: number;
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
