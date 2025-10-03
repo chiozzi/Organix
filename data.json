@@ -1,64 +1,37 @@
 {
   "tarefas": [
     {
-      "id": 1,
-      "titulo": "Ler capítulo do livro",
-      "descricao": "Capítulo 5 de Estruturas de Dados",
-      "dataVencimento": "2025-09-25",
-      "statusExecucao": "Concluido",
-      "flag": "Concluido",
-      "ordem": 0
-    },
-    {
-      "id": 2,
-      "titulo": "Corrigir bugs do sistema",
-      "descricao": "Correção de falhas no módulo de autenticação",
-      "dataVencimento": "2025-09-19",
-      "statusExecucao": "EmAtraso",
-      "flag": "Atrasado",
-      "ordem": 0
-    },
-    {
       "id": 3,
       "titulo": "Preparar apresentação",
       "descricao": "Slides para reunião com diretoria",
       "dataVencimento": "2025-09-11",
       "statusExecucao": "EmAtraso",
       "flag": "Atrasado",
-      "ordem": 2
-    },
-    {
-      "id": 4,
-      "titulo": "Desenvolver API de produtos",
-      "descricao": "Endpoints REST para listagem e cadastro",
-      "dataVencimento": "2025-10-02",
-      "statusExecucao": "Concluido",
-      "flag": "Concluido",
       "ordem": 0
     },
     {
       "id": 5,
       "titulo": "Entrega do relatório mensal",
       "descricao": "Relatório de indicadores de performance",
-      "dataVencimento": "2025-09-15",
-      "statusExecucao": "EmAtraso",
-      "flag": "Atrasado",
-      "ordem": 3
+      "dataVencimento": "2025-10-15",
+      "statusExecucao": "AFazer",
+      "flag": "Pendente",
+      "ordem": 0
     },
     {
       "id": 6,
       "titulo": "Estudar Angular",
       "descricao": "Revisar componentes e serviços",
-      "dataVencimento": "2025-09-26",
+      "dataVencimento": "2025-10-26",
       "statusExecucao": "AFazer",
-      "flag": "Atrasado",
+      "flag": "Pendente",
       "ordem": 1
     },
     {
       "id": 7,
       "titulo": "Planejar sprint",
       "descricao": "Definir tarefas para próxima semana",
-      "dataVencimento": "2025-09-27",
+      "dataVencimento": "2025-10-27",
       "statusExecucao": "Em Atraso",
       "flag": "Urgente",
       "ordem": 2
@@ -67,161 +40,161 @@
       "id": 8,
       "titulo": "Revisar documentação",
       "descricao": "Atualizar readme do projeto",
-      "dataVencimento": "2025-09-28",
-      "statusExecucao": "Concluido",
-      "flag": "Concluido",
-      "ordem": 3
+      "dataVencimento": "2025-10-28",
+      "statusExecucao": "AFazer",
+      "flag": "Atrasado",
+      "ordem": 2
     },
     {
-      "id": 10,
+      "id": 9,
       "titulo": "Pesquisar novas bibliotecas",
       "descricao": "Avaliar alternativas para otimização",
-      "dataVencimento": "2025-09-30",
+      "dataVencimento": "2025-10-30",
       "statusExecucao": "EmAndamento",
       "flag": "Atrasado",
       "ordem": 0
     },
     {
-      "id": 11,
+      "id": 10,
       "titulo": "Implementar componente de gráfico",
       "descricao": "Exibir indicadores no dashboard",
       "dataVencimento": "2025-10-01",
-      "statusExecucao": "Concluido",
-      "flag": "Concluido",
+      "statusExecucao": "EmAndamento",
+      "flag": "Atrasado",
       "ordem": 2
     },
     {
-      "id": 13,
+      "id": 11,
       "titulo": "Refatorar código legado",
       "descricao": "Melhorar performance e legibilidade",
       "dataVencimento": "2025-10-03",
-      "statusExecucao": "AFazer",
-      "flag": "Urgente",
-      "ordem": 2
+      "statusExecucao": "EmAtraso",
+      "flag": "Atrasado",
+      "ordem": 1
     },
     {
-      "id": 14,
+      "id": 12,
       "titulo": "Criar testes automatizados",
       "descricao": "Cobertura de 80% do código",
       "dataVencimento": "2025-10-04",
       "statusExecucao": "AFazer",
       "flag": "Urgente",
-      "ordem": 3
+      "ordem": 4
     },
     {
-      "id": 15,
+      "id": 13,
       "titulo": "Atualizar base de dados",
       "descricao": "Migrar tabelas antigas",
       "dataVencimento": "2025-10-05",
       "statusExecucao": "AFazer",
-      "flag": "Normal",
-      "ordem": 4
+      "flag": "Urgente",
+      "ordem": 5
     },
     {
-      "id": 16,
+      "id": 14,
       "titulo": "Enviar feedback para equipe",
       "descricao": "Revisar entregas da última sprint",
-      "dataVencimento": "2025-09-18",
+      "dataVencimento": "2025-10-18",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
       "ordem": 3
     },
     {
-      "id": 17,
+      "id": 15,
       "titulo": "Atualizar planilha financeira",
       "descricao": "Registrar despesas do mês",
-      "dataVencimento": "2025-09-25",
+      "dataVencimento": "2025-10-25",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
       "ordem": 4
     },
     {
-      "id": 18,
+      "id": 16,
       "titulo": "Revisar contrato de fornecedores",
       "descricao": "Checar cláusulas de renovação",
-      "dataVencimento": "2025-09-16",
+      "dataVencimento": "2025-10-16",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
       "ordem": 5
     },
     {
-      "id": 19,
+      "id": 17,
       "titulo": "Corrigir falhas no sistema de vendas",
       "descricao": "Relatórios não estão sendo gerados",
-      "dataVencimento": "2025-09-15",
+      "dataVencimento": "2025-10-15",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
       "ordem": 6
     },
     {
-      "id": 20,
+      "id": 18,
       "titulo": "Organizar arquivos antigos",
       "descricao": "Arquivar documentos e backups",
-      "dataVencimento": "2025-09-14",
+      "dataVencimento": "2025-10-14",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
       "ordem": 7
     },
     {
-      "id": 21,
+      "id": 19,
       "titulo": "Reunião com clientes",
       "descricao": "Apresentação de resultados",
-      "dataVencimento": "2025-09-12",
-      "statusExecucao": "Concluido",
-      "flag": "Concluido",
-      "ordem": 2
+      "dataVencimento": "2025-10-12",
+      "statusExecucao": "EmAndamento",
+      "flag": "Normal",
+      "ordem": 3
     },
     {
-      "id": 23,
+      "id": 20,
       "titulo": "Treinamento de equipe",
       "descricao": "Capacitação em novas ferramentas",
-      "dataVencimento": "2025-09-11",
+      "dataVencimento": "2025-10-11",
       "statusExecucao": "Concluido",
       "flag": "Concluído",
       "ordem": 0
     },
     {
-      "id": 24,
+      "id": 21,
       "titulo": "Publicar relatório anual",
       "descricao": "Divulgação para diretoria",
-      "dataVencimento": "2025-09-13",
+      "dataVencimento": "2025-10-13",
       "statusExecucao": "Em Andamento",
       "flag": "Normal",
       "ordem": 6
     },
     {
-      "id": 25,
+      "id": 22,
       "titulo": "Backup completo do sistema",
       "descricao": "Salvar dados críticos",
-      "dataVencimento": "2025-09-14",
-      "statusExecucao": "EmAtraso",
-      "flag": "Atrasado",
-      "ordem": 4
+      "dataVencimento": "2025-10-14",
+      "statusExecucao": "AFazer",
+      "flag": "Pendente",
+      "ordem": 6
     },
     {
+      "id": 23,
       "titulo": "Tarefa matemática",
       "descricao": "Lição teams",
       "dataVencimento": "2025-10-05",
       "statusExecucao": "EmAndamento",
       "flag": "Normal",
-      "ordem": 1,
-      "id": 26
+      "ordem": 1
     },
     {
+      "id": 24,
       "titulo": "Pintar casa",
       "descricao": "rolo de tinta",
       "dataVencimento": "2025-10-10",
       "statusExecucao": "Concluido",
       "flag": "Concluido",
-      "ordem": 1,
-      "id": 27
+      "ordem": 1
     },
     {
-      "id": 12,
+      "id": 25,
       "titulo": "Integrar API externa",
       "descricao": "Consumir dados do sistema parceiro",
       "dataVencimento": "2025-10-02",
-      "statusExecucao": "EmAndamento",
+      "statusExecucao": "EmAtraso",
       "flag": "Atrasado",
       "ordem": 2
     }
@@ -232,11 +205,6 @@
       "id": 1,
       "nome": "Sistema de Vendas",
       "lider": "Maria Souza",
-      "membros": [
-        "Ana",
-        "Carlos",
-        "João"
-      ],
       "etiqueta": "pendente",
       "descricao": "",
       "checklist": [],

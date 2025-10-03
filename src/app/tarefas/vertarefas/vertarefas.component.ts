@@ -36,53 +36,43 @@ export class VertarefasComponent {
   }
 
   // Concluir tarefa
-  concluirTarefa() {
-    if (!this.tarefa || !this.tarefa.id) return;
+concluirTarefa() {
+  if (!this.tarefa || !this.tarefa.id) return;
 
-    const tarefaAtualizada: Tarefa = {
-      ...this.tarefa,
-      statusExecucao: StatusExecucao.Concluido,
-      flag: Flag.Concluido
-    };
+  const tarefaAtualizada: Tarefa = {
+    ...this.tarefa,
+    statusExecucao: StatusExecucao.Concluido,
+    flag: Flag.Concluido
+  };
 
-    this.tarefasService.atualizar(this.tarefa.id, tarefaAtualizada).subscribe({
-      next: (t: Tarefa) => {
-        this.tarefa = t;
-        this.concluir.emit(t);
-        this.fecharModal();
-      },
-      error: (err) => console.error('Erro ao concluir tarefa:', err)
-    });
-  }
+  this.tarefasService.atualizar(this.tarefa.id, tarefaAtualizada).subscribe({
+    next: () => {
+      this.concluir.emit(tarefaAtualizada); // ✅ passa para o pai a tarefa concluída
+      this.fecharModal();
+    },
+    error: (err) => console.error('Erro ao concluir tarefa:', err)
+  });
+}
 
-  // Excluir tarefa com opção de desfazer
-  excluirTarefa() {
-    if (!this.tarefa || !this.tarefa.id) return;
+// Excluir tarefa
+excluirTarefa() {
+  if (!this.tarefa || !this.tarefa.id) return;
 
-    const confirmDelete = confirm('Tem certeza que deseja excluir esta tarefa?');
-    if (!confirmDelete) return;
+  const confirmDelete = confirm('Tem certeza que deseja excluir esta tarefa?');
+  if (!confirmDelete) return;
 
-    const tarefaTemporaria: Tarefa = { ...this.tarefa };
+  const tarefaTemporaria: Tarefa = { ...this.tarefa };
 
-    this.tarefasService.remover(this.tarefa.id).subscribe({
-      next: () => {
-        this.excluir.emit(tarefaTemporaria);
-        this.fecharModal();
+  this.tarefasService.remover(this.tarefa.id).subscribe({
+    next: () => {
+      this.excluir.emit(tarefaTemporaria); // ✅ passa a tarefa excluída
+      this.fecharModal();
+    },
+    error: (err) => console.error('Erro ao excluir tarefa:', err)
+  });
+}
 
-        const desfazer = confirm('Tarefa excluída com sucesso! Deseja desfazer?');
-        if (desfazer) {
-          this.tarefasService.criar(tarefaTemporaria).subscribe({
-            next: (t: Tarefa) => {
-              alert('Tarefa restaurada com sucesso!');
-              this.concluir.emit(t); // reaparece automaticamente
-            },
-            error: (err) => console.error('Erro ao restaurar tarefa:', err)
-          });
-        }
-      },
-      error: (err) => console.error('Erro ao excluir tarefa:', err)
-    });
-  }
+
 
   // Retorna classe CSS de acordo com a flag
   tarefaStatusClass(flag?: Flag): string {
@@ -96,6 +86,7 @@ export class VertarefasComponent {
     }
   }
 }
+
 
 
 

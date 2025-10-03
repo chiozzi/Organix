@@ -1,16 +1,19 @@
 <div class="modal-overlay" [ngClass]="{'fechando': fechando}">
   <div class="modal-content" [ngClass]="{'fechando': fechando}">
 
+    <!-- Botão fechar -->
     <button class="btn-fechar-topo" (click)="fecharModal()">&times;</button>
 
+    <!-- Cabeçalho -->
     <div class="modal-header">
       <h2>{{ tarefa?.titulo }}</h2>
     </div>
 
     <hr class="linha1" />
 
+    <!-- Corpo -->
     <div class="modal-body">
-      <!-- Informações da tarefa -->
+      <!-- Informações -->
       <section class="info-bloco">
         <h4>📅 Informações</h4>
         <p><strong>Vencimento:</strong> {{ tarefa?.dataVencimento | date:'dd/MM/yyyy' }}</p>
@@ -20,7 +23,7 @@
           </span>
         </p>
         <p *ngIf="tarefa?.flag">
-          <strong>⚑ Flag:</strong>
+          <strong>Flag:</strong>
           <span class="status" [ngClass]="tarefaStatusClass(tarefa?.flag)">
             {{ tarefa?.flag }}
           </span>
@@ -36,8 +39,12 @@
 
     <hr class="linha2" />
 
+    <!-- Rodapé -->
     <div class="modal-footer">
-      <button class="btn-concluir" *ngIf="tarefa?.statusExecucao !== StatusExecucao.Concluido" (click)="concluirTarefa()">
+      <!-- Botão concluir só aparece se não estiver concluída -->
+      <button class="btn-concluir" 
+              *ngIf="tarefa?.statusExecucao !== StatusExecucao.Concluido" 
+              (click)="concluirTarefa()">
         Concluir <i class="fas fa-check"></i>
       </button>
 
@@ -46,6 +53,7 @@
       </button>
     </div>
 
+    <!-- Botão excluir -->
     <button class="btn-excluir" (click)="excluirTarefa()">
       Excluir <i class="fas fa-trash"></i>
     </button>

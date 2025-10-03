@@ -1,9 +1,11 @@
-/* ===== Corpo e Container ===== */
+/* ==============================
+   🌐 Corpo e Container Geral
+============================== */
 html, body {
   height: 100%;
   margin: 0;
   color: #333;
-  background-color: #f5f5f5; 
+  background-color: #f5f5f5;
 }
 
 .container {
@@ -22,7 +24,9 @@ html, body {
   margin: 0;
 }
 
-/* ===== Kanban ===== */
+/* ==============================
+   🧭 Kanban Board
+============================== */
 .kanban {
   display: flex;
   gap: 20px;
@@ -42,19 +46,13 @@ html, body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   margin-top: 50px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .kanban-col:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-}
-
-.kanban-col.concluidas {
-  flex: 1 1 100%;
-  max-width: 100%;
-  margin-top: 40px;
 }
 
 .kanban-col h4 {
@@ -65,34 +63,6 @@ html, body {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-
-/* Cards Concluídas em Grid */
-.kanban-col.concluidas .kanban-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
-  align-items: start;
-}
-
-.kanban-col.concluidas .card {
-  height: 140px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.kanban-col.concluidas .card h3,
-.kanban-col.concluidas .card p {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Remove flag das tarefas concluídas (opcional) */
-.kanban-col.concluidas .status-badge {
-  display: none;
-}
-
 
 /* Scroll da lista de cards */
 .kanban-cards {
@@ -110,7 +80,68 @@ html, body {
   border-radius: 4px;
 }
 
-/* ===== Cards ===== */
+/* ==============================
+   ✅ Coluna Concluídas
+============================== */
+.kanban-col.concluidas {
+  flex: 1 1 100%;
+  max-width: 100%;
+  margin-top: 40px;
+  background: #f2f2f2;
+}
+
+.kanban-col.concluidas .kanban-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+  align-items: start;
+}
+
+/* ==============================
+   🟩 Ajuste de tamanho dos cards da coluna CONCLUÍDAS
+   ============================== */
+.kanban-col.concluidas .card {
+  height: 160px;          /* ✅ altura fixa padronizada */
+  min-height: 160px;
+  overflow: hidden;       /* garante que não “vaze” texto */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Limita título dentro das concluídas */
+.kanban-col.concluidas .card h5,
+.kanban-col.concluidas .card h3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;    /* Máx. 2 linhas */
+  line-clamp: 2;            /* Versão padrão */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+/* Limita textos (descrição, vencimento, status) */
+.kanban-col.concluidas .card p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;    /* Máx. 1 linha */
+  line-clamp: 1;            /* Versão padrão */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+
+
+/* Oculta badge de status nas concluídas */
+.kanban-col.concluidas .status-badge {
+  display: none;
+}
+
+/* ==============================
+   🃏 Cards de Tarefa
+============================== */
 .card {
   background: #fff;
   border-radius: 12px;
@@ -139,7 +170,8 @@ html, body {
   margin-bottom: 8px;
 }
 
-.card-header h3 {
+.card-header h3,
+.card-header h5 {
   margin: 0;
   font-size: 15px;
   font-weight: bold;
@@ -158,7 +190,9 @@ html, body {
   text-overflow: ellipsis;
 }
 
-/* ===== Badges de status ===== */
+/* ==============================
+   🏷️ Badges de Status
+============================== */
 .status-badge {
   padding: 4px 10px;
   border-radius: 20px;
@@ -168,14 +202,15 @@ html, body {
   color: #fff;
 }
 
-/* 🔹 Flags para todas as situações */
 .status-badge.urgente { background-color: orange; }
 .status-badge.atrasado { background-color: red; }
 .status-badge.pendente { background-color: yellow; color: black; }
 .status-badge.normal { background-color: #0080D7; }
 .status-badge.concluido { background-color: #2fa533; }
 
-/* ===== Botão flutuante ===== */
+/* ==============================
+   ➕ Botão Flutuante
+============================== */
 .btn-flutuante {
   position: fixed;
   bottom: 25px;
@@ -192,12 +227,14 @@ html, body {
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.btn-flutuante:hover { 
+.btn-flutuante:hover {
   background: #0066cc;
   transform: scale(1.1);
 }
 
-/* ===== Angular Drag & Drop ===== */
+/* ==============================
+   🧲 Angular Drag & Drop
+============================== */
 .cdk-drop-list {
   min-height: 200px;
   padding: 8px;
@@ -214,31 +251,9 @@ html, body {
   border-radius: 4px;
 }
 
-/* ===== Cards dentro da coluna Concluídas ===== */
-.kanban-col.concluidas .kanban-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 15px;
-  align-items: start;
-}
-
-.kanban-col.concluidas .card {
-  width: 100%;
-  height: 140px;       /* 🔹 altura fixa igual para todas as tarefas concluídas */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-/* 🔹 Concluídas com texto resumido */
-.kanban-col.concluidas .card h3,
-.kanban-col.concluidas .card p {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* ===== Modal Overlay ===== */
+/* ==============================
+   🪟 Modal
+============================== */
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -294,6 +309,9 @@ html, body {
   line-height: 1.4;
 }
 
+/* ==============================
+   🟩 Status Modal
+============================== */
 .status {
   padding: 4px 10px;
   border-radius: 6px;
@@ -302,12 +320,15 @@ html, body {
   display: inline-block;
 }
 
-.status.normal   { background: #e6f7ff; color: #007bff; }
+.status.normal { background: #e6f7ff; color: #007bff; }
 .status.pendente { background: #fff3cd; color: #856404; }
-.status.urgente  { background: #f8d7da; color: #721c24; }
-.status.atraso   { background: #f5c6cb; color: #a94442; }
+.status.urgente { background: #f8d7da; color: #721c24; }
+.status.atraso { background: #f5c6cb; color: #a94442; }
 .status.concluido { background: #2fa533; color: white; }
 
+/* ==============================
+   🧭 Modal Footer & Botões
+============================== */
 .modal-footer {
   margin-top: 25px;
   display: flex;
@@ -374,16 +395,22 @@ html, body {
   color: #d9534f;
 }
 
+/* ==============================
+   ✨ Animações Modal
+============================== */
 @keyframes modalFadeIn {
   from { opacity: 0; transform: scale(0.95) translateY(-20px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 @keyframes modalFadeOut {
   from { opacity: 1; transform: scale(1) translateY(0); }
-  to   { opacity: 0; transform: scale(0.95) translateY(-20px); }
+  to { opacity: 0; transform: scale(0.95) translateY(-20px); }
 }
 
+/* ==============================
+   📏 Linhas decorativas
+============================== */
 .linha1 {
   margin-top: 30px;
   margin-bottom: -7px;

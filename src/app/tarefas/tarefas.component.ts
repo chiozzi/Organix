@@ -60,12 +60,36 @@ export class TarefasComponent implements OnInit {
   }
 
   removerTarefa(tarefa: Tarefa): void {
-    this.carregarTarefas();
-  }
+  if (!tarefa.id) return;
+  this.tarefasService.remover(tarefa.id).subscribe({
+    next: () => {
+      this.carregarTarefas();
+      this.fecharModal();
+    },
+    error: (err) => console.error('Erro ao excluir tarefa:', err)
+  });
+}
 
-  tarefaConcluida(tarefa: Tarefa): void {
-    this.carregarTarefas();
-  }
+tarefaConcluida(tarefa: Tarefa): void {
+  if (!tarefa.id) return;
+
+  const tarefaAtualizada: Tarefa = {
+    ...tarefa,
+    statusExecucao: StatusExecucao.Concluido,
+    flag: Flag.Concluido
+  };
+
+  this.tarefasService.atualizar(tarefa.id, tarefaAtualizada).subscribe({
+    next: () => {
+      this.carregarTarefas();
+      this.fecharModal();
+    },
+    error: (err) => console.error('Erro ao concluir tarefa:', err)
+  });
+}
+
+
+
 
   private definirFlagAutomaticamente(tarefa: Tarefa): Flag {
     const hoje = new Date();
