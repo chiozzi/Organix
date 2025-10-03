@@ -20,6 +20,7 @@ export class VertarefasComponent {
 
   constructor(private tarefasService: TarefasService) {}
 
+  // Fecha o modal com animação
   fecharModal() {
     this.fechando = true;
     setTimeout(() => {
@@ -28,11 +29,13 @@ export class VertarefasComponent {
     }, 300);
   }
 
+  // Emite evento de edição
   editarTarefa() {
     if (!this.tarefa) return;
     this.editar.emit(this.tarefa);
   }
 
+  // Concluir tarefa
   concluirTarefa() {
     if (!this.tarefa || !this.tarefa.id) return;
 
@@ -46,11 +49,13 @@ export class VertarefasComponent {
       next: (t: Tarefa) => {
         this.tarefa = t;
         this.concluir.emit(t);
+        this.fecharModal();
       },
       error: (err) => console.error('Erro ao concluir tarefa:', err)
     });
   }
 
+  // Excluir tarefa com opção de desfazer
   excluirTarefa() {
     if (!this.tarefa || !this.tarefa.id) return;
 
@@ -69,7 +74,7 @@ export class VertarefasComponent {
           this.tarefasService.criar(tarefaTemporaria).subscribe({
             next: (t: Tarefa) => {
               alert('Tarefa restaurada com sucesso!');
-              this.concluir.emit(t); // opcional: reaparece automaticamente
+              this.concluir.emit(t); // reaparece automaticamente
             },
             error: (err) => console.error('Erro ao restaurar tarefa:', err)
           });
@@ -79,6 +84,7 @@ export class VertarefasComponent {
     });
   }
 
+  // Retorna classe CSS de acordo com a flag
   tarefaStatusClass(flag?: Flag): string {
     switch (flag) {
       case Flag.Atrasado: return 'status atraso';
@@ -90,5 +96,6 @@ export class VertarefasComponent {
     }
   }
 }
+
 
 

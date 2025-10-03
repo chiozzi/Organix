@@ -19,6 +19,8 @@
   import { DragDropModule } from '@angular/cdk/drag-drop';
   import { SobrenosComponent } from './footer/sobrenos/sobrenos.component';
 import { RouterModule } from '@angular/router';
+import { CriarequipeComponent } from './equipes/criarequipe/criarequipe.component';
+import { VerequipeComponent } from './equipes/verequipe/verequipe.component';
 
   @NgModule({
     declarations: [
@@ -33,7 +35,9 @@ import { RouterModule } from '@angular/router';
       CalendarioComponent,
       PerfilComponent,
       ChatComponent,
-      SobrenosComponent
+      SobrenosComponent,
+      CriarequipeComponent,
+      VerequipeComponent
     ],
     imports: [
       BrowserModule,

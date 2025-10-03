@@ -5,8 +5,8 @@
       "titulo": "Ler capítulo do livro",
       "descricao": "Capítulo 5 de Estruturas de Dados",
       "dataVencimento": "2025-09-25",
-      "statusExecucao": "AFazer",
-      "flag": "Atrasado",
+      "statusExecucao": "Concluido",
+      "flag": "Concluido",
       "ordem": 0
     },
     {
@@ -14,9 +14,9 @@
       "titulo": "Corrigir bugs do sistema",
       "descricao": "Correção de falhas no módulo de autenticação",
       "dataVencimento": "2025-09-19",
-      "statusExecucao": "AFazer",
+      "statusExecucao": "EmAtraso",
       "flag": "Atrasado",
-      "ordem": 1
+      "ordem": 0
     },
     {
       "id": 3,
@@ -25,7 +25,7 @@
       "dataVencimento": "2025-09-11",
       "statusExecucao": "EmAtraso",
       "flag": "Atrasado",
-      "ordem": 1
+      "ordem": 2
     },
     {
       "id": 4,
@@ -43,7 +43,7 @@
       "dataVencimento": "2025-09-15",
       "statusExecucao": "EmAtraso",
       "flag": "Atrasado",
-      "ordem": 0
+      "ordem": 3
     },
     {
       "id": 6,
@@ -97,7 +97,7 @@
       "dataVencimento": "2025-10-03",
       "statusExecucao": "AFazer",
       "flag": "Urgente",
-      "ordem": 0
+      "ordem": 2
     },
     {
       "id": 14,
@@ -106,7 +106,7 @@
       "dataVencimento": "2025-10-04",
       "statusExecucao": "AFazer",
       "flag": "Urgente",
-      "ordem": 0
+      "ordem": 3
     },
     {
       "id": 15,
@@ -115,7 +115,7 @@
       "dataVencimento": "2025-10-05",
       "statusExecucao": "AFazer",
       "flag": "Normal",
-      "ordem": 1
+      "ordem": 4
     },
     {
       "id": 16,
@@ -196,7 +196,7 @@
       "dataVencimento": "2025-09-14",
       "statusExecucao": "EmAtraso",
       "flag": "Atrasado",
-      "ordem": 1
+      "ordem": 4
     },
     {
       "titulo": "Tarefa matemática",
@@ -211,8 +211,8 @@
       "titulo": "Pintar casa",
       "descricao": "rolo de tinta",
       "dataVencimento": "2025-10-10",
-      "statusExecucao": "EmAndamento",
-      "flag": "Normal",
+      "statusExecucao": "Concluido",
+      "flag": "Concluido",
       "ordem": 1,
       "id": 27
     },
@@ -221,9 +221,9 @@
       "titulo": "Integrar API externa",
       "descricao": "Consumir dados do sistema parceiro",
       "dataVencimento": "2025-10-02",
-      "statusExecucao": "Concluido",
-      "flag": "Concluido",
-      "ordem": 1
+      "statusExecucao": "EmAndamento",
+      "flag": "Atrasado",
+      "ordem": 2
     }
   ],
   "eventos": [],

@@ -1,22 +1,22 @@
 <div class="container">
   <h2>Painel de Tarefas</h2>
-  <div class="kanban">
+  <div class="kanban row">
 
     <!-- Em atraso -->
-    <div class="kanban-col"
-        cdkDropList
-        id="EmAtraso"
-        [cdkDropListData]="tarefasEmAtraso"
-        [cdkDropListConnectedTo]="['AFazer','EmAndamento','Concluido']"
-        (cdkDropListDropped)="drop($event)">
+    <div class="col-md-3 kanban-col"
+         cdkDropList
+         id="EmAtraso"
+         [cdkDropListData]="tarefasEmAtraso"
+         [cdkDropListConnectedTo]="['AFazer','EmAndamento','Concluido']"
+         (cdkDropListDropped)="drop($event)">
       <h4>⏰ Em atraso</h4>
       <div class="kanban-cards">
-        <div class="card" *ngFor="let tarefa of tarefasEmAtraso" 
+        <div class="card mb-2" *ngFor="let tarefa of tarefasEmAtraso" 
              cdkDrag
              [cdkDragData]="tarefa"
              (click)="abrirModal(tarefa)">
           <div class="card-header">
-            <h3>{{ tarefa.titulo }}</h3>
+            <h5>{{ tarefa.titulo }}</h5>
             <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
           </div>
           <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
@@ -27,7 +27,7 @@
     </div>
 
     <!-- A fazer -->
-    <div class="kanban-col"
+    <div class="col-md-3 kanban-col"
          cdkDropList
          id="AFazer"
          [cdkDropListData]="tarefasAFazer"
@@ -35,12 +35,12 @@
          (cdkDropListDropped)="drop($event)">
       <h4>📝 A fazer</h4>
       <div class="kanban-cards">
-        <div class="card" *ngFor="let tarefa of tarefasAFazer" 
+        <div class="card mb-2" *ngFor="let tarefa of tarefasAFazer" 
              cdkDrag
              [cdkDragData]="tarefa"
              (click)="abrirModal(tarefa)">
           <div class="card-header">
-            <h3>{{ tarefa.titulo }}</h3>
+            <h5>{{ tarefa.titulo }}</h5>
             <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
           </div>
           <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
@@ -51,7 +51,7 @@
     </div>
 
     <!-- Em andamento -->
-    <div class="kanban-col"
+    <div class="col-md-3 kanban-col"
          cdkDropList
          id="EmAndamento"
          [cdkDropListData]="tarefasEmAndamento"
@@ -59,12 +59,12 @@
          (cdkDropListDropped)="drop($event)">
       <h4>⚙️ Em andamento</h4>
       <div class="kanban-cards">
-        <div class="card" *ngFor="let tarefa of tarefasEmAndamento" 
+        <div class="card mb-2" *ngFor="let tarefa of tarefasEmAndamento" 
              cdkDrag
              [cdkDragData]="tarefa"
              (click)="abrirModal(tarefa)">
           <div class="card-header">
-            <h3>{{ tarefa.titulo }}</h3>
+            <h5>{{ tarefa.titulo }}</h5>
             <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
           </div>
           <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
@@ -75,20 +75,20 @@
     </div>
 
     <!-- Concluídas -->
-    <div class="kanban-col concluidas"
-        cdkDropList
-        id="Concluido"
-        [cdkDropListData]="tarefasConcluidas"
-        [cdkDropListConnectedTo]="['EmAtraso','AFazer','EmAndamento']"
-        (cdkDropListDropped)="drop($event)">
+    <div class="col-md-3 kanban-col concluidas"
+         cdkDropList
+         id="Concluido"
+         [cdkDropListData]="tarefasConcluidas"
+         [cdkDropListConnectedTo]="['EmAtraso','AFazer','EmAndamento']"
+         (cdkDropListDropped)="drop($event)">
       <h4>✅ Concluídas</h4>
       <div class="kanban-cards concluidas-cards">
-        <div class="card" *ngFor="let tarefa of tarefasConcluidas" 
+        <div class="card mb-2" *ngFor="let tarefa of tarefasConcluidas" 
              cdkDrag
              [cdkDragData]="tarefa"
              (click)="abrirModal(tarefa)">
           <div class="card-header">
-            <h3>{{ tarefa.titulo }}</h3>
+            <h5>{{ tarefa.titulo }}</h5>
             <span *ngIf="tarefa.flag !== Flag.Concluido" class="status-badge {{ tarefa.flag | lowercase }}">
               {{ tarefa.flag }}
             </span>
@@ -102,24 +102,27 @@
 
   </div>
 
-  <button class="btn-flutuante" (click)="abrirCriarModal()"><i class="fas fa-plus"></i></button>
+  <!-- Botão flutuante de criar tarefa -->
+  <button class="btn-flutuante btn btn-primary" (click)="abrirCriarModal()">
+    <i class="fas fa-plus"></i>
+  </button>
 
-
+  <!-- Modal de visualizar tarefa -->
   <app-vertarefas
     *ngIf="tarefaSelecionada"
     [tarefa]="tarefaSelecionada"
     (fechar)="fecharModal()"
     (editar)="abrirCriarModal($event)"
     (excluir)="removerTarefa($event)"
-    (concluir)="tarefaConcluida($event)">
+    (concluir)="carregarTarefas()">
   </app-vertarefas>
 
-
-
+  <!-- Modal de criar/editar tarefa -->
   <app-criartarefas
     *ngIf="exibirCriarTarefa"
     [tarefa]="tarefaParaEdicao"
     (salvar)="tarefaCriadaOuAtualizada($event)"
     (fechar)="exibirCriarTarefa=false">
   </app-criartarefas>
+
 </div>

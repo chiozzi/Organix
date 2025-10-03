@@ -9,7 +9,7 @@ import { CriartarefasComponent } from './criartarefas/criartarefas.component';
   standalone: false,
   templateUrl: './tarefas.component.html',
   styleUrl: './tarefas.component.css'
-}) 
+})
 export class TarefasComponent implements OnInit {
 
   tarefasEmAtraso: Tarefa[] = [];
@@ -18,7 +18,7 @@ export class TarefasComponent implements OnInit {
   tarefasConcluidas: Tarefa[] = [];
 
   tarefaSelecionada: Tarefa | null = null;
-  exibirCriarTarefa = false;
+  exibirCriarTarefa: boolean = false;
   tarefaParaEdicao: Tarefa | null = null;
 
   StatusExecucao = StatusExecucao;
@@ -32,9 +32,7 @@ export class TarefasComponent implements OnInit {
 
   carregarTarefas(): void {
     this.tarefasService.listar().subscribe(tarefas => {
-      tarefas.forEach(t => {
-        t.flag = this.definirFlagAutomaticamente(t);
-      });
+      tarefas.forEach(t => t.flag = this.definirFlagAutomaticamente(t));
 
       this.tarefasEmAtraso    = tarefas.filter(t => t.statusExecucao === StatusExecucao.EmAtraso);
       this.tarefasAFazer      = tarefas.filter(t => t.statusExecucao === StatusExecucao.AFazer);
@@ -62,11 +60,11 @@ export class TarefasComponent implements OnInit {
   }
 
   removerTarefa(tarefa: Tarefa): void {
-    // Remove instantaneamente da tela
-    this.tarefasEmAtraso    = this.tarefasEmAtraso.filter(t => t.id !== tarefa.id);
-    this.tarefasAFazer      = this.tarefasAFazer.filter(t => t.id !== tarefa.id);
-    this.tarefasEmAndamento = this.tarefasEmAndamento.filter(t => t.id !== tarefa.id);
-    this.tarefasConcluidas  = this.tarefasConcluidas.filter(t => t.id !== tarefa.id);
+    this.carregarTarefas();
+  }
+
+  tarefaConcluida(tarefa: Tarefa): void {
+    this.carregarTarefas();
   }
 
   private definirFlagAutomaticamente(tarefa: Tarefa): Flag {
@@ -75,11 +73,9 @@ export class TarefasComponent implements OnInit {
 
     if (tarefa.statusExecucao === StatusExecucao.Concluido) return Flag.Concluido;
     if (vencimento < hoje) return Flag.Atrasado;
-
     const diffDias = Math.ceil((vencimento.getTime() - hoje.getTime()) / (1000*60*60*24));
     if (diffDias <= 2) return Flag.Urgente;
     if (tarefa.statusExecucao === StatusExecucao.AFazer) return Flag.Pendente;
-
     return Flag.Normal;
   }
 
@@ -114,15 +110,9 @@ export class TarefasComponent implements OnInit {
     });
   }
 
-  tarefaConcluida(tarefa: Tarefa): void {
-    // Remove da coluna atual
-    this.tarefasEmAtraso    = this.tarefasEmAtraso.filter(t => t.id !== tarefa.id);
-    this.tarefasAFazer      = this.tarefasAFazer.filter(t => t.id !== tarefa.id);
-    this.tarefasEmAndamento = this.tarefasEmAndamento.filter(t => t.id !== tarefa.id);
-    // Adiciona em concluídas
-    this.tarefasConcluidas.push(tarefa);
-  }
 }
+
+
 
 
 

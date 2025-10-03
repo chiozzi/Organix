@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export enum StatusExecucao {
-  AFazer = 'A Fazer',
-  EmAtraso = 'Em Atraso',
-  EmAndamento = 'Em Andamento',
+  AFazer = 'AFazer',
+  EmAtraso = 'EmAtraso',
+  EmAndamento = 'EmAndamento',
   Concluido = 'Concluido'
 }
 
@@ -27,9 +27,7 @@ export interface Tarefa {
   ordem: number;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class TarefasService {
   private apiUrl = 'http://localhost:3000/tarefas';
 
@@ -49,10 +47,6 @@ export class TarefasService {
 
   remover(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
-
-  atualizarStatus(id: number, status: StatusExecucao): Observable<Tarefa> {
-    return this.http.patch<Tarefa>(`${this.apiUrl}/${id}`, { statusExecucao: status });
   }
 
   atualizarOrdem(id: number, ordem: number): Observable<Tarefa> {
