@@ -5,7 +5,7 @@
       "titulo": "Ler capítulo do livro",
       "descricao": "Capítulo 5 de Estruturas de Dados",
       "dataVencimento": "2025-09-25",
-      "statusExecucao": "Em Atraso",
+      "statusExecucao": "AFazer",
       "flag": "Atrasado",
       "ordem": 0
     },
@@ -14,7 +14,7 @@
       "titulo": "Corrigir bugs do sistema",
       "descricao": "Correção de falhas no módulo de autenticação",
       "dataVencimento": "2025-09-19",
-      "statusExecucao": "Em Atraso",
+      "statusExecucao": "AFazer",
       "flag": "Atrasado",
       "ordem": 1
     },
@@ -23,17 +23,17 @@
       "titulo": "Preparar apresentação",
       "descricao": "Slides para reunião com diretoria",
       "dataVencimento": "2025-09-11",
-      "statusExecucao": "Em Atraso",
+      "statusExecucao": "EmAtraso",
       "flag": "Atrasado",
-      "ordem": 2
+      "ordem": 1
     },
     {
       "id": 4,
       "titulo": "Desenvolver API de produtos",
       "descricao": "Endpoints REST para listagem e cadastro",
       "dataVencimento": "2025-10-02",
-      "statusExecucao": "A Fazer",
-      "flag": "Pendente",
+      "statusExecucao": "Concluido",
+      "flag": "Concluido",
       "ordem": 0
     },
     {
@@ -41,18 +41,18 @@
       "titulo": "Entrega do relatório mensal",
       "descricao": "Relatório de indicadores de performance",
       "dataVencimento": "2025-09-15",
-      "statusExecucao": "Em Atraso",
+      "statusExecucao": "EmAtraso",
       "flag": "Atrasado",
-      "ordem": 3
+      "ordem": 0
     },
     {
       "id": 6,
       "titulo": "Estudar Angular",
       "descricao": "Revisar componentes e serviços",
       "dataVencimento": "2025-09-26",
-      "statusExecucao": "Em Atraso",
+      "statusExecucao": "AFazer",
       "flag": "Atrasado",
-      "ordem": 4
+      "ordem": 1
     },
     {
       "id": 7,
@@ -61,7 +61,7 @@
       "dataVencimento": "2025-09-27",
       "statusExecucao": "Em Atraso",
       "flag": "Urgente",
-      "ordem": 5
+      "ordem": 2
     },
     {
       "id": 8,
@@ -77,54 +77,45 @@
       "titulo": "Pesquisar novas bibliotecas",
       "descricao": "Avaliar alternativas para otimização",
       "dataVencimento": "2025-09-30",
-      "statusExecucao": "A Fazer",
-      "flag": "Pendente",
-      "ordem": 1
+      "statusExecucao": "EmAndamento",
+      "flag": "Atrasado",
+      "ordem": 0
     },
     {
       "id": 11,
       "titulo": "Implementar componente de gráfico",
       "descricao": "Exibir indicadores no dashboard",
       "dataVencimento": "2025-10-01",
-      "statusExecucao": "Em Andamento",
-      "flag": "Pendente",
-      "ordem": 0
-    },
-    {
-      "id": 12,
-      "titulo": "Integrar API externa",
-      "descricao": "Consumir dados do sistema parceiro",
-      "dataVencimento": "2025-10-02",
       "statusExecucao": "Concluido",
-      "flag": "Pendente",
-      "ordem": 1
+      "flag": "Concluido",
+      "ordem": 2
     },
     {
       "id": 13,
       "titulo": "Refatorar código legado",
       "descricao": "Melhorar performance e legibilidade",
       "dataVencimento": "2025-10-03",
-      "statusExecucao": "Em Andamento",
-      "flag": "Pendente",
-      "ordem": 1
+      "statusExecucao": "AFazer",
+      "flag": "Urgente",
+      "ordem": 0
     },
     {
       "id": 14,
       "titulo": "Criar testes automatizados",
       "descricao": "Cobertura de 80% do código",
       "dataVencimento": "2025-10-04",
-      "statusExecucao": "Em Andamento",
-      "flag": "Pendente",
-      "ordem": 2
+      "statusExecucao": "AFazer",
+      "flag": "Urgente",
+      "ordem": 0
     },
     {
       "id": 15,
       "titulo": "Atualizar base de dados",
       "descricao": "Migrar tabelas antigas",
       "dataVencimento": "2025-10-05",
-      "statusExecucao": "Em Andamento",
-      "flag": "Pendente",
-      "ordem": 4
+      "statusExecucao": "AFazer",
+      "flag": "Normal",
+      "ordem": 1
     },
     {
       "id": 16,
@@ -133,7 +124,7 @@
       "dataVencimento": "2025-09-18",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
-      "ordem": 6
+      "ordem": 3
     },
     {
       "id": 17,
@@ -142,7 +133,7 @@
       "dataVencimento": "2025-09-25",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
-      "ordem": 7
+      "ordem": 4
     },
     {
       "id": 18,
@@ -151,7 +142,7 @@
       "dataVencimento": "2025-09-16",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
-      "ordem": 8
+      "ordem": 5
     },
     {
       "id": 19,
@@ -160,7 +151,7 @@
       "dataVencimento": "2025-09-15",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
-      "ordem": 9
+      "ordem": 6
     },
     {
       "id": 20,
@@ -169,7 +160,7 @@
       "dataVencimento": "2025-09-14",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
-      "ordem": 10
+      "ordem": 7
     },
     {
       "id": 21,
@@ -196,16 +187,80 @@
       "dataVencimento": "2025-09-13",
       "statusExecucao": "Em Andamento",
       "flag": "Normal",
-      "ordem": 3
+      "ordem": 6
     },
     {
       "id": 25,
       "titulo": "Backup completo do sistema",
       "descricao": "Salvar dados críticos",
       "dataVencimento": "2025-09-14",
-      "statusExecucao": "A Fazer",
-      "flag": "Pendente",
-      "ordem": 2
+      "statusExecucao": "EmAtraso",
+      "flag": "Atrasado",
+      "ordem": 1
+    },
+    {
+      "titulo": "Tarefa matemática",
+      "descricao": "Lição teams",
+      "dataVencimento": "2025-10-05",
+      "statusExecucao": "EmAndamento",
+      "flag": "Normal",
+      "ordem": 1,
+      "id": 26
+    },
+    {
+      "titulo": "Pintar casa",
+      "descricao": "rolo de tinta",
+      "dataVencimento": "2025-10-10",
+      "statusExecucao": "EmAndamento",
+      "flag": "Normal",
+      "ordem": 1,
+      "id": 27
+    },
+    {
+      "id": 12,
+      "titulo": "Integrar API externa",
+      "descricao": "Consumir dados do sistema parceiro",
+      "dataVencimento": "2025-10-02",
+      "statusExecucao": "Concluido",
+      "flag": "Concluido",
+      "ordem": 1
+    }
+  ],
+  "eventos": [],
+  "equipes": [
+    {
+      "id": 1,
+      "nome": "Sistema de Vendas",
+      "lider": "Maria Souza",
+      "membros": [
+        "Ana",
+        "Carlos",
+        "João"
+      ],
+      "etiqueta": "pendente",
+      "descricao": "",
+      "checklist": [],
+      "comentarios": []
+    },
+    {
+      "id": 2,
+      "nome": "App de Delivery",
+      "lider": "João Silva",
+      "membros": [
+        "Pedro",
+        "Mariana"
+      ]
+    },
+    {
+      "id": 3,
+      "nome": "Portal Corporativo",
+      "lider": "Fernanda Lima",
+      "membros": [
+        "Rafa",
+        "Clara",
+        "Hugo",
+        "Lucas"
+      ]
     }
   ]
 }

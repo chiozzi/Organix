@@ -44,10 +44,10 @@ export class VertarefasComponent {
 
     this.tarefasService.atualizar(this.tarefa.id, tarefaAtualizada).subscribe({
       next: (t: Tarefa) => {
+        this.tarefa = t;
         this.concluir.emit(t);
-        this.fecharModal();
       },
-      error: (err: any) => console.error('Erro ao concluir tarefa:', err)
+      error: (err) => console.error('Erro ao concluir tarefa:', err)
     });
   }
 
@@ -61,13 +61,16 @@ export class VertarefasComponent {
 
     this.tarefasService.remover(this.tarefa.id).subscribe({
       next: () => {
-        this.excluir.emit(this.tarefa!); // já garantimos que não é null
+        this.excluir.emit(tarefaTemporaria);
         this.fecharModal();
 
         const desfazer = confirm('Tarefa excluída com sucesso! Deseja desfazer?');
         if (desfazer) {
           this.tarefasService.criar(tarefaTemporaria).subscribe({
-            next: () => alert('Tarefa restaurada com sucesso!'),
+            next: (t: Tarefa) => {
+              alert('Tarefa restaurada com sucesso!');
+              this.concluir.emit(t); // opcional: reaparece automaticamente
+            },
             error: (err) => console.error('Erro ao restaurar tarefa:', err)
           });
         }

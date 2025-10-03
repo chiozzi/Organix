@@ -1,1 +1,98 @@
-<p>equipes works!</p>
+<div class="equipes-main">
+  <div class="cards-container">
+    <div *ngFor="let equipe of equipes" class="card" (click)="abrirDetalhes(equipe)">
+      <div class="card-header">
+        <i class="fas fa-users"></i>
+        <!-- Etiqueta do status -->
+        <span class="tag" [ngClass]="equipe.status">{{ equipe.status }}</span>
+      </div>
+
+      <div class="card-body">
+        <h3>{{ equipe.nome }}</h3>
+        <p class="lider">Líder: {{ equipe.lider }}</p>
+
+        <div class="membros">
+          <span *ngFor="let m of equipe.membros" class="membro">{{ m }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botão Nova Equipe -->
+  <button class="nova-equipe-btn" (click)="abrirModal()">+ Nova equipe</button>
+
+  <!-- Modal Criar Equipe -->
+  <div class="modal" *ngIf="mostrarModal">
+    <div class="modal-content">
+      <h2>Criar Projeto</h2>
+
+      <label>Nome do projeto</label>
+      <input type="text" [(ngModel)]="novaEquipe.nome" />
+
+      <label>Líder</label>
+      <input type="text" [(ngModel)]="novaEquipe.lider" />
+
+      <label>Membros (separar por vírgula)</label>
+      <input type="text" [(ngModel)]="novaEquipe.membrosInput" />
+
+
+      <div class="modal-actions">
+        <button class="cancelar" (click)="fecharModal()">Cancelar</button>
+        <button class="salvar" (click)="criarEquipe()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Detalhes -->
+  <div class="modal" *ngIf="detalhesEquipe">
+    <div class="modal-content detalhes">
+      <h2>{{ detalhesEquipe.nome }}</h2>
+      <p><strong>Líder:</strong> {{ detalhesEquipe.lider }}</p>
+
+      <!-- Etiquetas -->
+      <label>Etiqueta</label>
+      <select [(ngModel)]="detalhesEquipe.etiqueta" [ngClass]="detalhesEquipe.etiqueta">
+        <option value="pendente">Pendente</option>
+        <option value="atrasada">Atrasada</option>
+        <option value="afazer">A fazer</option>
+        <option value="finalizada">Finalizada</option>
+      </select>
+      <span class="tag" [ngClass]="detalhesEquipe.etiqueta">{{ detalhesEquipe.etiqueta }}</span>
+
+      <!-- Checklist -->
+      <div class="checklist">
+        <label>Checklist</label>
+        <ul>
+          <li *ngFor="let item of detalhesEquipe.checklist; let i = index">
+            <input type="checkbox" [(ngModel)]="item.feito">
+            {{ item.tarefa }}
+            <button (click)="removerChecklistItem(i)">🗑</button>
+          </li>
+        </ul>
+        <input [(ngModel)]="novoChecklist" placeholder="Novo item...">
+        <button (click)="adicionarChecklist()">Adicionar</button>
+      </div>
+
+      <!-- Descrição -->
+      <label>Descrição</label>
+      <textarea [(ngModel)]="detalhesEquipe.descricao"></textarea>
+
+      <!-- Comentários -->
+      <div class="comentarios">
+        <label>Comentários</label>
+        <ul>
+          <li *ngFor="let c of detalhesEquipe.comentarios">{{ c }}</li>
+        </ul>
+        <input [(ngModel)]="novoComentario" placeholder="Escreva um comentário...">
+        <button (click)="adicionarComentario()">Enviar</button>
+      </div>
+
+      <!-- Ações -->
+      <div class="modal-actions">
+        <button class="cancelar" (click)="fecharDetalhes()">Fechar</button>
+        <button class="salvar" (click)="salvarDetalhes()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+

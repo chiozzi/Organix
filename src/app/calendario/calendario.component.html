@@ -1,1 +1,83 @@
-<p>calendario works!</p>
+<div class="calendar-container">
+  <div class="calendar">
+    <div class="calendar-header">
+      <span (click)="mudarMes(-1)">&#9664;</span>
+      <span (click)="mostrarModalMeses = true">
+        {{ meses[mesAtual] }} {{ anoAtual }}
+      </span>
+      <span (click)="mudarMes(1)">&#9654;</span>
+    </div>
+
+    <div class="calendar-days">
+      <div *ngFor="let dia of diasSemana">{{ dia }}</div>
+    </div>
+
+    <div class="calendar-dates">
+      <div *ngFor="let dia of diasMes" 
+           [ngClass]="{ today: ehHoje(dia), hasEvent: temEvento(dia) }"
+           (click)="selecionarDia(dia)">
+        {{ dia === 0 ? '' : dia }}
+      </div>
+    </div>
+  </div>
+
+  <div class="event-details" *ngIf="diaSelecionado">
+    <h3 class="event-title">{{ diaSelecionadoFormatado }}</h3>
+    
+    <div *ngIf="eventosDoDia.length > 0; else noEvents">
+      <ul class="event-list">
+        <li *ngFor="let evento of eventosDoDia" class="event-item">
+          <div class="event-info">
+            <h4>{{ evento.titulo }}</h4>
+            <p>{{ evento.descricao }}</p>
+            <small>Horário: {{ evento.horario }}</small>
+          </div>
+          <button class="delete-button" (click)="excluirEvento(evento.id)">&times;</button>
+        </li>
+      </ul>
+    </div>
+    
+    <ng-template #noEvents>
+      <p class="no-events-message">Você não tem nenhum evento marcado para este dia.</p>
+    </ng-template>
+    
+    <button class="add-event-button" (click)="abrirModalAdicionar()">Adicionar Evento</button>
+  </div>
+</div>
+
+<div *ngIf="mostrarModalMeses" class="modal">
+  <div class="modal-content">
+    <div *ngFor="let mes of meses; let i = index" 
+         class="modal-option"
+         (click)="selecionarMes(i)">
+      {{ mes }}
+    </div>
+    <button (click)="mostrarModalMeses = false">Fechar</button>
+  </div>
+</div>
+
+<div *ngIf="mostrarModalAdicionar" class="modal">
+  <div class="modal-content">
+    <h3 class="modal-title">Adicionar Evento</h3>
+    <form (ngSubmit)="salvarEvento()">
+      <div class="form-group">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" [(ngModel)]="novoEvento.titulo" name="titulo" required>
+      </div>
+      <div class="form-group">
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" [(ngModel)]="novoEvento.descricao" name="descricao" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="horario">Horário:</label>
+        <input type="time" id="horario" [(ngModel)]="novoEvento.horario" name="horario" required>
+      </div>
+      <div class="modal-actions">
+        <button type="submit" class="submit-button">Salvar</button>
+        <button type="button" (click)="fecharModalAdicionar()" class="cancel-button">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+

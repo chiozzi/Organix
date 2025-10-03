@@ -1,0 +1,333 @@
+.equipes-main {
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  margin-left: 90px;
+}
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #d3d3d3;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+
+/* Cores dos status */
+.tag.pendente {
+  background: #ffcc00;
+  color: #000;
+}
+
+.tag.atrasada {
+  background: #ff4d4d;
+  color: #fff;
+}
+
+.tag.afazer {
+  background: #ff9999;
+  color: #fff;
+}
+
+.tag.finalizada {
+  background: #4caf50;
+  color: #fff;
+}
+.card-header i {
+  font-size: 22px;
+  color: #0080d7;
+}
+
+.card-body h3 {
+  margin: 0;
+  color: #00497d;
+}
+.lider {
+  color: #0080d7;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+
+.membros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+.membro {
+  background-color: #0080d7;
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+/* Botão nova equipe */
+.nova-equipe-btn {
+  margin-top: 20px;
+  margin-left: 90px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #0080d7;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.nova-equipe-btn:hover {
+  background-color: #006bb5;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 95%;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.modal-content h2 {
+  margin-top: 0;
+  color: #00497d;
+}
+.modal-content label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+}
+.modal-content input, 
+.modal-content textarea, 
+.modal-content select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.modal-actions {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+button.cancelar {
+  background: #aaa;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+button.salvar {
+  background: #0080d7;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ====== MODAL DETALHES ====== */
+.modal-content.detalhes {
+  width: 650px;
+  max-width: 95%;
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px 30px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.modal-content.detalhes h2 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  color: #222;
+}
+
+.modal-content.detalhes label {
+  font-weight: 600;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #444;
+  font-size: 14px;
+}
+
+.modal-content.detalhes input,
+.modal-content.detalhes textarea,
+.modal-content.detalhes select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background: #fafafa;
+  transition: border 0.2s;
+}
+.modal-content.detalhes input:focus,
+.modal-content.detalhes textarea:focus,
+.modal-content.detalhes select:focus {
+  border-color: #0080d7;
+  outline: none;
+  background: #fff;
+}
+
+/* Ícones */
+.modal-content.detalhes label::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+label[for="info"]::before { content: "\f073"; color: #6c63ff; }   /* calendário */
+label[for="membros"]::before { content: "\f0c0"; color: #6c63ff; } /* usuários */
+label[for="descricao"]::before { content: "\f15c"; color: #6c63ff; } /* arquivo */
+
+/* Checklist */
+.checklist {
+  margin-top: 15px;
+}
+.checklist ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.checklist li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f7f7f7;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+}
+.checklist li input {
+  margin-right: 10px;
+}
+.checklist li button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ff4d4d;
+  font-size: 16px;
+}
+.checklist input[type="text"] {
+  margin-top: 8px;
+  border-radius: 6px;
+}
+.checklist button.add {
+  margin-top: 6px;
+  background: #0080d7;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+}
+.checklist button.add:hover {
+  background: #0080d7;;
+}
+
+/* Comentários */
+.comentarios {
+  margin-top: 15px;
+}
+.comentarios ul {
+  list-style: none;
+  padding: 0;
+}
+.comentarios li {
+  background: #f1f1f1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-top: 6px;
+  font-size: 14px;
+}
+.comentarios input {
+  margin-top: 8px;
+}
+.comentarios button {
+  margin-top: 6px;
+  background: #0080d7;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+}
+.comentarios button:hover {
+  background: #006bb5;
+}
+
+
+/* Ações */
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+button.cancelar {
+  background: #ccc;
+  color: #333;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button.cancelar:hover { background: #bbb; }
+button.salvar {
+  background: #0080d7;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button.salvar:hover { background: #006bb5; }
+
