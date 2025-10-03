@@ -32,8 +32,10 @@ export class TarefasComponent implements OnInit {
 
   carregarTarefas(): void {
     this.tarefasService.listar().subscribe(tarefas => {
+      // define a flag automaticamente em todas
       tarefas.forEach(t => t.flag = this.definirFlagAutomaticamente(t));
 
+      // separa por status
       this.tarefasEmAtraso    = tarefas.filter(t => t.statusExecucao === StatusExecucao.EmAtraso);
       this.tarefasAFazer      = tarefas.filter(t => t.statusExecucao === StatusExecucao.AFazer);
       this.tarefasEmAndamento = tarefas.filter(t => t.statusExecucao === StatusExecucao.EmAndamento);
@@ -60,46 +62,67 @@ export class TarefasComponent implements OnInit {
   }
 
   removerTarefa(tarefa: Tarefa): void {
-  if (!tarefa.id) return;
-  this.tarefasService.remover(tarefa.id).subscribe({
-    next: () => {
-      this.carregarTarefas();
-      this.fecharModal();
-    },
-    error: (err) => console.error('Erro ao excluir tarefa:', err)
-  });
-}
+    if (!tarefa.id) return;
+    this.tarefasService.remover(tarefa.id).subscribe({
+      next: () => {
+        this.carregarTarefas();
+        this.fecharModal();
+      },
+      error: (err) => console.error('Erro ao excluir tarefa:', err)
+    });
+  }
 
-tarefaConcluida(tarefa: Tarefa): void {
-  if (!tarefa.id) return;
+  tarefaConcluida(tarefa: Tarefa): void {
+    if (!tarefa.id) return;
 
-  const tarefaAtualizada: Tarefa = {
-    ...tarefa,
-    statusExecucao: StatusExecucao.Concluido,
-    flag: Flag.Concluido
-  };
+    const tarefaAtualizada: Tarefa = {
+      ...tarefa,
+      statusExecucao: StatusExecucao.Concluido,
+      flag: Flag.Concluido
+    };
 
-  this.tarefasService.atualizar(tarefa.id, tarefaAtualizada).subscribe({
-    next: () => {
-      this.carregarTarefas();
-      this.fecharModal();
-    },
-    error: (err) => console.error('Erro ao concluir tarefa:', err)
-  });
-}
+    this.tarefasService.atualizar(tarefa.id, tarefaAtualizada).subscribe({
+      next: () => {
+        this.carregarTarefas();
+        this.fecharModal();
+      },
+      error: (err) => console.error('Erro ao concluir tarefa:', err)
+    });
+  }
 
-
-
-
+  /** 
+   * Define a flag automaticamente de acordo com a data de vencimento 
+   * e o status de execução.
+   */
   private definirFlagAutomaticamente(tarefa: Tarefa): Flag {
     const hoje = new Date();
     const vencimento = new Date(tarefa.dataVencimento);
 
-    if (tarefa.statusExecucao === StatusExecucao.Concluido) return Flag.Concluido;
-    if (vencimento < hoje) return Flag.Atrasado;
-    const diffDias = Math.ceil((vencimento.getTime() - hoje.getTime()) / (1000*60*60*24));
-    if (diffDias <= 2) return Flag.Urgente;
-    if (tarefa.statusExecucao === StatusExecucao.AFazer) return Flag.Pendente;
+    // concluído sempre tem prioridade
+    if (tarefa.statusExecucao === StatusExecucao.Concluido) {
+      return Flag.Concluido;
+    }
+
+    // já passou do prazo
+    if (vencimento < hoje) {
+      return Flag.Atrasado;
+    }
+
+    // diferença em dias
+    const diffDias = Math.ceil(
+      (vencimento.getTime() - hoje.getTime()) / (1000 * 60 * 60 * 24)
+    );
+
+    // regras de acordo com os intervalos
+    if (diffDias >= 7) {
+      return Flag.Normal;
+    } else if (diffDias >= 3 && diffDias < 7) {
+      return Flag.Pendente;
+    } else if (diffDias >= 1 && diffDias < 3) {
+      return Flag.Urgente;
+    }
+
+    // fallback (se cair fora de qualquer regra)
     return Flag.Normal;
   }
 
@@ -129,6 +152,7 @@ tarefaConcluida(tarefa: Tarefa): void {
 
     this.tarefasService.atualizar(tarefa.id, tarefaAtualizada).subscribe();
 
+    // reordena todas as tarefas da coluna
     event.container.data.forEach((t, index) => {
       if (t.id) this.tarefasService.atualizarOrdem(t.id, index).subscribe();
     });

@@ -190,8 +190,9 @@ html, body {
   text-overflow: ellipsis;
 }
 
+
 /* ==============================
-   🏷️ Badges de Status
+   🏷️ Badges de Status (Kanban)
 ============================== */
 .status-badge {
   padding: 4px 10px;
@@ -202,11 +203,35 @@ html, body {
   color: #fff;
 }
 
-.status-badge.urgente { background-color: orange; }
-.status-badge.atrasado { background-color: red; }
-.status-badge.pendente { background-color: yellow; color: black; }
-.status-badge.normal { background-color: #0080D7; }
-.status-badge.concluido { background-color: #2fa533; }
+/* Normal */
+.status-badge.normal { 
+  background-color: #0080D7; 
+}
+
+/* Pendente */
+.status-badge.pendente { 
+  background-color: #ffee07; 
+  color: black;
+}
+
+/* Urgente */
+.status-badge.urgente { 
+  background-color: #ff6600; 
+  color: white;
+}
+
+/* Atrasado */
+.status-badge.atrasado { 
+  background-color: #ff1111; 
+  color: white;
+}
+
+/* Concluído */
+.status-badge.concluido { 
+  background-color: #2fa533;
+  color: white;
+}
+
 
 /* ==============================
    ➕ Botão Flutuante
@@ -310,7 +335,7 @@ html, body {
 }
 
 /* ==============================
-   🟩 Status Modal
+   🟩 Status no Modal
 ============================== */
 .status {
   padding: 4px 10px;
@@ -320,11 +345,36 @@ html, body {
   display: inline-block;
 }
 
-.status.normal { background: #e6f7ff; color: #007bff; }
-.status.pendente { background: #fff3cd; color: #856404; }
-.status.urgente { background: #f8d7da; color: #721c24; }
-.status.atraso { background: #f5c6cb; color: #a94442; }
-.status.concluido { background: #2fa533; color: white; }
+/* Normal */
+.status.normal { 
+  background: #0080D7; 
+  color: white; 
+}
+
+/* Pendente */
+.status.pendente { 
+  background: #ffee07; 
+  color: black; 
+}
+
+/* Urgente */
+.status.urgente { 
+  background: #ff6600; 
+  color: white; 
+}
+
+/* Atrasado */
+.status.atrasado { 
+  background: #ff1111; 
+  color: white; 
+}
+
+/* Concluído */
+.status.concluido { 
+  background: #2fa533; 
+  color: white; 
+}
+
 
 /* ==============================
    🧭 Modal Footer & Botões

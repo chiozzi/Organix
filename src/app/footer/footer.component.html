@@ -98,22 +98,66 @@
     </div>
   </div>
 
-  <!-- FAQ -->
-  <div *ngIf="exibirFAQ" class="modal-overlay" (click)="fecharModal('faq')">
-    <div class="modal-content" (click)="$event.stopPropagation()">
-      <h2>FAQ</h2>
-      <ol>
-        <li><strong>Como crio uma nova tarefa?</strong> Para criar uma tarefa, clique em “Nova Tarefa” no menu principal, preencha o título, a descrição e defina a data de vencimento. Em seguida, clique em Salvar.</li>
-        <li><strong>Posso editar ou excluir uma tarefa depois de criada?</strong> Sim. Abra a tarefa desejada e use os botões Editar ou Excluir para fazer alterações ou removê-la.</li>
-        <li><strong>É possível adicionar membros à minha equipe?</strong> Sim. Acesse a aba Equipes, clique em Adicionar Membro e insira o e-mail da pessoa que deseja convidar.</li>
-        <li><strong>Como recebo notificações de prazos?</strong> Você pode ativar as notificações nas Configurações da Conta. Assim, receberá lembretes por e-mail ou no próprio aplicativo.</li>
-        <li><strong>Meus dados estão seguros?</strong> Sim. Utilizamos criptografia e boas práticas de segurança para proteger todas as informações cadastradas.</li>
-        <li><strong>O Organix funciona em dispositivos móveis?</strong> Sim. O sistema é responsivo e pode ser acessado tanto em computadores quanto em smartphones e tablets.</li>
-        <li><strong>Há custos para usar a plataforma?</strong> Para fins de demonstração escolar, o uso é gratuito. Em um cenário real, poderiam existir planos gratuitos e pagos.</li>
-      </ol>
-      <button (click)="fecharModal('faq')">Fechar</button>
-    </div>
+ <!-- FAQ -->
+<div *ngIf="exibirFAQ" class="modal-overlay" (click)="fecharModal('faq')">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>FAQ</h2>
+    <ol>
+      <li>
+        <strong>Como crio uma nova tarefa?</strong><br>
+        Para criar uma nova tarefa no Organix, siga estes passos:
+        <br><br>
+        1- Clique no botão “+” no canto inferior direito da tela.<br>
+        2- Será aberta a janela de criação de tarefa.<br>
+        3- Preencha os campos disponíveis:<br>
+        - <b>Título:</b> nome da tarefa<br>
+        - <b>Data de Vencimento:</b> escolha o prazo limite<br>
+        - <b>Descrição:</b> detalhe o que precisa ser feito<br>
+        - <b>Membros:</b> adicione os responsáveis (separados por vírgula)<br>
+        - <b>Status:</b> selecione entre A Fazer, Em Andamento ou Concluído<br>
+        - <b>Prioridade:</b> defina como Baixa, Normal, Alta ou Urgente<br>
+        4- Após preencher as informações, clique em <b>Salvar</b> para registrar a tarefa.
+      </li>
+
+      <li>
+        <strong>Posso editar ou excluir uma tarefa depois de criada?</strong><br>
+        Sim. Basta clicar na tarefa desejada e ela será aberta em uma janela com os detalhes. 
+        Nessa tela, você pode:<br>
+        - Editar as informações da tarefa clicando em <b>Editar informações</b>.<br>
+        - Excluir a tarefa definitivamente clicando em <b>Excluir</b>.
+      </li>
+
+      <li>
+        <strong>Como recebo notificações de prazos?</strong><br>
+        No Organix, você recebe automaticamente os avisos de prazos por e-mail, na tela inicial em 
+        <b>"Tarefas de Hoje"</b>, e também na aba <b>"Notificações"</b>. Dessa forma, você sempre terá 
+        lembretes visíveis para não perder nenhum compromisso.
+      </li>
+
+      <li>
+        <strong>Meus dados estão seguros?</strong><br>
+        Sim. Utilizamos criptografia e boas práticas de segurança para proteger todas as informações cadastradas.
+      </li>
+
+      <li>
+        <strong>É possível adicionar membros à minha equipe?</strong><br>
+        Sim. Acesse a aba <b>Equipes</b>, clique em <b>Adicionar Membro</b> e insira o e-mail da pessoa que deseja convidar.
+      </li>
+
+      <li>
+        <strong>O Organix funciona em dispositivos móveis?</strong><br>
+        Não. O Organix é desenvolvido exclusivamente para computadores e notebooks, portanto não é compatível com smartphones ou tablets.
+      </li>
+
+      <li>
+        <strong>Há custos para usar a plataforma?</strong><br>
+        Não. O Organix é totalmente gratuito. Você pode utilizar todos os recursos da plataforma sem nenhum custo.
+      </li>
+    </ol>
+    <button (click)="fecharModal('faq')">Fechar</button>
   </div>
+</div>
+
 
   <!-- Central de Ajuda -->
   <div *ngIf="exibirCentralAjuda" class="modal-overlay" (click)="fecharModal('central')">

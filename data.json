@@ -14,8 +14,8 @@
       "titulo": "Entrega do relatório mensal",
       "descricao": "Relatório de indicadores de performance",
       "dataVencimento": "2025-10-15",
-      "statusExecucao": "AFazer",
-      "flag": "Pendente",
+      "statusExecucao": "Concluido",
+      "flag": "Concluido",
       "ordem": 0
     },
     {
@@ -42,17 +42,8 @@
       "descricao": "Atualizar readme do projeto",
       "dataVencimento": "2025-10-28",
       "statusExecucao": "AFazer",
-      "flag": "Atrasado",
+      "flag": "Pendente",
       "ordem": 2
-    },
-    {
-      "id": 9,
-      "titulo": "Pesquisar novas bibliotecas",
-      "descricao": "Avaliar alternativas para otimização",
-      "dataVencimento": "2025-10-30",
-      "statusExecucao": "EmAndamento",
-      "flag": "Atrasado",
-      "ordem": 0
     },
     {
       "id": 10,
@@ -61,7 +52,7 @@
       "dataVencimento": "2025-10-01",
       "statusExecucao": "EmAndamento",
       "flag": "Atrasado",
-      "ordem": 2
+      "ordem": 1
     },
     {
       "id": 11,
@@ -79,7 +70,7 @@
       "dataVencimento": "2025-10-04",
       "statusExecucao": "AFazer",
       "flag": "Urgente",
-      "ordem": 4
+      "ordem": 3
     },
     {
       "id": 13,
@@ -88,7 +79,7 @@
       "dataVencimento": "2025-10-05",
       "statusExecucao": "AFazer",
       "flag": "Urgente",
-      "ordem": 5
+      "ordem": 4
     },
     {
       "id": 14,
@@ -163,22 +154,13 @@
       "ordem": 6
     },
     {
-      "id": 22,
-      "titulo": "Backup completo do sistema",
-      "descricao": "Salvar dados críticos",
-      "dataVencimento": "2025-10-14",
-      "statusExecucao": "AFazer",
-      "flag": "Pendente",
-      "ordem": 6
-    },
-    {
       "id": 23,
       "titulo": "Tarefa matemática",
       "descricao": "Lição teams",
       "dataVencimento": "2025-10-05",
       "statusExecucao": "EmAndamento",
       "flag": "Normal",
-      "ordem": 1
+      "ordem": 4
     },
     {
       "id": 24,
