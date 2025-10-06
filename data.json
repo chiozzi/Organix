@@ -16,16 +16,16 @@
       "dataVencimento": "2025-10-15",
       "statusExecucao": "Concluido",
       "flag": "Concluido",
-      "ordem": 0
+      "ordem": 1
     },
     {
       "id": 6,
       "titulo": "Estudar Angular",
       "descricao": "Revisar componentes e serviços",
       "dataVencimento": "2025-10-26",
-      "statusExecucao": "AFazer",
-      "flag": "Pendente",
-      "ordem": 1
+      "statusExecucao": "EmAtraso",
+      "flag": "Normal",
+      "ordem": 2
     },
     {
       "id": 7,
@@ -43,7 +43,7 @@
       "dataVencimento": "2025-10-28",
       "statusExecucao": "AFazer",
       "flag": "Pendente",
-      "ordem": 2
+      "ordem": 0
     },
     {
       "id": 10,
@@ -52,7 +52,7 @@
       "dataVencimento": "2025-10-01",
       "statusExecucao": "EmAndamento",
       "flag": "Atrasado",
-      "ordem": 1
+      "ordem": 0
     },
     {
       "id": 11,
@@ -69,8 +69,8 @@
       "descricao": "Cobertura de 80% do código",
       "dataVencimento": "2025-10-04",
       "statusExecucao": "AFazer",
-      "flag": "Urgente",
-      "ordem": 3
+      "flag": "Atrasado",
+      "ordem": 2
     },
     {
       "id": 13,
@@ -79,7 +79,7 @@
       "dataVencimento": "2025-10-05",
       "statusExecucao": "AFazer",
       "flag": "Urgente",
-      "ordem": 4
+      "ordem": 1
     },
     {
       "id": 14,
@@ -133,7 +133,7 @@
       "dataVencimento": "2025-10-12",
       "statusExecucao": "EmAndamento",
       "flag": "Normal",
-      "ordem": 3
+      "ordem": 1
     },
     {
       "id": 20,
@@ -141,7 +141,7 @@
       "descricao": "Capacitação em novas ferramentas",
       "dataVencimento": "2025-10-11",
       "statusExecucao": "Concluido",
-      "flag": "Concluído",
+      "flag": "Concluido",
       "ordem": 0
     },
     {
@@ -160,7 +160,7 @@
       "dataVencimento": "2025-10-05",
       "statusExecucao": "EmAndamento",
       "flag": "Normal",
-      "ordem": 4
+      "ordem": 2
     },
     {
       "id": 24,
@@ -169,7 +169,7 @@
       "dataVencimento": "2025-10-10",
       "statusExecucao": "Concluido",
       "flag": "Concluido",
-      "ordem": 1
+      "ordem": 2
     },
     {
       "id": 25,
@@ -178,7 +178,7 @@
       "dataVencimento": "2025-10-02",
       "statusExecucao": "EmAtraso",
       "flag": "Atrasado",
-      "ordem": 2
+      "ordem": 3
     }
   ],
   "eventos": [],
