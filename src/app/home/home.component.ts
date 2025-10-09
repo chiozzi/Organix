@@ -10,7 +10,6 @@ import { Flag, StatusExecucao, Tarefa, TarefasService } from '../tarefas/tarefas
 })
 export class HomeComponent implements OnInit {
   usuario = 'Bruno';
-
   tarefasHoje: Tarefa[] = [];
   stats = [
     { titulo: 'Atrasadas', valor: 0, icone: 'fa fa-exclamation-triangle', cor: '#ff1111' },
@@ -42,7 +41,6 @@ export class HomeComponent implements OnInit {
     { remetente: 'Juliana', texto: 'Vamos marcar reunião para amanhã?' },
   ];
 
-  // 🔹 Controle do modal de criar tarefas
   exibirCriarTarefa = false;
   tarefaParaEdicao: Tarefa | null = null;
 
@@ -52,18 +50,18 @@ export class HomeComponent implements OnInit {
     this.carregarTarefas();
   }
 
-  /** Busca tarefas do backend e atualiza estatísticas + tarefas de hoje */
   carregarTarefas(): void {
     this.tarefasService.listar().subscribe(tarefas => {
-      const hoje = new Date().toDateString();
+      const hoje = new Date();
+      const dia = String(hoje.getDate()).padStart(2, '0');
+      const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+      const ano = hoje.getFullYear();
+      const dataHoje = `${ano}-${mes}-${dia}`;
 
-      // Filtra tarefas do dia atual
-      this.tarefasHoje = tarefas.filter(t => {
-        const dataVenc = new Date(t.dataVencimento).toDateString();
-        return dataVenc === hoje;
-      });
+      // 🔹 Filtra tarefas do dia atual
+      this.tarefasHoje = tarefas.filter(t => t.dataVencimento === dataHoje);
 
-      // Atualiza estatísticas
+      // 🔹 Atualiza estatísticas
       this.stats[0].valor = tarefas.filter(t => t.statusExecucao === StatusExecucao.EmAtraso).length;
       this.stats[1].valor = tarefas.filter(t => t.statusExecucao === StatusExecucao.AFazer).length;
       this.stats[2].valor = tarefas.filter(t => t.statusExecucao === StatusExecucao.EmAndamento).length;
@@ -71,44 +69,34 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  /** 🔹 Abre o modal de criar/editar tarefa */
   abrirCriarModal(tarefa?: Tarefa) {
     this.tarefaParaEdicao = tarefa || null;
     this.exibirCriarTarefa = true;
   }
 
-  /** 🔹 Fecha o modal e recarrega a lista */
   tarefaCriadaOuAtualizada(event: Tarefa) {
     this.exibirCriarTarefa = false;
-    this.carregarTarefas(); // Atualiza tarefas e estatísticas
+    this.carregarTarefas();
   }
 
   irParaTarefasPorTipo(tipo: string) {
     let id = '';
-
     switch (tipo) {
-      case 'Atrasadas':
-        id = 'atraso';
-        break;
-      case 'Pendentes':
-        id = 'afazer';
-        break;
-      case 'Em Andamento':
-        id = 'emandamento';
-        break;
-      case 'Concluídas':
-        id = 'concluidas';
-        break;
+      case 'Atrasadas': id = 'atraso'; break;
+      case 'Pendentes': id = 'afazer'; break;
+      case 'Em Andamento': id = 'emandamento'; break;
+      case 'Concluídas': id = 'concluidas'; break;
     }
-
     this.router.navigate(['/tarefas'], { fragment: id });
   }
 
-  // 🔹 Navegação original
   irParaTarefas() { this.router.navigate(['/tarefas']); }
   irParaCalendario() { this.router.navigate(['/calendario']); }
   irParaEquipes() { this.router.navigate(['/equipes']); }
 }
+
+
+
 
 
 

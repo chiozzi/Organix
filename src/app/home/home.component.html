@@ -57,10 +57,13 @@
         <li *ngFor="let tarefa of tarefasHoje" (click)="irParaTarefas()">
           <i class="fa fa-tasks"></i>
           <span>{{ tarefa.titulo }}</span>
-          <small>{{ tarefa.dataVencimento | date: 'HH:mm' }}</small>
+          <!-- Agora mostra a hora correta sem alterar o fuso horário -->
+          <small>{{ tarefa.horaVencimento }}</small>
         </li>
       </ul>
     </div>
+
+
 
     <!-- Próxima Reunião -->
     <div class="section">
