@@ -3,11 +3,10 @@
   <div class="kanban row">
 
     <!-- Em atraso -->
-    <div class="col-md-3 kanban-col"
+    <div id="atraso" class="col-md-3 kanban-col"
          cdkDropList
-         id="EmAtraso"
          [cdkDropListData]="tarefasEmAtraso"
-         [cdkDropListConnectedTo]="['AFazer','EmAndamento','Concluido']"
+         [cdkDropListConnectedTo]="['afazer','emandamento','concluidas']"
          (cdkDropListDropped)="drop($event)">
       <h4>⏰ Em atraso</h4>
       <div class="kanban-cards">
@@ -19,7 +18,7 @@
             <h5>{{ tarefa.titulo }}</h5>
             <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
           </div>
-          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }} às {{ tarefa.horaVencimento }}</p>
           <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
           <p><strong>Status:</strong> Em Atraso</p>
         </div>
@@ -27,11 +26,10 @@
     </div>
 
     <!-- A fazer -->
-    <div class="col-md-3 kanban-col"
+    <div id="afazer" class="col-md-3 kanban-col"
          cdkDropList
-         id="AFazer"
          [cdkDropListData]="tarefasAFazer"
-         [cdkDropListConnectedTo]="['EmAtraso','EmAndamento','Concluido']"
+         [cdkDropListConnectedTo]="['atraso','emandamento','concluidas']"
          (cdkDropListDropped)="drop($event)">
       <h4>📝 A fazer</h4>
       <div class="kanban-cards">
@@ -43,7 +41,7 @@
             <h5>{{ tarefa.titulo }}</h5>
             <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
           </div>
-          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }} às {{ tarefa.horaVencimento }}</p>
           <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
           <p><strong>Status:</strong> A Fazer</p>
         </div>
@@ -51,11 +49,10 @@
     </div>
 
     <!-- Em andamento -->
-    <div class="col-md-3 kanban-col"
+    <div id="emandamento" class="col-md-3 kanban-col"
          cdkDropList
-         id="EmAndamento"
          [cdkDropListData]="tarefasEmAndamento"
-         [cdkDropListConnectedTo]="['EmAtraso','AFazer','Concluido']"
+         [cdkDropListConnectedTo]="['atraso','afazer','concluidas']"
          (cdkDropListDropped)="drop($event)">
       <h4>⚙️ Em andamento</h4>
       <div class="kanban-cards">
@@ -67,7 +64,7 @@
             <h5>{{ tarefa.titulo }}</h5>
             <span class="status-badge {{ tarefa.flag | lowercase }}">{{ tarefa.flag }}</span>
           </div>
-          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }} às {{ tarefa.horaVencimento }}</p>
           <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
           <p><strong>Status:</strong> Em Andamento</p>
         </div>
@@ -75,11 +72,10 @@
     </div>
 
     <!-- Concluídas -->
-    <div class="col-md-3 kanban-col concluidas"
+    <div id="concluidas" class="col-md-3 kanban-col concluidas"
          cdkDropList
-         id="Concluido"
          [cdkDropListData]="tarefasConcluidas"
-         [cdkDropListConnectedTo]="['EmAtraso','AFazer','EmAndamento']"
+         [cdkDropListConnectedTo]="['atraso','afazer','emandamento']"
          (cdkDropListDropped)="drop($event)">
       <h4>✅ Concluídas</h4>
       <div class="kanban-cards concluidas-cards">
@@ -93,7 +89,7 @@
               {{ tarefa.flag }}
             </span>
           </div>
-          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }}</p>
+          <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }} às {{ tarefa.horaVencimento }}</p>
           <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
           <p><strong>Status:</strong> Concluído</p>
         </div>
@@ -116,7 +112,6 @@
     (excluir)="removerTarefa($event)"
     (concluir)="tarefaConcluida($event)">
   </app-vertarefas>
-
 
   <!-- Modal de criar/editar tarefa -->
   <app-criartarefas

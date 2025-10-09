@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Flag, Tarefa, TarefasService, StatusExecucao } from './tarefas.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { CriartarefasComponent } from './criartarefas/criartarefas.component';
+import { ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
@@ -24,11 +26,31 @@ export class TarefasComponent implements OnInit {
   StatusExecucao = StatusExecucao;
   Flag = Flag;
 
-  constructor(private tarefasService: TarefasService) {}
+  constructor(
+  private tarefasService: TarefasService,
+  private route: ActivatedRoute
+) {}
+
 
   ngOnInit(): void {
-    this.carregarTarefas();
-  }
+  this.carregarTarefas();
+
+  // Checar se veio um status via query params
+  this.route.fragment.subscribe(fragment => {
+    if (fragment) {
+      setTimeout(() => {
+        const el = document.getElementById(fragment);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.add('destacado');
+          setTimeout(() => el.classList.remove('destacado'), 2000);
+        }
+      }, 300);
+    }
+  });
+
+}
+
 
   carregarTarefas(): void {
     this.tarefasService.listar().subscribe(tarefas => {
@@ -95,35 +117,28 @@ export class TarefasComponent implements OnInit {
    * e o status de execução.
    */
   private definirFlagAutomaticamente(tarefa: Tarefa): Flag {
-    const hoje = new Date();
-    const vencimento = new Date(tarefa.dataVencimento);
+    const agora = new Date();
+    const vencimento = new Date(`${tarefa.dataVencimento}T${tarefa.horaVencimento || '23:59'}`);
 
-    // concluído sempre tem prioridade
     if (tarefa.statusExecucao === StatusExecucao.Concluido) {
       return Flag.Concluido;
     }
 
-    // já passou do prazo
-    if (vencimento < hoje) {
+    if (vencimento < agora) {
       return Flag.Atrasado;
     }
 
-    // diferença em dias
-    const diffDias = Math.ceil(
-      (vencimento.getTime() - hoje.getTime()) / (1000 * 60 * 60 * 24)
-    );
+    const diffHoras = (vencimento.getTime() - agora.getTime()) / (1000 * 60 * 60);
 
-    // regras de acordo com os intervalos
-    if (diffDias >= 7) {
+    if (diffHoras >= 72) {        // mais de 3 dias
       return Flag.Normal;
-    } else if (diffDias >= 3 && diffDias < 7) {
+    } else if (diffHoras >= 24) { // entre 1 e 3 dias
       return Flag.Pendente;
-    } else if (diffDias >= 1 && diffDias < 3) {
+    } else if (diffHoras > 0) {   // menos de 1 dia
       return Flag.Urgente;
     }
 
-    // fallback (se cair fora de qualquer regra)
-    return Flag.Normal;
+    return Flag.Atrasado;
   }
 
   drop(event: CdkDragDrop<Tarefa[]>): void {

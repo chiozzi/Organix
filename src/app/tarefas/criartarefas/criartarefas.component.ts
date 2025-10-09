@@ -31,9 +31,10 @@ export class CriartarefasComponent implements OnInit {
       titulo: new FormControl(this.tarefa?.titulo || '', Validators.required),
       descricao: new FormControl(this.tarefa?.descricao || ''),
       dataVencimento: new FormControl(this.tarefa?.dataVencimento || '', Validators.required),
-      statusExecucao: new FormControl(this.tarefa?.statusExecucao || StatusExecucao.AFazer, Validators.required),
-      flag: new FormControl(this.tarefa?.flag || Flag.Normal, Validators.required)
+      horaVencimento: new FormControl(this.tarefa?.horaVencimento || '', Validators.required),
+      statusExecucao: new FormControl(this.tarefa?.statusExecucao || StatusExecucao.AFazer, Validators.required)
     });
+
   }
 
   abrirModalComTarefa(tarefa: Tarefa | null): void {
@@ -66,10 +67,12 @@ export class CriartarefasComponent implements OnInit {
       titulo: formValue.titulo,
       descricao: formValue.descricao,
       dataVencimento: formValue.dataVencimento,
+      horaVencimento: formValue.horaVencimento,
       statusExecucao: formValue.statusExecucao,
-      flag: formValue.flag,
+      flag: this.tarefa ? this.tarefa.flag : Flag.Normal, // será recalculada depois
       ordem: this.tarefa?.ordem ?? 0
     };
+
 
     const operacao$ = this.tarefa?.id
       ? this.tarefasService.atualizar(this.tarefa.id, tarefaParaSalvar)
@@ -87,12 +90,12 @@ export class CriartarefasComponent implements OnInit {
   cancelar(): void { this.fecharModal(); }
 
   fecharModal() {
-    this.fechando = true;
-    setTimeout(() => {
-      this.fechar.emit();
-      this.fechando = false;
-    }, 300);
-  }
+  this.fechando = true;
+  setTimeout(() => {
+    this.fechar.emit();
+    this.fechando = false;
+  }, 300);
+}
 }
 
 

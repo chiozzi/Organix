@@ -1,3 +1,6 @@
+/* ========================
+   MODAL OVERLAY
+======================== */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -11,22 +14,32 @@
   z-index: 1000;
 }
 
+/* ========================
+   MODAL PRINCIPAL
+======================== */
 .modal-content {
   background: #f9f9f9;
-  padding: 25px 30px;
-  border-radius: 15px;
   width: 60%;
   max-width: 700px;
-  max-height: 80%;
-  overflow-y: auto;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  max-height: 80vh; /* altura máxima do modal */
   display: flex;
   flex-direction: column;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  overflow: hidden; /* nada escapa do modal */
   animation: modalFadeIn 0.3s ease-in-out;
 }
 
-.modal-content.fechando {
-  animation: modalFadeOut 0.3s ease-in-out forwards;
+/* ========================
+   CABEÇALHO
+======================== */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background: #f9f9f9;
+  flex-shrink: 0; /* não encolhe */
 }
 
 .modal-header h2 {
@@ -35,8 +48,48 @@
   color: #333;
 }
 
+.btn-fechar-topo {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #666;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.btn-fechar-topo:hover {
+  color: #d9534f;
+  transform: rotate(90deg) scale(1.2);
+}
+
+/* ========================
+   CORPO / SCROLL LITERAL DENTRO
+======================== */
 .modal-body {
-  margin-top: 20px;
+  padding: 20px 30px;
+  overflow-y: auto; /* scroll interno */
+  flex-grow: 1; /* ocupa espaço restante */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-body::-webkit-scrollbar-track {
+  background: #eee;
+  border-radius: 8px;
+}
+.modal-body::-webkit-scrollbar-thumb {
+  background: #0080D7;
+  border-radius: 8px;
+}
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: #0066A1;
 }
 
 .info-bloco {
@@ -62,7 +115,7 @@
   width: 100%;
   padding: 10px 12px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 0.95em;
   color: #333;
   transition: border-color 0.2s;
@@ -76,19 +129,23 @@
   box-shadow: 0 0 4px rgba(0,128,215,0.3);
 }
 
-/* Footer / Botões */
+/* ========================
+   RODAPÉ / BOTÕES
+======================== */
 .modal-footer {
-  margin-top: 25px;
+  padding: 15px 30px;
   display: flex;
   justify-content: flex-end;
   gap: 12px;
+  background: #f9f9f9;
+  flex-shrink: 0; /* footer fixo */
 }
 
 .btn-editar,
 .btn-fechar {
   border: none;
   padding: 10px 18px;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 0.95em;
   transition: all 0.2s ease;
@@ -101,41 +158,30 @@
   align-items: center;
   justify-content: center;
 }
-.btn-editar:hover:enabled {
-  background: #0066A1;
-}
-.btn-editar:disabled {
-  background: #a6c8e5;
-  cursor: not-allowed;
-}
-
-.btn-fechar-topo {
-  position: absolute;
-  top: 12px;
-  right: 15px;
-  background: transparent;
-  border: none;
-  font-size: 28px;
-  cursor: pointer;
-  color: #666;
-  transition: color 0.2s ease;
-}
+.btn-editar:hover:enabled { background: #0066A1; }
+.btn-editar:disabled { background: #a6c8e5; cursor: not-allowed; }
 
 .btn-fechar {
   background: #d9534f;
   color: white;
 }
-.btn-fechar:hover {
-  background: #c9302c;
-}
+.btn-fechar:hover { background: #c9302c; }
 
-/* Linhas decorativas */
+/* ========================
+   LINHA DECORATIVA
+======================== */
 .linha1 {
   margin-top: 30px;
   margin-bottom: -7px;
 }
 
-/* Animações */
+/* ========================
+   ANIMAÇÕES
+======================== */
+.modal-content.fechando {
+  animation: modalFadeOut 0.3s ease-in-out forwards;
+}
+
 @keyframes modalFadeIn {
   from { opacity: 0; transform: scale(0.95) translateY(-20px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }

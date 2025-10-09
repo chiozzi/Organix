@@ -3,11 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export enum StatusExecucao {
-  AFazer = 'AFazer',
-  EmAtraso = 'EmAtraso',
-  EmAndamento = 'EmAndamento',
-  Concluido = 'Concluido'
+  AFazer = 'A Fazer',
+  EmAtraso = 'Em Atraso',
+  EmAndamento = 'Em Andamento',
+  Concluido = 'Concluído'
 }
+
 
 export enum Flag {
   Normal = 'Normal',
@@ -22,10 +23,12 @@ export interface Tarefa {
   titulo: string;
   descricao: string;
   dataVencimento: string;
+  horaVencimento: string; // <-- novo campo
   statusExecucao: StatusExecucao;
-  flag: Flag;
+  flag: Flag; // continua existindo, mas é definida automaticamente
   ordem: number;
 }
+
 
 @Injectable({ providedIn: 'root' })
 export class TarefasService {

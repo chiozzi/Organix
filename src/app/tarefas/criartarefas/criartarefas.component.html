@@ -1,17 +1,21 @@
-<div class="modal-overlay" [ngClass]="{'fechando': fechando}">
-  <div class="modal-content" [ngClass]="{'fechando': fechando}">
+<div class="modal-overlay" [ngClass]="{'fechando': fechando}" (click)="fecharModal()">
+  <div class="modal-content" [ngClass]="{'fechando': fechando}" (click)="$event.stopPropagation()">
+
+    <!-- ========================
+         CABEÇALHO
+    ======================== -->
     <div class="modal-header">
-
-          <button class="btn-fechar-topo" (click)="fecharModal()">&times;</button>
-
       <h2>{{ tarefa ? 'Atualizar Tarefa' : 'Criar Nova Tarefa' }}</h2>
+      <button class="btn-fechar-topo" (click)="fecharModal()">&times;</button>
     </div>
 
     <hr class="linha1" />
 
+    <!-- ========================
+         CORPO / SCROLL INTERNO
+    ======================== -->
     <div class="modal-body">
       <form [formGroup]="formTarefa" (ngSubmit)="salvarTarefa()">
-
         <section class="info-bloco">
           <h4>📝 Informações</h4>
 
@@ -19,9 +23,10 @@
           <input type="text" formControlName="titulo" placeholder="Digite o título" />
 
           <label>Data de Vencimento</label>
-          <input type="date" formControlName="dataVencimento" [min]="hoje"
-        />
+          <input type="date" formControlName="dataVencimento" [min]="hoje" />
 
+          <label>Hora de Vencimento</label>
+          <input type="time" formControlName="horaVencimento" />
 
           <label>Descrição</label>
           <textarea rows="3" formControlName="descricao" placeholder="Detalhes da tarefa"></textarea>
@@ -33,23 +38,19 @@
             <option value="Em Andamento">Em Andamento</option>
             <option value="Concluido">Concluído</option>
           </select>
-
-          <label>Prioridade</label>
-          <select formControlName="flag">
-            <option value="Normal">Normal</option>
-            <option value="Pendente">Pendente</option>
-            <option value="Urgente">Urgente</option>
-            <option value="Atrasado">Atrasado</option>
-          </select>
         </section>
-
-        <div class="modal-footer">
-          <button type="button" class="btn-fechar" (click)="cancelar()">Cancelar</button>
-          <button type="submit" class="btn-editar" [disabled]="formTarefa.invalid">
-            {{ tarefa ? 'Atualizar' : 'Salvar' }}
-          </button>
-        </div>
       </form>
     </div>
+
+    <!-- ========================
+         RODAPÉ / BOTÕES
+    ======================== -->
+    <div class="modal-footer">
+      <button type="button" class="btn-fechar" (click)="cancelar()">Cancelar</button>
+      <button type="submit" class="btn-editar" [disabled]="formTarefa.invalid" (click)="salvarTarefa()">
+        {{ tarefa ? 'Atualizar' : 'Salvar' }}
+      </button>
+    </div>
+
   </div>
 </div>

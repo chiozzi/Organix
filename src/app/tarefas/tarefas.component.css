@@ -24,6 +24,37 @@ html, body {
   margin: 0;
 }
 
+/* Destaque temporário da coluna */
+.destacado {
+  border: 3px solid;
+  border-radius: 8px;
+  animation: pulse 1.5s ease-out;
+}
+
+/* Pulsação suave */
+@keyframes pulse {
+  70% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Colunas destacadas com cores condizentes */
+#atraso.destacado {
+  border-color: #ff1111; /* Atrasado */
+}
+
+#afazer.destacado {
+  border-color: #ff6600; /* Pendente (ou Normal, se preferir) */
+}
+
+#emandamento.destacado {
+  border-color: #ffee07; /* Urgente */
+}
+
+#concluidas.destacado {
+  border-color: #2fa533; /* Concluído */
+}
+
+
 /* ==============================
    🧭 Kanban Board
 ============================== */

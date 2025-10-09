@@ -21,6 +21,8 @@
 import { RouterModule } from '@angular/router';
 import { CriarequipeComponent } from './equipes/criarequipe/criarequipe.component';
 import { VerequipeComponent } from './equipes/verequipe/verequipe.component';
+import { CriarreuniaoComponent } from './calendario/criarreuniao/criarreuniao.component';
+import { VerreuniaoComponent } from './calendario/verreuniao/verreuniao.component';
 
   @NgModule({
     declarations: [
@@ -37,7 +39,9 @@ import { VerequipeComponent } from './equipes/verequipe/verequipe.component';
       ChatComponent,
       SobrenosComponent,
       CriarequipeComponent,
-      VerequipeComponent
+      VerequipeComponent,
+      CriarreuniaoComponent,
+      VerreuniaoComponent
     ],
     imports: [
       BrowserModule,
