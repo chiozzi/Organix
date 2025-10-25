@@ -6,7 +6,7 @@
       "descricao": "Slides para reunião com diretoria",
       "dataVencimento": "2025-09-09",
       "horaVencimento": "10:00",
-      "statusExecucao": "Em Atraso",
+      "statusExecucao": "atraso",
       "flag": "Atrasado",
       "ordem": 0
     },
@@ -16,28 +16,28 @@
       "descricao": "Relatório de indicadores de performance",
       "dataVencimento": "2025-10-09",
       "horaVencimento": "18:00",
-      "statusExecucao": "Concluído",
-      "flag": "Concluído",
+      "statusExecucao": "emandamento",
+      "flag": "Atrasado",
       "ordem": 1
     },
     {
       "id": 6,
       "titulo": "Estudar Angular",
       "descricao": "Revisar componentes e serviços",
-      "dataVencimento": "2025-10-26",
+      "dataVencimento": "2025-10-10",
       "horaVencimento": "20:00",
-      "statusExecucao": "A Fazer",
-      "flag": "Normal",
-      "ordem": 7
+      "statusExecucao": "afazer",
+      "flag": "Urgente",
+      "ordem": 0
     },
     {
       "id": 7,
       "titulo": "Planejar sprint",
       "descricao": "Definir tarefas para próxima semana",
-      "dataVencimento": "2025-10-09",
+      "dataVencimento": "2025-10-10",
       "horaVencimento": "09:30",
-      "statusExecucao": "A Fazer",
-      "flag": "Normal",
+      "statusExecucao": "afazer",
+      "flag": "Atrasado",
       "ordem": 1
     },
     {
@@ -46,8 +46,8 @@
       "descricao": "Atualizar readme do projeto",
       "dataVencimento": "2025-10-28",
       "horaVencimento": "17:00",
-      "statusExecucao": "A Fazer",
-      "flag": "Pendente",
+      "statusExecucao": "emandamento",
+      "flag": "Normal",
       "ordem": 0
     },
     {
@@ -56,29 +56,19 @@
       "descricao": "Exibir indicadores no dashboard",
       "dataVencimento": "2025-10-01",
       "horaVencimento": "14:00",
-      "statusExecucao": "Em Andamento",
+      "statusExecucao": "afazer",
       "flag": "Atrasado",
-      "ordem": 0
+      "ordem": 1
     },
     {
       "id": 11,
       "titulo": "Refatorar código legado",
       "descricao": "Melhorar performance e legibilidade",
-      "dataVencimento": "2025-10-03",
+      "dataVencimento": "2025-10-10",
       "horaVencimento": "09:00",
       "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
       "ordem": 1
-    },
-    {
-      "id": 12,
-      "titulo": "Criar testes automatizados",
-      "descricao": "Cobertura de 80% do código",
-      "dataVencimento": "2025-10-04",
-      "horaVencimento": "19:00",
-      "statusExecucao": "A Fazer",
-      "flag": "Atrasado",
-      "ordem": 8
     },
     {
       "id": 13,
@@ -86,9 +76,9 @@
       "descricao": "Migrar tabelas antigas",
       "dataVencimento": "2025-10-05",
       "horaVencimento": "22:00",
-      "statusExecucao": "A Fazer",
-      "flag": "Urgente",
-      "ordem": 9
+      "statusExecucao": "atraso",
+      "flag": "Atrasado",
+      "ordem": 0
     },
     {
       "id": 14,
@@ -96,9 +86,9 @@
       "descricao": "Revisar entregas da última sprint",
       "dataVencimento": "2025-10-18",
       "horaVencimento": "15:00",
-      "statusExecucao": "A Fazer",
-      "flag": "Normal",
-      "ordem": 6
+      "statusExecucao": "atraso",
+      "flag": "Atrasado",
+      "ordem": 2
     },
     {
       "id": 15,
@@ -106,7 +96,7 @@
       "descricao": "Registrar despesas do mês",
       "dataVencimento": "2025-10-25",
       "horaVencimento": "08:00",
-      "statusExecucao": "A Fazer",
+      "statusExecucao": "afazer",
       "flag": "Normal",
       "ordem": 5
     },
@@ -116,9 +106,9 @@
       "descricao": "Checar cláusulas de renovação",
       "dataVencimento": "2025-10-16",
       "horaVencimento": "16:30",
-      "statusExecucao": "A Fazer",
-      "flag": "Normal",
-      "ordem": 4
+      "statusExecucao": "atraso",
+      "flag": "Atrasado",
+      "ordem": 3
     },
     {
       "id": 17,
@@ -126,9 +116,9 @@
       "descricao": "Relatórios não estão sendo gerados",
       "dataVencimento": "2025-10-15",
       "horaVencimento": "11:00",
-      "statusExecucao": "A Fazer",
+      "statusExecucao": "concluidas",
       "flag": "Normal",
-      "ordem": 3
+      "ordem": 2
     },
     {
       "id": 18,
@@ -136,9 +126,9 @@
       "descricao": "Arquivar documentos e backups",
       "dataVencimento": "2025-10-14",
       "horaVencimento": "17:00",
-      "statusExecucao": "A Fazer",
-      "flag": "Normal",
-      "ordem": 2
+      "statusExecucao": "afazer",
+      "flag": "Atrasado",
+      "ordem": 0
     },
     {
       "id": 19,
@@ -148,7 +138,7 @@
       "horaVencimento": "10:00",
       "statusExecucao": "Em Andamento",
       "flag": "Normal",
-      "ordem": 1
+      "ordem": 0
     },
     {
       "id": 20,
@@ -158,7 +148,7 @@
       "horaVencimento": "09:00",
       "statusExecucao": "Concluído",
       "flag": "Concluído",
-      "ordem": 0
+      "ordem": 1
     },
     {
       "id": 21,
@@ -168,7 +158,7 @@
       "horaVencimento": "18:30",
       "statusExecucao": "Em Andamento",
       "flag": "Normal",
-      "ordem": 6
+      "ordem": 2
     },
     {
       "id": 23,
@@ -178,7 +168,7 @@
       "horaVencimento": "21:00",
       "statusExecucao": "Em Andamento",
       "flag": "Normal",
-      "ordem": 2
+      "ordem": 3
     },
     {
       "id": 25,
@@ -198,7 +188,27 @@
       "horaVencimento": "19:00",
       "statusExecucao": "A Fazer",
       "flag": "Normal",
-      "ordem": 0
+      "ordem": 2
+    },
+    {
+      "titulo": "dasdasdasda",
+      "descricao": "daadadada",
+      "dataVencimento": "2025-10-11",
+      "horaVencimento": "13:13",
+      "statusExecucao": "afazer",
+      "flag": "Urgente",
+      "ordem": 2,
+      "id": 28
+    },
+    {
+      "titulo": "llllllllllllllllllll",
+      "descricao": "llllllllllllllllllllllllllllllllllllll",
+      "dataVencimento": "2025-10-24",
+      "horaVencimento": "12:12",
+      "statusExecucao": "concluidas",
+      "flag": "Normal",
+      "ordem": 2,
+      "id": 29
     }
   ],
   "eventos": [],
