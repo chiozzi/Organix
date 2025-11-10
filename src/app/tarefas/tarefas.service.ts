@@ -23,9 +23,9 @@ export interface Tarefa {
   titulo: string;
   descricao: string;
   dataVencimento: string;
-  horaVencimento: string; // <-- novo campo
+  horaVencimento: string; 
   statusExecucao: StatusExecucao;
-  flag: Flag; // continua existindo, mas é definida automaticamente
+  flag: Flag; 
   ordem: number;
 }
 

@@ -1,7 +1,9 @@
-<div class="modal-overlay" [ngClass]="{'fechando': fechando}">
-  <div class="modal-content" [ngClass]="{'fechando': fechando}">
+<div class="modal-overlay" [ngClass]="{'fechando': fechando}" (click)="fecharModal()">
 
-    <!-- Botão fechar -->
+  <!-- Modal normal -->
+  <div class="modal-content" [ngClass]="{'fechando': fechando, 'invisivel': mostrarCheck}" (click)="$event.stopPropagation()">
+
+    <!-- Botão fechar topo -->
     <button class="btn-fechar-topo" (click)="fecharModal()">&times;</button>
 
     <!-- Cabeçalho -->
@@ -13,7 +15,6 @@
 
     <!-- Corpo -->
     <div class="modal-body">
-      <!-- Informações -->
       <section class="info-bloco">
         <h4>📅 Informações</h4>
         <p><strong>Vencimento:</strong> {{ tarefa?.dataVencimento | date:'dd/MM/yyyy' }}</p>
@@ -30,7 +31,6 @@
         </p>
       </section>
 
-      <!-- Descrição -->
       <section class="info-bloco">
         <h4>📝 Descrição</h4>
         <p>{{ tarefa?.descricao || 'Sem descrição' }}</p>
@@ -39,24 +39,34 @@
 
     <hr class="linha2" />
 
-    <!-- Rodapé -->
+    <!-- Rodapé: botões distribuídos -->
     <div class="modal-footer">
-      <!-- Botão concluir só aparece se não estiver concluída -->
-      <button class="btn-concluir" 
-              *ngIf="tarefa?.statusExecucao !== StatusExecucao.Concluido" 
-              (click)="concluirTarefa()">
-        Concluir <i class="fas fa-check"></i>
-      </button>
+      <div class="botoes-esquerda">
+        <button class="btn-excluir" (click)="excluirTarefa()">
+          Excluir <i class="fas fa-trash"></i>
+        </button>
+        <button class="btn-arquivar">
+          Arquivar <i class="fas fa-archive"></i>
+        </button>
+      </div>
 
-      <button class="btn-editar" (click)="editarTarefa()">
-        Editar informações <i class="fas fa-edit"></i>
-      </button>
+      <div class="botoes-direita">
+        <button class="btn-editar" (click)="editarTarefa()">
+          Editar <i class="fas fa-edit"></i>
+        </button>
+        <button class="btn-concluir" 
+                *ngIf="tarefa?.statusExecucao !== StatusExecucao.Concluido" 
+                (click)="concluirTarefa()">
+          Concluir <i class="fas fa-check"></i>
+        </button>
+      </div>
     </div>
 
-    <!-- Botão excluir -->
-    <button class="btn-excluir" (click)="excluirTarefa()">
-      Excluir <i class="fas fa-trash"></i>
-    </button>
-
   </div>
+
+  <!-- Check gigante -->
+  <div class="check-grande" *ngIf="mostrarCheck">
+    <i class="fas fa-check"></i>
+  </div>
+
 </div>

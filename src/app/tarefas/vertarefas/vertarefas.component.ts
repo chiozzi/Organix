@@ -17,6 +17,7 @@ export class VertarefasComponent {
   fechando = false;
   StatusExecucao = StatusExecucao;
   Flag = Flag;
+  mostrarCheck = false;
 
   constructor(private tarefasService: TarefasService) {}
 
@@ -36,8 +37,13 @@ export class VertarefasComponent {
   }
 
   // Concluir tarefa
+
+
 concluirTarefa() {
   if (!this.tarefa || !this.tarefa.id) return;
+
+  // Mostra o check gigante e esconde o modal
+  this.mostrarCheck = true;
 
   const tarefaAtualizada: Tarefa = {
     ...this.tarefa,
@@ -47,12 +53,17 @@ concluirTarefa() {
 
   this.tarefasService.atualizar(this.tarefa.id, tarefaAtualizada).subscribe({
     next: () => {
-      this.concluir.emit(tarefaAtualizada); // ✅ passa para o pai a tarefa concluída
-      this.fecharModal();
+      // Depois de 1s, fecha modal e emite tarefa concluída
+      setTimeout(() => {
+        this.concluir.emit(tarefaAtualizada);
+        this.fecharModal();
+        this.mostrarCheck = false;
+      }, 1000);
     },
     error: (err) => console.error('Erro ao concluir tarefa:', err)
   });
 }
+
 
 // Excluir tarefa
 excluirTarefa() {

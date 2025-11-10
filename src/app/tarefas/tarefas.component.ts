@@ -14,10 +14,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TarefasComponent implements OnInit {
 
-  tarefasEmAtraso: Tarefa[] = [];
   tarefasAFazer: Tarefa[] = [];
   tarefasEmAndamento: Tarefa[] = [];
   tarefasConcluidas: Tarefa[] = [];
+  mostrarConcluidas: boolean = true;
 
   tarefaSelecionada: Tarefa | null = null;
   exibirCriarTarefa: boolean = false;
@@ -27,41 +27,89 @@ export class TarefasComponent implements OnInit {
   Flag = Flag;
 
   constructor(
-  private tarefasService: TarefasService,
-  private route: ActivatedRoute
-) {}
-
+    private tarefasService: TarefasService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-  this.carregarTarefas();
+    this.carregarTarefas();
 
-  // Checar se veio um status via query params
-  this.route.fragment.subscribe(fragment => {
-    if (fragment) {
-      setTimeout(() => {
-        const el = document.getElementById(fragment);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          el.classList.add('destacado');
-          setTimeout(() => el.classList.remove('destacado'), 2000);
-        }
-      }, 300);
-    }
-  });
+    // 🔹 Scroll automático se vier fragmento na URL
+    this.route.fragment.subscribe(fragment => {
+      if (fragment) {
+        setTimeout(() => {
+          const el = document.getElementById(fragment);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.classList.add('destacado');
+            setTimeout(() => el.classList.remove('destacado'), 2000);
+          }
+        }, 300);
+      }
+    });
+  }
 
-}
-
+  alternarConcluidas(): void {
+    this.mostrarConcluidas = !this.mostrarConcluidas;
+  }
 
   carregarTarefas(): void {
     this.tarefasService.listar().subscribe(tarefas => {
-      // define a flag automaticamente em todas
-      tarefas.forEach(t => t.flag = this.definirFlagAutomaticamente(t));
+      console.log('RAW TAREFAS:', JSON.stringify(tarefas, null, 2));
 
-      // separa por status
-      this.tarefasEmAtraso    = tarefas.filter(t => t.statusExecucao === StatusExecucao.EmAtraso);
-      this.tarefasAFazer      = tarefas.filter(t => t.statusExecucao === StatusExecucao.AFazer);
-      this.tarefasEmAndamento = tarefas.filter(t => t.statusExecucao === StatusExecucao.EmAndamento);
-      this.tarefasConcluidas  = tarefas.filter(t => t.statusExecucao === StatusExecucao.Concluido);
+      const agora = new Date();
+
+      tarefas.forEach(t => {
+        const vencimento = new Date(`${t.dataVencimento}T${t.horaVencimento || '23:59'}`);
+        const statusOriginal = t.statusExecucao;
+        const flagOriginal = t.flag;
+
+        // 🔹 Atualiza status automaticamente
+        if (t.statusExecucao !== StatusExecucao.Concluido) {
+          if (vencimento < agora) {
+            t.statusExecucao = StatusExecucao.EmAtraso;
+          } else if (t.statusExecucao === StatusExecucao.EmAtraso && vencimento >= agora) {
+            t.statusExecucao = StatusExecucao.AFazer;
+          }
+        }
+
+        // 🔹 Atualiza flag automaticamente
+        t.flag = this.definirFlagAutomaticamente(t);
+
+        // 🔹 Atualiza no backend se algo mudou
+        if (t.statusExecucao !== statusOriginal || t.flag !== flagOriginal) {
+          this.tarefasService.atualizar(t.id!, t).subscribe();
+        }
+      });
+
+      // 🧠 Normaliza texto do status
+      const normaliza = (s?: any) => (s ? String(s).trim().toLowerCase() : '');
+      const fazerKey = normaliza('A Fazer');
+      const andamentoKey = normaliza('Em Andamento');
+      const concluidoKey = normaliza('Concluído');
+      const atrasoKey = normaliza('Em Atraso');
+
+      const tarefasNorm = tarefas.map(t => ({
+        ...t,
+        _statusNorm: normaliza(t.statusExecucao)
+      }));
+
+      // 🔹 Exibe tarefas “Em Atraso” junto das “A Fazer”
+      this.tarefasAFazer = tarefasNorm
+        .filter(t =>
+          t._statusNorm === fazerKey ||
+          t._statusNorm === atrasoKey ||
+          t.flag === Flag.Atrasado
+        )
+        .map(t => ({ ...t } as Tarefa));
+
+      this.tarefasEmAndamento = tarefasNorm
+        .filter(t => t._statusNorm === andamentoKey)
+        .map(t => ({ ...t } as Tarefa));
+
+      this.tarefasConcluidas = tarefasNorm
+        .filter(t => t._statusNorm === concluidoKey)
+        .map(t => ({ ...t } as Tarefa));
     });
   }
 
@@ -90,7 +138,7 @@ export class TarefasComponent implements OnInit {
         this.carregarTarefas();
         this.fecharModal();
       },
-      error: (err) => console.error('Erro ao excluir tarefa:', err)
+      error: err => console.error('Erro ao excluir tarefa:', err)
     });
   }
 
@@ -108,12 +156,12 @@ export class TarefasComponent implements OnInit {
         this.carregarTarefas();
         this.fecharModal();
       },
-      error: (err) => console.error('Erro ao concluir tarefa:', err)
+      error: err => console.error('Erro ao concluir tarefa:', err)
     });
   }
 
   /** 
-   * Define a flag automaticamente de acordo com a data de vencimento 
+   * Define flag automaticamente de acordo com a data de vencimento 
    * e o status de execução.
    */
   private definirFlagAutomaticamente(tarefa: Tarefa): Flag {
@@ -130,11 +178,11 @@ export class TarefasComponent implements OnInit {
 
     const diffHoras = (vencimento.getTime() - agora.getTime()) / (1000 * 60 * 60);
 
-    if (diffHoras >= 72) {        // mais de 3 dias
+    if (diffHoras >= 72) {
       return Flag.Normal;
-    } else if (diffHoras >= 24) { // entre 1 e 3 dias
+    } else if (diffHoras >= 24) {
       return Flag.Pendente;
-    } else if (diffHoras > 0) {   // menos de 1 dia
+    } else if (diffHoras > 0) {
       return Flag.Urgente;
     }
 
@@ -167,15 +215,8 @@ export class TarefasComponent implements OnInit {
 
     this.tarefasService.atualizar(tarefa.id, tarefaAtualizada).subscribe();
 
-    // reordena todas as tarefas da coluna
     event.container.data.forEach((t, index) => {
       if (t.id) this.tarefasService.atualizarOrdem(t.id, index).subscribe();
     });
   }
-
 }
-
-
-
-
-

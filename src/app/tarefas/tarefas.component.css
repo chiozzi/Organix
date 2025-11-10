@@ -1,6 +1,6 @@
-/* ==============================
-   🌐 Corpo e Container Geral
-============================== */
+/* ==========================================================
+   🌐 ESTRUTURA GERAL
+========================================================== */
 html, body {
   height: 100%;
   margin: 0;
@@ -24,45 +24,15 @@ html, body {
   margin: 0;
 }
 
-/* Destaque temporário da coluna */
-.destacado {
-  border: 3px solid;
-  border-radius: 8px;
-  animation: pulse 1.5s ease-out;
-}
-
-/* Pulsação suave */
-@keyframes pulse {
-  70% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-
-/* Colunas destacadas com cores condizentes */
-#atraso.destacado {
-  border-color: #ff1111; /* Atrasado */
-}
-
-#afazer.destacado {
-  border-color: #ff6600; /* Pendente (ou Normal, se preferir) */
-}
-
-#emandamento.destacado {
-  border-color: #ffee07; /* Urgente */
-}
-
-#concluidas.destacado {
-  border-color: #2fa533; /* Concluído */
-}
-
-
-/* ==============================
-   🧭 Kanban Board
-============================== */
+/* ==========================================================
+   🧭 KANBAN BOARD
+========================================================== */
 .kanban {
   display: flex;
-  gap: 20px;
-  align-items: flex-start;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
   padding-bottom: 10px;
 }
 
@@ -72,12 +42,14 @@ html, body {
   background: #e9e9e9;
   border-radius: 16px;
   padding: 20px;
+  min-height: 300px;
   height: 600px;
   overflow-y: auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   margin-top: 50px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -95,98 +67,118 @@ html, body {
   letter-spacing: 0.5px;
 }
 
-/* Scroll da lista de cards */
+/* Scroll personalizado */
 .kanban-cards {
   flex: 1;
   overflow-y: auto;
   padding-right: 5px;
+  transition: all 0.4s ease;
+  box-sizing: border-box;
 }
 
 .kanban-cards::-webkit-scrollbar {
   width: 8px;
 }
-
 .kanban-cards::-webkit-scrollbar-thumb {
   background: #bbb;
   border-radius: 4px;
 }
 
-/* ==============================
-   ✅ Coluna Concluídas
-============================== */
-.kanban-col.concluidas {
-  flex: 1 1 100%;
-  max-width: 100%;
-  margin-top: 40px;
-  background: #f2f2f2;
+/* ==========================================================
+   ✅ COLUNA CONCLUÍDAS
+========================================================== */
+.kanban-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.kanban-col.concluidas .kanban-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 15px;
-  align-items: start;
+.toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #555;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+.toggle-btn:hover {
+  color: #000;
+}
+.toggle-btn i {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.toggle-btn:active i {
+  transform: rotate(180deg) scale(1.1);
+}
+.toggle-btn:hover i {
+  color: #0080D7;
 }
 
-/* ==============================
-   🟩 Ajuste de tamanho dos cards da coluna CONCLUÍDAS
-   ============================== */
-.kanban-col.concluidas .card {
-  height: 160px;          /* ✅ altura fixa padronizada */
-  min-height: 160px;
-  overflow: hidden;       /* garante que não “vaze” texto */
+/* Painel de concluídas (embaixo e largo) */
+.concluido-col {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+  background: #e9e9e9;
+  border-radius: 16px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: stretch;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-/* Limita título dentro das concluídas */
-.kanban-col.concluidas .card h5,
-.kanban-col.concluidas .card h3 {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;    /* Máx. 2 linhas */
-  line-clamp: 2;            /* Versão padrão */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
+.concluido-col:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
-/* Limita textos (descrição, vencimento, status) */
-.kanban-col.concluidas .card p {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;    /* Máx. 1 linha */
-  line-clamp: 1;            /* Versão padrão */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
+.concluido-col h4 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-
-
-/* Oculta badge de status nas concluídas */
-.kanban-col.concluidas .status-badge {
-  display: none;
+/* ==========================================================
+   🃏 CARDS DE TAREFA (TODAS AS COLUNAS)
+========================================================== */
+#afazer,
+#emandamento {
+  flex: 1 1 45%;
+  max-width: 45%;
 }
 
-/* ==============================
-   🃏 Cards de Tarefa
-============================== */
+/* Garante layout consistente em todas as colunas */
+#afazer .kanban-cards,
+#emandamento .kanban-cards,
+.concluidas-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+  width: 100%;
+  align-items: start;
+  justify-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Cards individuais padronizados */
 .card {
-  background: #fff;
+  background: #ffffff;
+  border: 1px solid #eee;
   border-radius: 12px;
   padding: 15px;
   width: 100%;
-  min-height: 140px;
+  min-height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  margin-bottom: 15px;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  border: 1px solid #eee;
 }
 
 .card:hover {
@@ -194,6 +186,7 @@ html, body {
   box-shadow: 0 6px 16px rgba(0,0,0,0.15);
 }
 
+/* Cabeçalho e texto dos cards */
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -201,7 +194,6 @@ html, body {
   margin-bottom: 8px;
 }
 
-.card-header h3,
 .card-header h5 {
   margin: 0;
   font-size: 15px;
@@ -221,10 +213,18 @@ html, body {
   text-overflow: ellipsis;
 }
 
+/* Limita textos longos em todas as colunas */
+.card h5,
+.card p {
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+}
 
-/* ==============================
-   🏷️ Badges de Status (Kanban)
-============================== */
+/* ==========================================================
+   🏷️ BADGES DE STATUS
+========================================================== */
 .status-badge {
   padding: 4px 10px;
   border-radius: 20px;
@@ -233,40 +233,31 @@ html, body {
   text-transform: uppercase;
   color: #fff;
 }
+.status-badge.normal { background-color: #0080D7; }
+.status-badge.pendente { background-color: #ffee07; color: black; }
+.status-badge.urgente { background-color: #ff6600; }
+.status-badge.atrasado { background-color: #ff1111; }
+.status-badge.concluido { background-color: #2fa533; }
 
-/* Normal */
-.status-badge.normal { 
-  background-color: #0080D7; 
+/* ==========================================================
+   ✨ EFEITO DE DESTAQUE (DROP)
+========================================================== */
+.destacado {
+  border: 3px solid;
+  border-radius: 8px;
+  animation: pulse 1.5s ease-out;
 }
-
-/* Pendente */
-.status-badge.pendente { 
-  background-color: #ffee07; 
-  color: black;
+@keyframes pulse {
+  70% { opacity: 0.5; }
+  100% { opacity: 1; }
 }
+#afazer.destacado { border-color: #ff6600; }
+#emandamento.destacado { border-color: #ffee07; }
+#concluidas.destacado { border-color: #2fa533; }
 
-/* Urgente */
-.status-badge.urgente { 
-  background-color: #ff6600; 
-  color: white;
-}
-
-/* Atrasado */
-.status-badge.atrasado { 
-  background-color: #ff1111; 
-  color: white;
-}
-
-/* Concluído */
-.status-badge.concluido { 
-  background-color: #2fa533;
-  color: white;
-}
-
-
-/* ==============================
-   ➕ Botão Flutuante
-============================== */
+/* ==========================================================
+   ➕ BOTÃO FLUTUANTE
+========================================================== */
 .btn-flutuante {
   position: fixed;
   bottom: 25px;
@@ -282,34 +273,31 @@ html, body {
   box-shadow: 0 6px 12px rgba(0,0,0,0.2);
   transition: transform 0.2s ease, background 0.2s ease;
 }
-
 .btn-flutuante:hover {
   background: #0066cc;
   transform: scale(1.1);
 }
 
-/* ==============================
-   🧲 Angular Drag & Drop
-============================== */
+/* ==========================================================
+   🧲 DRAG & DROP ANGULAR
+========================================================== */
 .cdk-drop-list {
   min-height: 200px;
   padding: 8px;
   background-color: #f4f4f4;
   border-radius: 8px;
 }
-
 .cdk-drag-preview {
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 }
-
 .cdk-drag-placeholder {
   background: #ddd;
   border-radius: 4px;
 }
 
-/* ==============================
-   🪟 Modal
-============================== */
+/* ==========================================================
+   🪟 MODAIS DE TAREFAS
+========================================================== */
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -339,6 +327,15 @@ html, body {
   animation: modalFadeOut 0.3s ease-in-out forwards;
 }
 
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.95) translateY(-20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes modalFadeOut {
+  from { opacity: 1; transform: scale(1) translateY(0); }
+  to { opacity: 0; transform: scale(0.95) translateY(-20px); }
+}
+
 .modal-header h2 {
   margin: 0;
   font-size: 1.8em;
@@ -365,9 +362,7 @@ html, body {
   line-height: 1.4;
 }
 
-/* ==============================
-   🟩 Status no Modal
-============================== */
+/* Status no modal */
 .status {
   padding: 4px 10px;
   border-radius: 6px;
@@ -375,41 +370,13 @@ html, body {
   font-size: 0.9em;
   display: inline-block;
 }
+.status.normal { background: #0080D7; color: white; }
+.status.pendente { background: #ffee07; color: black; }
+.status.urgente { background: #ff6600; color: white; }
+.status.atrasado { background: #ff1111; color: white; }
+.status.concluido { background: #2fa533; color: white; }
 
-/* Normal */
-.status.normal { 
-  background: #0080D7; 
-  color: white; 
-}
-
-/* Pendente */
-.status.pendente { 
-  background: #ffee07; 
-  color: black; 
-}
-
-/* Urgente */
-.status.urgente { 
-  background: #ff6600; 
-  color: white; 
-}
-
-/* Atrasado */
-.status.atrasado { 
-  background: #ff1111; 
-  color: white; 
-}
-
-/* Concluído */
-.status.concluido { 
-  background: #2fa533; 
-  color: white; 
-}
-
-
-/* ==============================
-   🧭 Modal Footer & Botões
-============================== */
+/* Rodapé do modal */
 .modal-footer {
   margin-top: 25px;
   display: flex;
@@ -430,18 +397,15 @@ html, body {
   gap: 6px;
   transition: background 0.2s ease;
 }
-
 .btn-concluir,
 .btn-editar {
   background: #0080D7;
   color: white;
 }
-
 .btn-concluir:hover,
 .btn-editar:hover {
   background: #0066A1;
 }
-
 .btn-excluir {
   position: absolute;
   bottom: 20px;
@@ -449,17 +413,9 @@ html, body {
   background: #d9534f;
   color: white;
 }
-
 .btn-excluir:hover {
   background: #c9302c;
 }
-
-.btn-concluir i,
-.btn-editar i,
-.btn-excluir i {
-  order: 0;
-}
-
 .btn-fechar-topo {
   position: absolute;
   top: 12px;
@@ -471,32 +427,6 @@ html, body {
   color: #666;
   transition: color 0.2s ease;
 }
-
 .btn-fechar-topo:hover {
   color: #d9534f;
-}
-
-/* ==============================
-   ✨ Animações Modal
-============================== */
-@keyframes modalFadeIn {
-  from { opacity: 0; transform: scale(0.95) translateY(-20px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-@keyframes modalFadeOut {
-  from { opacity: 1; transform: scale(1) translateY(0); }
-  to { opacity: 0; transform: scale(0.95) translateY(-20px); }
-}
-
-/* ==============================
-   📏 Linhas decorativas
-============================== */
-.linha1 {
-  margin-top: 30px;
-  margin-bottom: -7px;
-}
-
-.linha2 {
-  margin: 7px 0;
 }
