@@ -74,6 +74,8 @@ html, body {
   padding-right: 5px;
   transition: all 0.4s ease;
   box-sizing: border-box;
+  align-content: start; /* <-- adiciona esta linha */
+
 }
 
 .kanban-cards::-webkit-scrollbar {
@@ -221,6 +223,26 @@ html, body {
   display: -webkit-box;
   overflow: hidden;
 }
+
+
+/* ==========================================================
+   🗑️ ANIMAÇÃO DE REMOÇÃO
+========================================================== */
+.removendo {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+
 
 /* ==========================================================
    🏷️ BADGES DE STATUS

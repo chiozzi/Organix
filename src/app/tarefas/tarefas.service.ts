@@ -27,6 +27,9 @@ export interface Tarefa {
   statusExecucao: StatusExecucao;
   flag: Flag; 
   ordem: number;
+  removendo?: boolean; 
+  _statusNorm?: string;
+
 }
 
 

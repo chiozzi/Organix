@@ -53,11 +53,21 @@ export class TarefasComponent implements OnInit {
     this.mostrarConcluidas = !this.mostrarConcluidas;
   }
 
+
   carregarTarefas(): void {
     this.tarefasService.listar().subscribe(tarefas => {
       console.log('RAW TAREFAS:', JSON.stringify(tarefas, null, 2));
 
       const agora = new Date();
+
+      // 🔹 Normaliza todos os status para comparação confiável
+      const normaliza = (s?: any) =>
+        s ? String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase() : '';
+
+      const fazerKey = normaliza(StatusExecucao.AFazer);
+      const andamentoKey = normaliza(StatusExecucao.EmAndamento);
+      const concluidoKey = normaliza(StatusExecucao.Concluido);
+      const atrasoKey = normaliza(StatusExecucao.EmAtraso);
 
       tarefas.forEach(t => {
         const vencimento = new Date(`${t.dataVencimento}T${t.horaVencimento || '23:59'}`);
@@ -65,10 +75,10 @@ export class TarefasComponent implements OnInit {
         const flagOriginal = t.flag;
 
         // 🔹 Atualiza status automaticamente
-        if (t.statusExecucao !== StatusExecucao.Concluido) {
+        if (normaliza(t.statusExecucao) !== normaliza(StatusExecucao.Concluido)) {
           if (vencimento < agora) {
             t.statusExecucao = StatusExecucao.EmAtraso;
-          } else if (t.statusExecucao === StatusExecucao.EmAtraso && vencimento >= agora) {
+          } else if (normaliza(t.statusExecucao) === atrasoKey && vencimento >= agora) {
             t.statusExecucao = StatusExecucao.AFazer;
           }
         }
@@ -82,37 +92,33 @@ export class TarefasComponent implements OnInit {
         }
       });
 
-      // 🧠 Normaliza texto do status
-      const normaliza = (s?: any) => (s ? String(s).trim().toLowerCase() : '');
-      const fazerKey = normaliza('A Fazer');
-      const andamentoKey = normaliza('Em Andamento');
-      const concluidoKey = normaliza('Concluído');
-      const atrasoKey = normaliza('Em Atraso');
-
       const tarefasNorm = tarefas.map(t => ({
         ...t,
         _statusNorm: normaliza(t.statusExecucao)
       }));
 
       // 🔹 Exibe tarefas “Em Atraso” junto das “A Fazer”
-      this.tarefasAFazer = tarefasNorm
-        .filter(t =>
-          t._statusNorm === fazerKey ||
-          t._statusNorm === atrasoKey ||
-          t.flag === Flag.Atrasado
-        )
-        .map(t => ({ ...t } as Tarefa));
+      this.tarefasAFazer = tarefasNorm.filter(t =>
+        [fazerKey, atrasoKey].includes(t._statusNorm) || t.flag === Flag.Atrasado
+      );
 
-      this.tarefasEmAndamento = tarefasNorm
-        .filter(t => t._statusNorm === andamentoKey)
-        .map(t => ({ ...t } as Tarefa));
+      this.tarefasEmAndamento = tarefasNorm.filter(
+        t => t._statusNorm === andamentoKey
+      );
 
-      this.tarefasConcluidas = tarefasNorm
-        .filter(t => t._statusNorm === concluidoKey)
-        .map(t => ({ ...t } as Tarefa));
+      this.tarefasConcluidas = tarefasNorm.filter(
+        t => t._statusNorm === concluidoKey
+      );
+
+      console.log('A FAZER:', this.tarefasAFazer);
+      console.log('EM ANDAMENTO:', this.tarefasEmAndamento);
+      console.log('CONCLUIDAS:', this.tarefasConcluidas);
     });
   }
 
+
+    
+  
   abrirModal(tarefa: Tarefa): void {
     this.tarefaSelecionada = tarefa;
   }
@@ -133,14 +139,26 @@ export class TarefasComponent implements OnInit {
 
   removerTarefa(tarefa: Tarefa): void {
     if (!tarefa.id) return;
+
+    // Marca visualmente a tarefa para animação
+    tarefa.removendo = true;
+
+    // Espera o tempo da animação CSS (300ms) antes de remover do array
+    setTimeout(() => {
+      this.tarefasAFazer = this.tarefasAFazer.filter(t => t.id !== tarefa.id);
+      this.tarefasEmAndamento = this.tarefasEmAndamento.filter(t => t.id !== tarefa.id);
+      this.tarefasConcluidas = this.tarefasConcluidas.filter(t => t.id !== tarefa.id);
+      this.fecharModal();
+    }, 300);
+
+    // Chama o backend normalmente
     this.tarefasService.remover(tarefa.id).subscribe({
-      next: () => {
-        this.carregarTarefas();
-        this.fecharModal();
-      },
+      next: () => console.log(`✅ Tarefa ${tarefa.id} excluída do backend.`),
       error: err => console.error('Erro ao excluir tarefa:', err)
     });
   }
+
+
 
   tarefaConcluida(tarefa: Tarefa): void {
     if (!tarefa.id) return;

@@ -1,4 +1,6 @@
-/* ===== Modal Overlay ===== */
+/* ==========================================================
+   🪟 MODAL OVERLAY
+========================================================== */
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -9,7 +11,10 @@
   z-index: 1000;
 }
 
-/* ===== Modal Content ===== */
+
+/* ==========================================================
+   📦 CONTEÚDO DO MODAL
+========================================================== */
 .modal-content {
   background: #f9f9f9;
   padding: 25px 30px;
@@ -29,14 +34,20 @@
   animation: modalFadeOut 0.3s ease-in-out forwards;
 }
 
-/* ===== Modal Header ===== */
+
+/* ==========================================================
+   🧩 CABEÇALHO DO MODAL
+========================================================== */
 .modal-header h2 {
   margin: 0;
   font-size: 1.8em;
   color: #333;
 }
 
-/* ===== Modal Body ===== */
+
+/* ==========================================================
+   📄 CORPO DO MODAL
+========================================================== */
 .modal-body {
   margin-top: 20px;
 }
@@ -57,7 +68,10 @@
   line-height: 1.4;
 }
 
-/* ===== Status ===== */
+
+/* ==========================================================
+   ⚙️ STATUS DAS TAREFAS
+========================================================== */
 .status {
   padding: 4px 10px;
   border-radius: 6px;
@@ -66,13 +80,16 @@
   display: inline-block;
 }
 
-.status.normal   { background: #e6f7ff; color: #007bff; }
-.status.pendente { background: #fff3cd; color: #856404; }
-.status.urgente  { background: #f8d7da; color: #721c24; }
-.status.atraso   { background: #f5c6cb; color: #a94442; }
-.status.concluido { background: #28a745; color: white; }
+.status.normal     { background: #e6f7ff; color: #007bff; }
+.status.pendente   { background: #fff3cd; color: #856404; }
+.status.urgente    { background: #f8d7da; color: #721c24; }
+.status.atraso     { background: #f5c6cb; color: #a94442; }
+.status.concluido  { background: #28a745; color: white; }
 
-/* ===== Rodapé ===== */
+
+/* ==========================================================
+   🦶 RODAPÉ DO MODAL
+========================================================== */
 .modal-footer {
   margin-top: 25px;
   display: flex;
@@ -86,7 +103,10 @@
   gap: 10px;
 }
 
-/* ===== Botões ===== */
+
+/* ==========================================================
+   🔘 BOTÕES GERAIS
+========================================================== */
 .btn-concluir,
 .btn-editar,
 .btn-excluir,
@@ -102,25 +122,21 @@
   transition: background 0.2s ease;
 }
 
-/* Concluir */
-/* ===== Concluir: animação do check ===== */
+
+/* ==========================================================
+   ✅ BOTÃO CONCLUIR (COM ANIMAÇÃO)
+========================================================== */
 .btn-concluir {
   background: #28a745;
   color: white;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.95em;
-  display: flex;
-  align-items: center;
-  gap: 6px;
   position: relative;
   overflow: hidden;
   transition: background 0.2s ease;
 }
 
-.btn-concluir:hover { background: #218838; }
+.btn-concluir:hover {
+  background: #218838;
+}
 
 .btn-concluir i {
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -137,29 +153,48 @@
 }
 
 
-/* Editar e Arquivar */
+/* ==========================================================
+   ✏️ BOTÕES EDITAR E ARQUIVAR
+========================================================== */
 .btn-editar,
 .btn-arquivar {
   background: #0080D7;
   color: white;
 }
-.btn-editar:hover,
-.btn-arquivar:hover { background: #0066A1; }
 
-/* Excluir */
+.btn-editar:hover,
+.btn-arquivar:hover {
+  background: #0066A1;
+}
+
+
+/* ==========================================================
+   🗑️ BOTÃO EXCLUIR
+========================================================== */
 .btn-excluir {
   background: #d9534f;
   color: white;
 }
-.btn-excluir:hover { background: #c9302c; }
 
-/* Ícones nos botões */
+.btn-excluir:hover {
+  background: #c9302c;
+}
+
+
+/* ==========================================================
+   🧭 ÍCONES DOS BOTÕES
+========================================================== */
 .btn-concluir i,
 .btn-editar i,
 .btn-excluir i,
-.btn-arquivar i { order: 0; }
+.btn-arquivar i {
+  order: 0;
+}
 
-/* ===== Botão fechar topo ===== */
+
+/* ==========================================================
+   ❌ BOTÃO FECHAR TOPO
+========================================================== */
 .btn-fechar-topo {
   position: absolute;
   top: 12px;
@@ -177,7 +212,10 @@
   transform: rotate(90deg);
 }
 
-/* ===== Animações ===== */
+
+/* ==========================================================
+   ✨ ANIMAÇÕES DO MODAL
+========================================================== */
 @keyframes modalFadeIn {
   from { opacity: 0; transform: scale(0.95) translateY(-20px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }
@@ -188,32 +226,63 @@
   to   { opacity: 0; transform: scale(0.95) translateY(-20px); }
 }
 
+
+/* ==========================================================
+   ➕ OUTROS ELEMENTOS
+========================================================== */
 .linha1, .linha2 {
-margin-top: 10px;
-margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-/* Esconde modal durante animação do check */
 .invisivel {
   opacity: 0;
   pointer-events: none;
 }
 
-/* Check gigante centralizado */
+/* ===== Check redondo estilizado ===== */
 .check-grande {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 6rem;
-  color: #28a745;
+  transform: translate(-50%, -50%) scale(0);
+  width: 130px;
+  height: 130px;
+  background: #0080D7;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 128, 215, 0.7);
   opacity: 0;
-  animation: checkPop 1s forwards;
+  animation: checkCirclePop 0.9s ease-out forwards, checkPulse 2s ease-in-out infinite alternate;
   z-index: 1001;
 }
 
-@keyframes checkPop {
-  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(1) opacity 1; }
+/* Efeito de entrada (cresce e aparece) */
+@keyframes checkCirclePop {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Brilho pulsante */
+@keyframes checkPulse {
+  0% {
+    box-shadow: 0 0 15px rgba(0, 128, 215, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(0, 128, 215, 0.9);
+  }
 }

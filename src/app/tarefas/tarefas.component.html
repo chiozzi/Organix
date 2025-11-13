@@ -12,7 +12,9 @@
          (cdkDropListDropped)="drop($event)">
       <h4>📝 A Fazer</h4>
       <div class="kanban-cards">
-        <div class="card mb-2" *ngFor="let tarefa of tarefasAFazer"
+        <div class="card mb-2"
+             *ngFor="let tarefa of tarefasAFazer"
+             [ngClass]="{'removendo': tarefa.removendo}"
              cdkDrag
              [cdkDragData]="tarefa"
              (click)="abrirModal(tarefa)">
@@ -35,7 +37,9 @@
          (cdkDropListDropped)="drop($event)">
       <h4>⚙️ Em Andamento</h4>
       <div class="kanban-cards">
-        <div class="card mb-2" *ngFor="let tarefa of tarefasEmAndamento"
+        <div class="card mb-2"
+             *ngFor="let tarefa of tarefasEmAndamento"
+             [ngClass]="{'removendo': tarefa.removendo}"
              cdkDrag
              [cdkDragData]="tarefa"
              (click)="abrirModal(tarefa)">
@@ -67,7 +71,9 @@
     </div>
 
     <div class="kanban-cards concluidas-cards" [class.oculto]="!mostrarConcluidas">
-      <div class="card mb-2" *ngFor="let tarefa of tarefasConcluidas"
+      <div class="card mb-2"
+           *ngFor="let tarefa of tarefasConcluidas"
+           [ngClass]="{'removendo': tarefa.removendo}"
            cdkDrag
            [cdkDragData]="tarefa"
            (click)="abrirModal(tarefa)">
@@ -76,7 +82,6 @@
           <span class="status-badge {{ tarefa.flag | lowercase }}">
             {{ tarefa.flag }}
           </span>
-
         </div>
         <p><strong>Vencimento:</strong> {{ tarefa.dataVencimento | date:'dd/MM/yyyy' }} às {{ tarefa.horaVencimento }}</p>
         <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
@@ -107,3 +112,4 @@
     (fechar)="exibirCriarTarefa=false">
   </app-criartarefas>
 </div>
+  
