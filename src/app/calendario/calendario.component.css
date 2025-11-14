@@ -1,4 +1,6 @@
-/* Container para alinhar o calendário e a seção de eventos */
+/* =========================================================
+   CONTAINER PRINCIPAL
+   ========================================================= */
 .calendar-container {
   display: flex;
   flex-wrap: wrap;
@@ -8,7 +10,7 @@
   margin-top: 35px;
   margin-bottom: 90px;
 }
-
+ 
 .calendar {
   width: 100%;
   max-width: 600px;
@@ -19,8 +21,10 @@
   overflow: hidden;
   margin: 0;
 }
-
-/* Cabeçalho */
+ 
+/* =========================================================
+   CABEÇALHO DO CALENDÁRIO
+   ========================================================= */
 .calendar-header {
   cursor: pointer;
   text-align: center;
@@ -30,47 +34,55 @@
   font-size: 1.2em;
   font-weight: bold;
 }
-
-/* Dias da semana */
+ 
+/* =========================================================
+   DIAS DA SEMANA
+   ========================================================= */
 .calendar-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   background-color: #0080d7;
   color: white;
 }
-
+ 
 .calendar-days div {
   cursor: pointer;
   padding: 10px;
   text-align: center;
   font-weight: bold;
 }
-
-/* Dias do mês */
+ 
+/* =========================================================
+   DIAS DO MÊS
+   ========================================================= */
 .calendar-dates {
   cursor: pointer;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   user-select: none;
 }
-
+ 
 .calendar-dates div {
   padding: 20px;
   text-align: center;
   border: 1px solid #ddd;
 }
-
+ 
 /* Destaque do dia atual */
 .today {
   background-color: #adddfc;
   font-weight: bold;
 }
-
-/* Estilo para dias com evento */
+ 
+/* Dia com evento */
 .calendar-dates div.hasEvent {
   border: 2px solid #0080d7;
 }
-
+ 
+/* =========================================================
+   MODAIS
+   ========================================================= */
+ 
 /* Fundo do modal */
 .modal {
   position: fixed;
@@ -79,14 +91,14 @@
   cursor: pointer;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999;
 }
-
-/* Caixa central do modal */
+ 
+/* Caixa interna do modal */
 .modal-content {
   background: #fff;
   border: 1px solid #ddd;
@@ -97,8 +109,8 @@
   position: relative;
   cursor: default;
 }
-
-/* Opção de mês */
+ 
+/* Opção de seleção de mês */
 .modal-option {
   cursor: pointer;
   margin: 5px 0;
@@ -106,12 +118,14 @@
   border-radius: 4px;
   user-select: none;
 }
-
+ 
 .modal-option:hover {
   background: #f0f0f0;
 }
-
-/* Seção de detalhes do evento */
+ 
+/* =========================================================
+   DETALHES / LISTA DE EVENTOS
+   ========================================================= */
 .event-details {
   background: #fff;
   border: 1px solid #ddd;
@@ -121,27 +135,27 @@
   max-width: 400px;
   min-height: 200px;
 }
-
+ 
 .event-title {
   color: #000;
   border-bottom: 2px solid #ddd;
   padding-bottom: 10px;
   margin-bottom: 15px;
 }
-
+ 
 .no-events-message {
   color: #888;
   font-style: italic;
   text-align: center;
   margin-top: 30px;
 }
-
+ 
 .event-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-
+ 
 .event-item {
   display: flex;
   justify-content: space-between;
@@ -149,27 +163,33 @@
   border-bottom: 1px solid #eee;
   padding-bottom: 10px;
   margin-bottom: 10px;
+  gap: 5px;
 }
-
+ 
 .event-item:last-child {
   border-bottom: none;
 }
-
+ 
 .event-info {
   flex-grow: 1;
   text-align: left;
 }
-
+ 
 .event-item h4 {
   margin: 0 0 5px 0;
   color: #333;
 }
-
-.event-item p, .event-item small {
+ 
+.event-item p,
+.event-item small {
   margin: 0 0 5px 0;
   color: #555;
 }
-
+ 
+/* =========================================================
+   BOTÕES
+   ========================================================= */
+ 
 /* Botão de adicionar evento */
 .add-event-button {
   background-color: #0080d7;
@@ -183,11 +203,11 @@
   width: 100%;
   font-size: 1em;
 }
-
+ 
 .add-event-button:hover {
   background-color: #218838;
 }
-
+ 
 /* Botão de exclusão */
 .delete-button {
   background: none;
@@ -197,67 +217,84 @@
   cursor: pointer;
   font-weight: bold;
 }
-
+ 
 .delete-button:hover {
   color: #c9302c;
 }
-
-/* Estilos do formulário do modal de adicionar */
+ 
+/* =========================================================
+   FORMULÁRIO DO MODAL DE ADICIONAR EVENTO
+   ========================================================= */
 .modal-title {
   color: #000;
   margin-bottom: 15px;
 }
-
+ 
 .form-group {
   margin-bottom: 15px;
   text-align: left;
 }
-
+ 
 .form-group label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
   color: #333;
 }
-
-.form-group input, .form-group textarea {
+ 
+.form-group input,
+.form-group textarea {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
   border-radius: 4px;
   border: 1px solid #ddd;
 }
-
+ 
 .modal-actions {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
   margin-top: 20px;
 }
-
-.submit-button, .cancel-button {
+ 
+.submit-button,
+.cancel-button {
   padding: 10px 15px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
   font-size: 1em;
 }
-
+ 
 .submit-button {
   background-color: #0080d7;
   color: white;
 }
-
+ 
 .submit-button:hover {
   background-color: #006ab8;
 }
-
+ 
 .cancel-button {
   background-color: #6c757d;
   color: white;
 }
-
+ 
 .cancel-button:hover {
   background-color: #5a6268;
 }
-
+ 
+.edit-button {
+  background: none;
+  border: none;
+  color: #0080d7;
+  font-size: 1.2em;
+  cursor: pointer;
+  font-weight: bold;
+}
+ 
+.edit-button:hover {
+  color: #006ab8;
+}
+ 

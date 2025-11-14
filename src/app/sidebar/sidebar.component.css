@@ -4,13 +4,13 @@
   margin: 0;
   padding: 0;
 }
-
+ 
 /* Container principal */
 .sidebar-container {
   position: relative;
   user-select: none;
 }
-
+ 
 /* Sidebar */
 .sidebar {
   width: 240px;
@@ -28,15 +28,13 @@
   overflow: hidden;
   z-index: 1000;
 }
-
+ 
 /* Sidebar colapsada */
 .sidebar.collapsed {
   width: 70px;
 }
-
-
-
-/* Header da sidebar */
+ 
+/* Header */
 .sidebar-header {
   display: flex;
   justify-content: flex-start;
@@ -44,8 +42,8 @@
   height: 55px;
   margin-bottom: 20px;
 }
-
-/* Botão toggle fixo */
+ 
+/* Botão toggle */
 .toggle-btn {
   background: transparent;
   border: none;
@@ -60,12 +58,12 @@
   border-radius: 8px;
   transition: background-color 0.25s ease, transform 0.25s ease;
 }
-
+ 
 .toggle-btn:hover {
   background-color: rgba(255, 255, 255, 0.15);
   transform: rotate(90deg);
 }
-
+ 
 /* Menu */
 .menu {
   list-style: none;
@@ -73,12 +71,12 @@
   margin: 0;
   flex-grow: 1;
 }
-
+ 
 .menu li {
   margin-bottom: 10px;
 }
-
-/* Links do menu e footer */
+ 
+/* Links globais */
 .menu a,
 .profile-footer a {
   display: flex;
@@ -93,24 +91,23 @@
   position: relative;
   transition: all 0.3s ease;
 }
-
-/* Hover do menu */
+ 
 .menu a:hover {
   background-color: rgba(255, 255, 255, 0.15);
   transform: translateX(4px);
 }
-
-/* Hover do perfil (somente se não estiver ativo) */
+ 
+/* Hover perfil */
 .profile-footer a:not(.active):hover {
   background-color: rgba(255, 255, 255, 0.15);
   transform: translateX(4px);
 }
-
+ 
 .profile-footer a:not(.active):hover .profile-pic i {
   transform: rotate(15deg);
   color: #ffffff;
 }
-
+ 
 /* Ícones */
 .icon {
   font-size: 18px;
@@ -118,12 +115,12 @@
   text-align: center;
   transition: transform 0.25s ease, color 0.25s ease;
 }
-
+ 
 .menu a:hover .icon {
   transform: scale(1.2);
   color: #ffffff;
 }
-
+ 
 /* Perfil */
 .profile-pic {
   background-color: transparent;
@@ -137,7 +134,7 @@
   font-size: 18px;
   transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
-
+ 
 /* Sidebar colapsada */
 .sidebar.collapsed .menu a,
 .sidebar.collapsed .profile-footer a {
@@ -145,43 +142,44 @@
   gap: 0;
   padding: 12px 0;
 }
-
+ 
 .sidebar.collapsed .menu a span,
 .sidebar.collapsed .profile-footer a span {
   display: none;
 }
-
-/* Profile footer fixo embaixo */
+ 
+/* Footer do perfil */
 .profile-footer {
   margin-top: auto;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-
-/* Links ativos (menu e perfil) */
+ 
+/* Ativo */
 .menu a.active,
 .profile-footer a.active {
-  background-color: #ffffff; /* fundo branco */
-  color: #0049d7;            /* cor do texto */
+  background-color: #ffffff;
+  color: #0049d7;
   font-weight: 700;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
   transform: translateX(4px);
-  position: relative; /* necessário para o ::before */
+  position: relative;
 }
-
-/* Ícones ativos */
+ 
 .menu a.active .icon,
 .profile-footer a.active .icon {
   color: #0049d7;
 }
-
-/* Perfil: círculo do avatar ativo */
+ 
 .profile-footer a.active .profile-pic {
   background-color: #ffffff;
   color: #0049d7;
 }
-
-/* Barra lateral azul do item ativo */
+ 
+/* Barrinha lateral estilo Teams */
 .menu a.active::before,
 .profile-footer a.active::before {
   content: "";
@@ -193,8 +191,8 @@
   background: #0049d7;
   border-radius: 2px;
 }
-
-/* Tooltip quando colapsado */
+ 
+/* Tooltip */
 .sidebar.collapsed .menu a[mattooltip]::after,
 .sidebar.collapsed .profile-footer a[mattooltip]::after {
   content: attr(mattooltip);
@@ -213,9 +211,16 @@
   font-size: 13px;
   font-weight: 600;
 }
-
+ 
 .sidebar.collapsed .menu a[mattooltip]:hover::after,
 .sidebar.collapsed .profile-footer a[mattooltip]:hover::after {
   opacity: 1;
   transform: translate(16px, -50%);
 }
+ 
+/* --- NOVO: girar ícone Configurações no hover --- */
+.config-settings:hover .icon {
+  transform: rotate(180deg);
+  transition: transform 0.4s ease;
+}
+ 

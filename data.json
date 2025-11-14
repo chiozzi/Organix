@@ -39,7 +39,7 @@
       "dataVencimento": "2025-11-16",
       "horaVencimento": "17:00",
       "statusExecucao": "emandamento",
-      "flag": "Normal",
+      "flag": "Pendente",
       "ordem": 0,
       "_statusNorm": "em andamento"
     },
