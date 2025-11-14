@@ -115,3 +115,22 @@
     (fechar)="exibirCriarTarefa = false">
   </app-criartarefas>
 </div>
+
+<!-- Modal de listagem por tipo -->
+<app-listartarefas
+  *ngIf="mostrarListaModal"
+  [tarefas]="tarefasFiltradas"
+  [titulo]="tituloModal"
+  (fechar)="fecharListaModal()"
+  (editar)="onEditarFromModal($event)"
+  (abrirTarefa)="abrirCriarModal($event)">
+</app-listartarefas>
+
+<!-- Modal de criar/editar tarefa já existente -->
+<app-criartarefas
+  *ngIf="exibirCriarTarefa"
+  [tarefa]="tarefaParaEdicao"
+  (salvar)="tarefaCriadaOuAtualizada($event)"
+  (fechar)="exibirCriarTarefa = false">
+</app-criartarefas>
+

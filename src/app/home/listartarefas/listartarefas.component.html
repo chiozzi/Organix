@@ -1,0 +1,35 @@
+<div class="modal-overlay" (click)="fecharModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="btn-fechar-topo" (click)="fecharModal()">×</button>
+
+    <div class="modal-header">
+      <h2>{{ titulo }} <small>({{ tarefas.length }})</small></h2>
+    </div>
+
+    <div class="modal-body">
+      <div *ngIf="tarefas.length === 0" class="info-bloco">
+        <p>Nenhuma tarefa encontrada.</p>
+      </div>
+
+      <div *ngFor="let t of tarefas" class="lista-item">
+        <div class="lista-item-header">
+          <h4 (click)="abrirTarefaDetalhe(t)">{{ t.titulo }}</h4>
+          <span class="status" [ngClass]="(t.flag || '').toString().toLowerCase()">{{ t.flag }}</span>
+        </div>
+
+        <p><strong>Vencimento:</strong> {{ t.dataVencimento | date:'dd/MM/yyyy' }} — {{ t.horaVencimento || '23:59' }}</p>
+        <p class="descricao">{{ t.descricao }}</p>
+
+        <div class="lista-item-acoes">
+          <button class="btn-editar" (click)="onEditar(t)"><i class="fa fa-edit"></i> Editar</button>
+        </div>
+
+        <hr/>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-fechar" (click)="fecharModal()">Fechar</button>
+    </div>
+  </div>
+</div>

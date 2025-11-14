@@ -1,0 +1,19 @@
+/* Reaproveitei o visual dos modais que você já tem */
+.modal-overlay { position: fixed; top:0;left:0;right:0;bottom:0; background: rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:1000; }
+.modal-content { background:#f9f9f9; padding:22px; border-radius:12px; width:70%; max-width:900px; max-height:84%; overflow:auto; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.25); }
+.modal-header h2 { margin:0; font-size:1.4rem; color:#222; }
+.modal-body { margin-top:14px; }
+.lista-item { margin-bottom:12px; }
+.lista-item-header { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.lista-item-header h4 { margin:0; cursor:pointer; }
+.lista-item .descricao { color:#444; margin:6px 0; }
+.lista-item-acoes { display:flex; gap:8px; margin-top:8px; }
+.btn-editar { background:#0080D7; color:#fff; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; }
+.btn-fechar { background:#ddd; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; }
+.btn-fechar-topo { position:absolute; top:10px; right:12px; background:transparent; border:none; font-size:26px; cursor:pointer; color:#666; }
+.status { padding:4px 8px; border-radius:6px; font-weight:600; font-size:0.85rem; }
+.status.normal { background:#0080D7; color:white; }
+.status.pendente { background:#ffee07; color:black; }
+.status.urgente { background:#ff6600; color:white; }
+.status.atrasado { background:#ff1111; color:white; }
+.status.concluido { background:#2fa533; color:white; }
