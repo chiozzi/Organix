@@ -9,6 +9,7 @@ export enum StatusExecucao {
   Concluido = 'Concluído'
 }
 
+
 export enum Flag {
   Normal = 'Normal',
   Urgente = 'Urgente',
@@ -22,13 +23,15 @@ export interface Tarefa {
   titulo: string;
   descricao: string;
   dataVencimento: string;
-  horaVencimento: string;
+  horaVencimento: string; 
   statusExecucao: StatusExecucao;
-  flag: Flag;
+  flag: Flag; 
   ordem: number;
-  removendo?: boolean;      // ❗ usado APENAS no front
-  _statusNorm?: string;     // ❗ usado APENAS no front
+  removendo?: boolean; 
+  _statusNorm?: string;
+
 }
+
 
 @Injectable({ providedIn: 'root' })
 export class TarefasService {
@@ -36,26 +39,16 @@ export class TarefasService {
 
   constructor(private http: HttpClient) {}
 
-  /** 
-   * Remove todos os campos que NÃO devem ir para o backend 
-   */
-  private limparCamposInternos(tarefa: Tarefa): Tarefa {
-    const copia = { ...tarefa };
-    delete (copia as any)._statusNorm;
-    delete (copia as any).removendo;
-    return copia;
-  }
-
   listar(): Observable<Tarefa[]> {
     return this.http.get<Tarefa[]>(this.apiUrl);
   }
 
   criar(tarefa: Tarefa): Observable<Tarefa> {
-    return this.http.post<Tarefa>(this.apiUrl, this.limparCamposInternos(tarefa));
+    return this.http.post<Tarefa>(this.apiUrl, tarefa);
   }
 
   atualizar(id: number, tarefa: Tarefa): Observable<Tarefa> {
-    return this.http.put<Tarefa>(`${this.apiUrl}/${id}`, this.limparCamposInternos(tarefa));
+    return this.http.put<Tarefa>(`${this.apiUrl}/${id}`, tarefa);
   }
 
   remover(id: number): Observable<void> {

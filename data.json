@@ -180,5 +180,36 @@
         "Lucas"
       ]
     }
-  ]
+  ],
+
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "Letícia",
+      "email": "leticia@sistema.com",
+      "senha": "123456",
+      "perfil": "Admin",
+      "status": "Ativo",
+      "criadoEm": "2025-11-22"
+    },
+    {
+      "id": 2,
+      "nome": "Cristiano Ronaldo",
+      "email": "cr7@sistema.com",
+      "senha": "abcdef",
+      "perfil": "Cliente",
+      "status": "Ativo",
+      "criadoEm": "2025-06-06"
+    },
+    {
+      "id": 3,
+      "nome": "Lionel Messi",
+      "email": "messi@sistema.com",
+      "senha": "123abc",
+      "perfil": "Cliente",
+      "status": "Inativo",
+      "criadoEm": "2025-07-07"
+    }
+  ] 
+
 }
