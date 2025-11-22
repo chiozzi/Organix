@@ -65,6 +65,8 @@ html, body {
   margin-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin-top: 12px;
+  margin-left: 12px;
 }
 
 /* Scroll personalizado */
@@ -142,7 +144,32 @@ html, body {
   font-size: 18px;
   font-weight: bold;
   text-transform: uppercase;
+  margin-top: 12px;
+  margin-left: 12px;
 }
+
+.oculto {
+  display: none !important;
+}
+
+.concluidas-cards.oculto {
+  display: none !important;
+  max-height: 0;
+  opacity: 0;
+  padding: 0 !important;
+}
+
+/* Quando tiver oculto, o card fica pequeno */
+.concluido-col.compactado {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  background: #fafafa;
+  border-radius: 12px;
+  min-height: 50px; /* altura mínima só para o cabeçalho */
+  transition: min-height 0.3s ease;
+}
+
+
 
 /* ==========================================================
    🃏 CARDS DE TAREFA (TODAS AS COLUNAS)
@@ -165,6 +192,10 @@ html, body {
   justify-items: center;
   padding: 10px;
   box-sizing: border-box;
+  max-height: 1000px; /* altura máxima para conter várias tarefas */
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  opacity: 1;
 }
 
 /* Cards individuais padronizados */

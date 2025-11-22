@@ -58,6 +58,7 @@
 
   <!-- Painel Concluídas (abaixo, centralizado e largo) -->
   <div id="concluidas" class="kanban-col concluido-col"
+       [ngClass]="{ 'compactado': !mostrarConcluidas }"
        cdkDropList
        [cdkDropListData]="tarefasConcluidas"
        [cdkDropListConnectedTo]="['afazer','emandamento']"

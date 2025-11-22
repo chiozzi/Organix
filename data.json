@@ -36,7 +36,7 @@
       "descricao": "Atualizar readme do projeto",
       "dataVencimento": "2025-11-16",
       "horaVencimento": "17:00",
-      "statusExecucao": "afazer",
+      "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
       "ordem": 1
     },
@@ -46,7 +46,7 @@
       "descricao": "Exibir indicadores no dashboard",
       "dataVencimento": "2025-11-19",
       "horaVencimento": "14:00",
-      "statusExecucao": "emandamento",
+      "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
       "ordem": 2
     },
@@ -56,7 +56,7 @@
       "descricao": "Revisar entregas da última sprint",
       "dataVencimento": "2025-11-18",
       "horaVencimento": "15:00",
-      "statusExecucao": "afazer",
+      "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
       "ordem": 0
     },
@@ -116,7 +116,7 @@
       "descricao": "Consumir dados do sistema parceiro",
       "dataVencimento": "2025-10-31",
       "horaVencimento": "17:00",
-      "statusExecucao": "afazer",
+      "statusExecucao": "Em Atraso",
       "flag": "Atrasado",
       "ordem": 3
     },
