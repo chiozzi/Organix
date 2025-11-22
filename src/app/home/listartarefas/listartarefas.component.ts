@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Tarefa } from '../../tarefas/tarefas.service';
 
 @Component({
@@ -7,12 +7,22 @@ import { Tarefa } from '../../tarefas/tarefas.service';
   templateUrl: './listartarefas.component.html',
   styleUrl: './listartarefas.component.css'
 })
-export class ListartarefasComponent {
+export class ListartarefasComponent implements OnInit, OnDestroy {
   @Input() tarefas: Tarefa[] = [];
   @Input() titulo: string = 'Tarefas';
   @Output() fechar = new EventEmitter<void>();
   @Output() editar = new EventEmitter<Tarefa>();
   @Output() abrirTarefa = new EventEmitter<Tarefa>(); // se quiser abrir detalhe
+
+
+
+  ngOnInit(): void {
+    document.body.style.overflow = 'hidden';
+  }
+
+  ngOnDestroy(): void {
+    document.body.style.overflow = '';
+  }
 
   fecharModal() {
     this.fechar.emit();

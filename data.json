@@ -1,160 +1,155 @@
 {
   "tarefas": [
     {
-      "id": 11,
+      "id": 1,
       "titulo": "Refatorar código legado",
       "descricao": "Melhorar performance e legibilidade",
       "dataVencimento": "2025-11-24",
       "horaVencimento": "09:00",
-      "statusExecucao": "emandamento",
-      "flag": "Normal",
-      "ordem": 1,
-      "_statusNorm": "a fazer"
+      "statusExecucao": "Em Andamento",
+      "flag": "Pendente",
+      "ordem": 0
     },
     {
-      "id": 15,
+      "id": 2,
       "titulo": "Atualizar planilha financeira",
       "descricao": "Registrar despesas do mês",
       "dataVencimento": "2025-11-25",
       "horaVencimento": "08:00",
-      "statusExecucao": "Concluído",
-      "flag": "Concluido",
-      "ordem": 1,
-      "_statusNorm": "a fazer"
+      "statusExecucao": "emandamento",
+      "flag": "Pendente",
+      "ordem": 5
     },
     {
-      "id": 17,
+      "id": 3,
       "titulo": "Corrigir falhas no sistema de vendas",
       "descricao": "Relatórios não estão sendo gerados",
       "dataVencimento": "2025-11-26",
       "horaVencimento": "11:00",
-      "statusExecucao": "A Fazer",
-      "flag": "Normal",
-      "ordem": 3
+      "statusExecucao": "Concluído",
+      "flag": "Concluido",
+      "ordem": 1
     },
     {
-      "id": 8,
+      "id": 4,
       "titulo": "Revisar documentação",
       "descricao": "Atualizar readme do projeto",
       "dataVencimento": "2025-11-16",
       "horaVencimento": "17:00",
-      "statusExecucao": "emandamento",
-      "flag": "Pendente",
-      "ordem": 0,
-      "_statusNorm": "em andamento"
+      "statusExecucao": "afazer",
+      "flag": "Atrasado",
+      "ordem": 1
     },
     {
-      "id": 10,
+      "id": 5,
       "titulo": "Implementar componente de gráfico",
       "descricao": "Exibir indicadores no dashboard",
-      "dataVencimento": "2025-11-29",
+      "dataVencimento": "2025-11-19",
       "horaVencimento": "14:00",
-      "statusExecucao": "Em Andamento",
-      "flag": "Normal",
+      "statusExecucao": "emandamento",
+      "flag": "Atrasado",
       "ordem": 2
     },
     {
-      "id": 14,
+      "id": 6,
       "titulo": "Enviar feedback para equipe",
       "descricao": "Revisar entregas da última sprint",
       "dataVencimento": "2025-11-18",
       "horaVencimento": "15:00",
-      "statusExecucao": "Em Andamento",
-      "flag": "Normal",
-      "ordem": 3
+      "statusExecucao": "afazer",
+      "flag": "Atrasado",
+      "ordem": 0
     },
     {
-      "id": 21,
+      "id": 7,
       "titulo": "Publicar relatório anual",
       "descricao": "Divulgação para diretoria",
       "dataVencimento": "2025-12-07",
       "horaVencimento": "18:30",
       "statusExecucao": "Em Andamento",
       "flag": "Normal",
-      "ordem": 4
+      "ordem": 1
     },
     {
-      "id": 23,
+      "id": 8,
       "titulo": "Tarefa matemática",
       "descricao": "Lição Teams",
       "dataVencimento": "2025-12-05",
       "horaVencimento": "21:00",
-      "statusExecucao": "Em Andamento",
+      "statusExecucao": "A Fazer",
       "flag": "Normal",
-      "ordem": 5
+      "ordem": 2
     },
     {
-      "id": 26,
+      "id": 9,
       "titulo": "Ler",
       "descricao": "Ler muito",
       "dataVencimento": "2026-02-12",
       "horaVencimento": "19:00",
       "statusExecucao": "Em Andamento",
       "flag": "Normal",
-      "ordem": 6
+      "ordem": 3
     },
     {
-      "id": 28,
+      "id": 10,
       "titulo": "dasdasdasda",
       "descricao": "daadadada",
       "dataVencimento": "2025-12-08",
       "horaVencimento": "13:13",
       "statusExecucao": "Em Andamento",
       "flag": "Normal",
-      "ordem": 7
+      "ordem": 4
     },
     {
-      "id": 32,
+      "id": 11,
       "titulo": "Natal",
       "descricao": "hou hou hou",
       "dataVencimento": "2025-12-25",
       "horaVencimento": "21:32",
       "statusExecucao": "Em Andamento",
       "flag": "Normal",
-      "ordem": 8
+      "ordem": 6
     },
     {
-      "id": 25,
+      "id": 12,
       "titulo": "Integrar API externa",
       "descricao": "Consumir dados do sistema parceiro",
       "dataVencimento": "2025-10-31",
       "horaVencimento": "17:00",
-      "statusExecucao": "Em Atraso",
+      "statusExecucao": "afazer",
       "flag": "Atrasado",
-      "ordem": 4
+      "ordem": 3
     },
     {
-      "id": 18,
-      "titulo": "Organizar arquivos antigos",
-      "descricao": "Arquivar documentos e backups",
-      "dataVencimento": "2025-11-12",
-      "horaVencimento": "17:00",
-      "statusExecucao": "Em Atraso",
-      "flag": "Atrasado",
-      "ordem": 5
-    },
-    {
-      "id": 5,
+      "id": 13,
       "titulo": "Entrega do relatório mensal",
       "descricao": "Relatório de indicadores de performance",
       "dataVencimento": "2025-11-15",
       "horaVencimento": "18:00",
       "statusExecucao": "Concluído",
       "flag": "Concluido",
-      "ordem": 0
+      "ordem": 3
     },
     {
-      "id": 20,
+      "id": 14,
       "titulo": "Treinamento de equipe",
       "descricao": "Capacitação em novas ferramentas",
       "dataVencimento": "2025-11-13",
       "horaVencimento": "09:00",
       "statusExecucao": "Concluído",
       "flag": "Concluido",
-      "ordem": 1
+      "ordem": 4
     }
   ],
-  "eventos": [],
+  "eventos": [
+    {
+      "data": "2025-11-14",
+      "titulo": "kaakala",
+      "descricao": "dasdasda",
+      "horario": "01:01",
+      "id": 1
+    }
+  ],
   "equipes": [
     {
       "id": 1,

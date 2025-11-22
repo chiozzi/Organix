@@ -1,55 +1,79 @@
 <div class="modal-overlay" [ngClass]="{'fechando': fechando}" (click)="fecharModal()">
-  <div class="modal-content" [ngClass]="{'fechando': fechando}" (click)="$event.stopPropagation()">
 
-    <!-- ========================
-         CABEÇALHO
-    ======================== -->
+  <div class="modal-content" 
+       [ngClass]="{'fechando': fechando}" 
+       (click)="$event.stopPropagation()">
+
+    <!-- Botão fechar topo -->
+    <button class="btn-fechar-topo" (click)="fecharModal()">&times;</button>
+
+    <!-- Cabeçalho -->
     <div class="modal-header">
       <h2>{{ tarefa ? 'Atualizar Tarefa' : 'Criar Nova Tarefa' }}</h2>
-      <button class="btn-fechar-topo" (click)="fecharModal()">&times;</button>
     </div>
 
     <hr class="linha1" />
 
-    <!-- ========================
-         CORPO / SCROLL INTERNO
-    ======================== -->
+    <!-- Corpo -->
     <div class="modal-body">
+
       <form [formGroup]="formTarefa" (ngSubmit)="salvarTarefa()">
+
         <section class="info-bloco">
           <h4>📝 Informações</h4>
 
-          <label>Título</label>
-          <input type="text" formControlName="titulo" placeholder="Digite o título" />
+          <p>
+            <label>Título</label>
+            <input type="text" formControlName="titulo" placeholder="Digite o título" />
+          </p>
 
-          <label>Data de Vencimento</label>
-          <input type="date" formControlName="dataVencimento" [min]="hoje" />
+          <p>
+            <label>Data de Vencimento</label>
+            <input type="date" formControlName="dataVencimento" [min]="hoje" />
+          </p>
 
-          <label>Hora de Vencimento</label>
-          <input type="time" formControlName="horaVencimento" />
+          <p>
+            <label>Hora de Vencimento</label>
+            <input type="time" formControlName="horaVencimento" />
+          </p>
 
-          <label>Descrição</label>
-          <textarea rows="3" formControlName="descricao" placeholder="Detalhes da tarefa"></textarea>
+          <p>
+            <label>Descrição</label>
+            <textarea rows="3" formControlName="descricao" placeholder="Detalhes da tarefa"></textarea>
+          </p>
 
-          <label>Status</label>
-          <select formControlName="statusExecucao">
-            <option value="A Fazer">A Fazer</option>
-            <option value="Em Andamento">Em Andamento</option>
-            <option value="Concluido">Concluído</option>
-          </select>
+          <p>
+            <label>Status</label>
+            <select formControlName="statusExecucao">
+              <option value="A Fazer">A Fazer</option>
+              <option value="Em Andamento">Em Andamento</option>
+              <option value="Concluido">Concluído</option>
+            </select>
+          </p>
         </section>
+
       </form>
+
     </div>
 
-    <!-- ========================
-         RODAPÉ / BOTÕES
-    ======================== -->
+    <hr class="linha2" />
+
+    <!-- Rodapé -->
     <div class="modal-footer">
-      <button type="button" class="btn-fechar" (click)="cancelar()">Cancelar</button>
-      <button type="submit" class="btn-editar" [disabled]="formTarefa.invalid" (click)="salvarTarefa()">
-        {{ tarefa ? 'Atualizar' : 'Salvar' }}
-      </button>
+      <div class="botoes-esquerda">
+        <button type="button" class="btn-excluir" (click)="cancelar()">Cancelar</button>
+      </div>
+
+      <div class="botoes-direita">
+        <button type="submit"
+                class="btn-editar"
+                [disabled]="formTarefa.invalid"
+                (click)="salvarTarefa()">
+          {{ tarefa ? 'Atualizar' : 'Salvar' }}
+        </button>
+      </div>
     </div>
 
   </div>
+
 </div>

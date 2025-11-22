@@ -1,35 +1,61 @@
 <div class="modal-overlay" (click)="fecharModal()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <button class="btn-fechar-topo" (click)="fecharModal()">×</button>
 
+  <div class="modal-content" (click)="$event.stopPropagation()">
+
+    <!-- Botão fechar topo -->
+    <button class="btn-fechar-topo" (click)="fecharModal()">&times;</button>
+
+    <!-- Cabeçalho -->
     <div class="modal-header">
       <h2>{{ titulo }} <small>({{ tarefas.length }})</small></h2>
     </div>
 
-    <div class="modal-body">
-      <div *ngIf="tarefas.length === 0" class="info-bloco">
-        <p>Nenhuma tarefa encontrada.</p>
-      </div>
+    <hr class="linha1" />
 
-      <div *ngFor="let t of tarefas" class="lista-item">
+    <!-- Corpo -->
+    <div class="modal-body">
+
+      <section class="info-bloco" *ngIf="tarefas.length === 0">
+        <h4>📂 Lista vazia</h4>
+        <p>Nenhuma tarefa encontrada.</p>
+      </section>
+
+      <section *ngFor="let t of tarefas" class="info-bloco lista-item">
+
         <div class="lista-item-header">
-          <h4 (click)="abrirTarefaDetalhe(t)">{{ t.titulo }}</h4>
-          <span class="status" [ngClass]="(t.flag || '').toString().toLowerCase()">{{ t.flag }}</span>
+          <h4 class="titulo-tarefa" (click)="abrirTarefaDetalhe(t)">
+            {{ t.titulo }}
+          </h4>
+
+          <span class="status" 
+                [ngClass]="(t.flag || '').toString().toLowerCase()">
+            {{ t.flag }}
+          </span>
         </div>
 
-        <p><strong>Vencimento:</strong> {{ t.dataVencimento | date:'dd/MM/yyyy' }} — {{ t.horaVencimento || '23:59' }}</p>
-        <p class="descricao">{{ t.descricao }}</p>
+        <p><strong>Vencimento:</strong>
+          {{ t.dataVencimento | date:'dd/MM/yyyy' }} — {{ t.horaVencimento || '23:59' }}
+        </p>
+
+        <p class="descricao">
+          {{ t.descricao || 'Sem descrição' }}
+        </p>
 
         <div class="lista-item-acoes">
-          <button class="btn-editar" (click)="onEditar(t)"><i class="fa fa-edit"></i> Editar</button>
+          <button class="btn-editar" (click)="onEditar(t)">
+            Editar <i class="fas fa-edit"></i>
+          </button>
         </div>
 
         <hr/>
-      </div>
+      </section>
     </div>
+
+    <hr class="linha2" />
 
     <div class="modal-footer">
       <button class="btn-fechar" (click)="fecharModal()">Fechar</button>
     </div>
+
   </div>
 </div>

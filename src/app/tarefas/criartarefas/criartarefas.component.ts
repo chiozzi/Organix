@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Tarefa, TarefasService, StatusExecucao, Flag } from '../tarefas.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -9,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './criartarefas.component.css'
 })
 
-export class CriartarefasComponent implements OnInit {
+export class CriartarefasComponent implements OnInit, OnDestroy {
   @Input() tarefa: Tarefa | null = null;
   @Output() salvar = new EventEmitter<Tarefa>();
   @Output() fechar = new EventEmitter<void>();
@@ -21,10 +21,16 @@ export class CriartarefasComponent implements OnInit {
   constructor(private tarefasService: TarefasService) {}
 
   ngOnInit(): void {
+    document.body.style.overflow = 'hidden';
     this.inicializarFormulario();
     const hojeDate = new Date();
     this.hoje = hojeDate.toISOString().split('T')[0];
   }
+
+  ngOnDestroy(): void {
+    document.body.style.overflow = '';
+  }
+
 
   inicializarFormulario(): void {
     this.formTarefa = new FormGroup({

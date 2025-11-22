@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Flag, StatusExecucao, Tarefa, TarefasService } from '../tarefas.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { Flag, StatusExecucao, Tarefa, TarefasService } from '../tarefas.service
   templateUrl: './vertarefas.component.html',
   styleUrl: './vertarefas.component.css'
 })
-export class VertarefasComponent {
+export class VertarefasComponent implements OnInit, OnDestroy{
   @Input() tarefa: Tarefa | null | undefined;
   @Output() fechar = new EventEmitter<void>();
   @Output() editar = new EventEmitter<Tarefa>();
@@ -20,6 +20,15 @@ export class VertarefasComponent {
   mostrarCheck = false;
 
   constructor(private tarefasService: TarefasService) {}
+
+
+  ngOnInit(): void {
+    document.body.style.overflow = 'hidden';
+  }
+
+  ngOnDestroy(): void {
+    document.body.style.overflow = '';
+  }
 
   // Fecha o modal com animação
   fecharModal() {
