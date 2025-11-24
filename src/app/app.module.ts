@@ -24,6 +24,8 @@ import { VerequipeComponent } from './equipes/verequipe/verequipe.component';
 import { CriarreuniaoComponent } from './calendario/criarreuniao/criarreuniao.component';
 import { VerreuniaoComponent } from './calendario/verreuniao/verreuniao.component';
 import { ListartarefasComponent } from './home/listartarefas/listartarefas.component';
+import { ArquivadasComponent } from './arquivadas/arquivadas.component';
+import { ExcluidasComponent } from './excluidas/excluidas.component';
 
   @NgModule({
     declarations: [
@@ -43,7 +45,9 @@ import { ListartarefasComponent } from './home/listartarefas/listartarefas.compo
       VerequipeComponent,
       CriarreuniaoComponent,
       VerreuniaoComponent,
-      ListartarefasComponent
+      ListartarefasComponent,
+      ArquivadasComponent,
+      ExcluidasComponent
     ],
     imports: [
       BrowserModule,
