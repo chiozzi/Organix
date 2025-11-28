@@ -26,6 +26,7 @@ export class TarefasComponent implements OnInit {
   StatusExecucao = StatusExecucao;
   Flag = Flag;
 
+  // 🔹 Mapa correto entre ID das colunas e os enums
   private mapColunaParaStatus: any = {
     afazer: StatusExecucao.AFazer,
     emandamento: StatusExecucao.EmAndamento,
@@ -58,92 +59,55 @@ export class TarefasComponent implements OnInit {
     this.mostrarConcluidas = !this.mostrarConcluidas;
   }
 
-  /**
-   * Normaliza uma string para comparação (remove acentos, trim e lowercase).
-   */
-  private normaliza(s?: any): string {
-    return s ? String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase() : '';
-  }
-
-  /**
-   * Converte qualquer string de status para o enum StatusExecucao válido.
-   * Se não encontrar correspondência, retorna AFazer (padrão).
-   */
-  private parseStatus(s?: any): StatusExecucao {
-    const norm = this.normaliza(s);
-    for (const val of Object.values(StatusExecucao)) {
-      if (this.normaliza(val) === norm) return val as StatusExecucao;
-    }
-    return StatusExecucao.AFazer;
-  }
-
-  /**
-   * Converte qualquer string de flag para o enum Flag válido.
-   * Se não encontrar correspondência, retorna Normal (padrão).
-   */
-  private parseFlag(s?: any): Flag {
-    const norm = this.normaliza(s);
-    for (const val of Object.values(Flag)) {
-      if (this.normaliza(val) === norm) return val as Flag;
-    }
-    return Flag.Normal;
-  }
-
   carregarTarefas(): void {
     this.tarefasService.listar().subscribe(tarefas => {
       const agora = new Date();
 
-      const fazerKey = this.normaliza(StatusExecucao.AFazer);
-      const andamentoKey = this.normaliza(StatusExecucao.EmAndamento);
-      const concluidoKey = this.normaliza(StatusExecucao.Concluido);
-      const atrasoKey = this.normaliza(StatusExecucao.EmAtraso);
+      const normaliza = (s?: any) =>
+        s ? String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase() : '';
 
-      // 1) Normaliza status/flag e trata datas inválidas
+      const fazerKey = normaliza(StatusExecucao.AFazer);
+      const andamentoKey = normaliza(StatusExecucao.EmAndamento);
+      const concluidoKey = normaliza(StatusExecucao.Concluido);
+      const atrasoKey = normaliza(StatusExecucao.EmAtraso);
+
       tarefas.forEach(t => {
-        // Garante status/flag válidos (evita strings vazias/estranhas)
-        t.statusExecucao = this.parseStatus(t.statusExecucao);
-        t.flag = this.parseFlag(t.flag);
+        const vencimentoString = t.dataVencimento ? 
+          `${t.dataVencimento}T${t.horaVencimento || '23:59'}` : null;
 
-        // Trata data/hora de vencimento com segurança
-        const vencimentoString = t.dataVencimento ? `${t.dataVencimento}T${t.horaVencimento || '23:59'}` : null;
         const vencimento = vencimentoString ? new Date(vencimentoString) : null;
+
         const statusOriginal = t.statusExecucao;
         const flagOriginal = t.flag;
 
+
         if (vencimento && !isNaN(vencimento.getTime())) {
-          // Só recalcula status de atraso se houver data válida
-          if (this.normaliza(t.statusExecucao) !== this.normaliza(StatusExecucao.Concluido)) {
+          if (normaliza(t.statusExecucao) !== normaliza(StatusExecucao.Concluido)) {
             if (vencimento < agora) {
               t.statusExecucao = StatusExecucao.EmAtraso;
-            } else if (this.normaliza(statusOriginal) === atrasoKey && vencimento >= agora) {
+            } else if (normaliza(t.statusExecucao) === atrasoKey && vencimento >= agora) {
               t.statusExecucao = StatusExecucao.AFazer;
             }
           }
-        } else {
-          // Sem data válida: manter status (ou garantir AFazer para novas)
-          if (!t.statusExecucao) t.statusExecucao = StatusExecucao.AFazer;
         }
 
-        // Recalcula flag de forma segura (definirFlag trata de Invalid Date internamente)
-        t.flag = this.definirFlagAutomaticamenteSeguro(t);
 
-        // Atualiza backend apenas se houve alteração real
-        if (t.id && (t.statusExecucao !== statusOriginal || t.flag !== flagOriginal)) {
-          this.tarefasService.atualizar(t.id!, t).subscribe({
-            next: () => {},
-            error: () => {}
-          });
+
+
+        t.flag = this.definirFlagAutomaticamente(t);
+
+        if (t.statusExecucao !== statusOriginal || t.flag !== flagOriginal) {
+          this.tarefasService.atualizar(t.id!, t).subscribe();
         }
       });
 
-      // 2) Normaliza o status para filtros e preenche as listas
       const tarefasNorm = tarefas.map(t => ({
         ...t,
-        _statusNorm: this.normaliza(t.statusExecucao)
+        _statusNorm: normaliza(t.statusExecucao)
       }));
 
       this.tarefasAFazer = tarefasNorm.filter(t =>
-        [fazerKey, atrasoKey].includes(t._statusNorm) || this.normaliza(t.flag) === this.normaliza(Flag.Atrasado)
+        [fazerKey, atrasoKey].includes(t._statusNorm) || t.flag === Flag.Atrasado
       );
 
       this.tarefasEmAndamento = tarefasNorm.filter(
@@ -153,8 +117,6 @@ export class TarefasComponent implements OnInit {
       this.tarefasConcluidas = tarefasNorm.filter(
         t => t._statusNorm === concluidoKey
       );
-    }, err => {
-      console.error('Erro ao listar tarefas:', err);
     });
   }
 
@@ -171,51 +133,25 @@ export class TarefasComponent implements OnInit {
     this.exibirCriarTarefa = true;
   }
 
-  /**
-   * Recebe tarefa criada/atualizada pelo modal.
-   * Se for edição, substitui; se for nova, insere na lista correta.
-   */
+  // 🔥 Correção do BUG 1 — tarefa editada era substituída pela versão antiga ao concluir
   tarefaCriadaOuAtualizada(tarefaAtualizada: Tarefa): void {
     this.exibirCriarTarefa = false;
 
-    // Garante status/flag válidos quando vem do formulário
-    tarefaAtualizada.statusExecucao = this.parseStatus(tarefaAtualizada.statusExecucao);
-    tarefaAtualizada.flag = this.parseFlag(tarefaAtualizada.flag);
-
-    // Se não tiver id (por segurança) — recarrega tudo
-    if (!tarefaAtualizada.id) {
-      this.carregarTarefas();
-      return;
+    // garante que a nova tarefa entra em uma lista
+    if (!tarefaAtualizada.statusExecucao) {
+      tarefaAtualizada.statusExecucao = StatusExecucao.AFazer;
     }
 
     const listas = [this.tarefasAFazer, this.tarefasEmAndamento, this.tarefasConcluidas];
 
-    // Tenta substituir em alguma lista existente
-    let substituiu = false;
     listas.forEach(lista => {
       const index = lista.findIndex(t => t.id === tarefaAtualizada.id);
-      if (index !== -1) {
-        lista[index] = tarefaAtualizada;
-        substituiu = true;
-      }
+      if (index !== -1) lista[index] = tarefaAtualizada;
     });
 
-    // Se não substituiu (ou seja: é nova ou a lista não continha), insere corretamente
-    if (!substituiu) {
-      const statusNorm = this.normaliza(tarefaAtualizada.statusExecucao);
-      if (statusNorm === this.normaliza(StatusExecucao.EmAndamento)) {
-        this.tarefasEmAndamento.splice(tarefaAtualizada.ordem ?? this.tarefasEmAndamento.length, 0, tarefaAtualizada);
-      } else if (statusNorm === this.normaliza(StatusExecucao.Concluido)) {
-        this.tarefasConcluidas.splice(tarefaAtualizada.ordem ?? this.tarefasConcluidas.length, 0, tarefaAtualizada);
-      } else {
-        // default: AFazer / Em Atraso
-        this.tarefasAFazer.splice(tarefaAtualizada.ordem ?? this.tarefasAFazer.length, 0, tarefaAtualizada);
-      }
-    }
-
-    // Por segurança, sincroniza com backend/refresh parcial
     this.carregarTarefas();
   }
+
 
   removerTarefa(tarefa: Tarefa): void {
     if (!tarefa.id) return;
@@ -249,22 +185,12 @@ export class TarefasComponent implements OnInit {
     });
   }
 
-  /**
-   * Versão segura da função de cálculo de flag.
-   * Se data inválida -> retorna Flag.Normal (ou respeita status concluído).
-   */
-  private definirFlagAutomaticamenteSeguro(tarefa: Tarefa): Flag {
+  private definirFlagAutomaticamente(tarefa: Tarefa): Flag {
     const agora = new Date();
-    const vencimentoString = tarefa.dataVencimento ? `${tarefa.dataVencimento}T${tarefa.horaVencimento || '23:59'}` : null;
-    const vencimento = vencimentoString ? new Date(vencimentoString) : null;
+    const vencimento = new Date(`${tarefa.dataVencimento}T${tarefa.horaVencimento || '23:59'}`);
 
-    if (this.normaliza(tarefa.statusExecucao) === this.normaliza(StatusExecucao.Concluido)) {
+    if (tarefa.statusExecucao === StatusExecucao.Concluido) {
       return Flag.Concluido;
-    }
-
-    if (!vencimento || isNaN(vencimento.getTime())) {
-      // Sem data válida -> não marque como atrasado automaticamente
-      return tarefa.flag ?? Flag.Normal;
     }
 
     if (vencimento < agora) {
@@ -280,6 +206,7 @@ export class TarefasComponent implements OnInit {
     return Flag.Atrasado;
   }
 
+  // 🔥 Correção total do BUG 2 — arrastar tarefa gravava status errado
   drop(event: CdkDragDrop<Tarefa[]>): void {
     const tarefa = event.item.data as Tarefa;
     if (!tarefa?.id) return;
@@ -303,7 +230,7 @@ export class TarefasComponent implements OnInit {
     const tarefaAtualizada: Tarefa = {
       ...tarefa,
       statusExecucao: novoStatus,
-      flag: this.definirFlagAutomaticamenteSeguro({ ...tarefa, statusExecucao: novoStatus }),
+      flag: this.definirFlagAutomaticamente({ ...tarefa, statusExecucao: novoStatus }),
       ordem: event.currentIndex
     };
 

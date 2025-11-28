@@ -4,28 +4,28 @@
       "id": 1,
       "titulo": "Refatorar código legado",
       "descricao": "Melhorar performance e legibilidade",
-      "dataVencimento": "2025-11-24",
+      "dataVencimento": "2025-12-24",
       "horaVencimento": "09:00",
       "statusExecucao": "Concluído",
       "flag": "Concluido",
-      "ordem": 0,
-      "_statusNorm": "em atraso"
+      "ordem": 0
     },
     {
       "id": 2,
-      "titulo": "Atualizar planilha financeira",
+      "titulo": "Atualizar planilha financeiraaaaa",
       "descricao": "Registrar despesas do mês",
-      "dataVencimento": "2025-11-25",
+      "dataVencimento": "2025-12-25",
       "horaVencimento": "08:00",
-      "statusExecucao": "Em Atraso",
-      "flag": "Atrasado",
-      "ordem": 5
+      "statusExecucao": "Concluído",
+      "flag": "Concluido",
+      "ordem": 5,
+      "_statusNorm": "a fazer"
     },
     {
       "id": 3,
       "titulo": "Corrigir falhas no sistema de vendas",
       "descricao": "Relatórios não estão sendo gerados",
-      "dataVencimento": "2025-11-26",
+      "dataVencimento": "2025-11-28",
       "horaVencimento": "11:00",
       "statusExecucao": "Concluído",
       "flag": "Concluido",
@@ -35,22 +35,22 @@
       "id": 4,
       "titulo": "Revisar documentação",
       "descricao": "Atualizar readme do projeto",
-      "dataVencimento": "2025-11-16",
+      "dataVencimento": "2025-12-02",
       "horaVencimento": "17:00",
       "statusExecucao": "Concluído",
       "flag": "Concluido",
-      "ordem": 1,
-      "_statusNorm": "em atraso"
+      "ordem": 1
     },
     {
       "id": 5,
       "titulo": "Implementar componente de gráfico",
       "descricao": "Exibir indicadores no dashboard",
-      "dataVencimento": "2025-11-19",
+      "dataVencimento": "2025-12-29",
       "horaVencimento": "14:00",
-      "statusExecucao": "Em Atraso",
-      "flag": "Atrasado",
-      "ordem": 2
+      "statusExecucao": "Concluído",
+      "flag": "Concluido",
+      "ordem": 2,
+      "_statusNorm": "a fazer"
     },
     {
       "id": 6,
@@ -67,7 +67,7 @@
       "id": 7,
       "titulo": "Publicar relatório anual",
       "descricao": "Divulgação para diretoria",
-      "dataVencimento": "2025-12-07",
+      "dataVencimento": "2026-02-07",
       "horaVencimento": "18:30",
       "statusExecucao": "Em Andamento",
       "flag": "Normal",
@@ -77,7 +77,7 @@
       "id": 8,
       "titulo": "Tarefa matemática",
       "descricao": "Lição Teams",
-      "dataVencimento": "2025-12-05",
+      "dataVencimento": "2026-01-05",
       "horaVencimento": "21:00",
       "statusExecucao": "A Fazer",
       "flag": "Normal",
@@ -101,8 +101,7 @@
       "horaVencimento": "13:13",
       "statusExecucao": "Concluído",
       "flag": "Concluido",
-      "ordem": 4,
-      "_statusNorm": "em andamento"
+      "ordem": 4
     },
     {
       "id": 11,
@@ -118,17 +117,17 @@
       "id": 12,
       "titulo": "Integrar API externa",
       "descricao": "Consumir dados do sistema parceiro",
-      "dataVencimento": "2025-10-31",
+      "dataVencimento": "2025-11-31",
       "horaVencimento": "17:00",
-      "statusExecucao": "Em Atraso",
-      "flag": "Atrasado",
+      "statusExecucao": "A Fazer",
+      "flag": "Normal",
       "ordem": 3
     },
     {
       "id": 13,
       "titulo": "Entrega do relatório mensal",
       "descricao": "Relatório de indicadores de performance",
-      "dataVencimento": "2025-11-15",
+      "dataVencimento": "2025-11-13",
       "horaVencimento": "18:00",
       "statusExecucao": "Concluído",
       "flag": "Concluido",
@@ -145,74 +144,84 @@
       "ordem": 4
     },
     {
+      "id": 15,
       "titulo": "ssajdja",
       "descricao": "kljlkj",
       "dataVencimento": "2025-11-30",
       "horaVencimento": "01:01",
       "statusExecucao": "A Fazer",
       "flag": "Pendente",
-      "ordem": 0,
-      "id": 15
+      "ordem": 0
     },
     {
+      "id": 16,
       "titulo": "ajkdgashdlknh",
       "descricao": "asdçajshd",
       "dataVencimento": "2025-11-29",
       "horaVencimento": "20:20",
       "statusExecucao": "A Fazer",
       "flag": "Pendente",
-      "ordem": 0,
-      "id": 16
+      "ordem": 0
     },
     {
+      "id": 17,
       "titulo": "popopopo",
       "descricao": "çoppopopopopo",
       "dataVencimento": "2025-12-16",
       "horaVencimento": "12:56",
       "statusExecucao": "A Fazer",
       "flag": "Normal",
-      "ordem": 0,
-      "id": 17
+      "ordem": 0
     },
     {
+      "id": 18,
       "titulo": "kfskldmfcc",
       "descricao": "çfjifcokssd",
       "dataVencimento": "2025-12-05",
       "horaVencimento": "12:12",
       "statusExecucao": "A Fazer",
       "flag": "Normal",
-      "ordem": 0,
-      "id": 18
+      "ordem": 0
     },
     {
+      "id": 19,
       "titulo": "qqqqqqqqqqqqqqq",
       "descricao": "aaaaaaaaaaaaaaaa",
       "dataVencimento": "2025-12-12",
       "horaVencimento": "17:55",
       "statusExecucao": "A Fazer",
       "flag": "Normal",
-      "ordem": 0,
-      "id": 19
+      "ordem": 0
     },
     {
+      "id": 20,
       "titulo": "ççççççççççççççççççççççççççççççç",
       "descricao": "ççççççççççççççççç",
       "dataVencimento": "2025-12-01",
       "horaVencimento": "23:23",
       "statusExecucao": "A Fazer",
       "flag": "Normal",
-      "ordem": 0,
-      "id": 20
+      "ordem": 0
     },
     {
+      "id": 21,
       "titulo": "feaszdcc\\",
       "descricao": "dsdkfohcudsibh",
       "dataVencimento": "2025-12-01",
       "horaVencimento": "14:52",
       "statusExecucao": "A Fazer",
       "flag": "Pendente",
+      "ordem": 0
+    },
+    {
+      "titulo": "aaaaaa",
+      "descricao": "asda",
+      "dataVencimento": "2026-01-01",
+      "horaVencimento": "01:01",
+      "statusExecucao": "A Fazer",
+      "flag": "Normal",
       "ordem": 0,
-      "id": 21
+      "id": 22
     }
   ],
   "eventos": [
@@ -253,6 +262,27 @@
         "Hugo",
         "Lucas"
       ]
+    },
+    {
+      "nome": "projeto pi",
+      "lider": "lucas",
+      "membros": [
+        "ana",
+        "maria",
+        "joão"
+      ],
+      "etiqueta": "afazer",
+      "descricao": "finalizar",
+      "checklist": [
+        {
+          "tarefa": "front",
+          "feito": false
+        }
+      ],
+      "comentarios": [],
+      "dataCriacao": "2025-11-28T19:49:13.693Z",
+      "dataPrazo": "2025-12-12",
+      "id": 4
     }
   ],
   "usuarios": [
@@ -273,15 +303,104 @@
       "perfil": "Cliente",
       "status": "Ativo",
       "criadoEm": "2025-06-06"
+    }
+  ],
+  "conversas": [
+    {
+      "id": 1,
+      "nome": "Assistente Virtual",
+      "tipo": "bot",
+      "fixado": true,
+      "icone": "robot",
+      "mensagens": [
+        {
+          "id": 1,
+          "autor": "bot",
+          "texto": "Olá! Eu sou o Assistente Virtual. Digite /ajuda para comandos rápidos.",
+          "timestamp": "2025-11-25T12:00:00.000Z"
+        },
+        {
+          "id": 1764359424824,
+          "autor": "Você",
+          "texto": "/ajuda",
+          "timestamp": "2025-11-28T19:50:24.824Z"
+        },
+        {
+          "id": 1764359425757,
+          "autor": "bot",
+          "texto": "Comandos: /ajuda, /tutorial, /atalhos, /contato",
+          "timestamp": "2025-11-28T19:50:25.756Z"
+        },
+        {
+          "id": 1764359433321,
+          "autor": "Você",
+          "texto": "/atalhos",
+          "timestamp": "2025-11-28T19:50:33.321Z"
+        },
+        {
+          "id": 1764359434345,
+          "autor": "bot",
+          "texto": "Atalhos: Enter para enviar. /ajuda para comandos.",
+          "timestamp": "2025-11-28T19:50:34.345Z"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "Maria",
+      "tipo": "usuario",
+      "fixado": false,
+      "icone": "user",
+      "mensagens": [
+        {
+          "id": 1,
+          "autor": "Maria",
+          "texto": "Tudo bem?",
+          "timestamp": "2025-11-24T10:12:00.000Z"
+        }
+      ]
     },
     {
       "id": 3,
-      "nome": "Lionel Messi",
-      "email": "messi@sistema.com",
-      "senha": "123abc",
-      "perfil": "Cliente",
-      "status": "Inativo",
-      "criadoEm": "2025-07-07"
+      "nome": "João",
+      "tipo": "usuario",
+      "fixado": false,
+      "icone": "user",
+      "mensagens": [
+        {
+          "id": 1,
+          "autor": "João",
+          "texto": "Amanhã ok",
+          "timestamp": "2025-11-24T09:30:00.000Z"
+        },
+        {
+          "id": 1764359402271,
+          "autor": "Você",
+          "texto": "oi",
+          "timestamp": "2025-11-28T19:50:02.271Z"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "nome": "Equipe Desenvolvimento",
+      "tipo": "grupo",
+      "fixado": false,
+      "icone": "group",
+      "mensagens": [
+        {
+          "id": 1,
+          "autor": "Rafa",
+          "texto": "Atualizei a tarefa 12",
+          "timestamp": "2025-11-23T16:00:00.000Z"
+        },
+        {
+          "id": 1764359410477,
+          "autor": "Você",
+          "texto": "ok",
+          "timestamp": "2025-11-28T19:50:10.477Z"
+        }
+      ]
     }
   ]
 }
