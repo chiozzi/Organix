@@ -10,7 +10,7 @@
   justify-content: center;
   z-index: 1000;
 }
-
+ 
 .modal-content {
   background: #fff;
   border-radius: 10px;
@@ -20,24 +20,24 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   animation: fadeIn 0.25s ease-in-out;
 }
-
+ 
 .modal-title {
   text-align: center;
   margin-bottom: 15px;
   font-size: 1.3rem;
   font-weight: 600;
 }
-
+ 
 .form-group {
   margin-bottom: 15px;
 }
-
+ 
 .form-group label {
   display: block;
   margin-bottom: 5px;
   font-weight: 500;
 }
-
+ 
 .form-group input,
 .form-group textarea {
   width: 100%;
@@ -46,17 +46,17 @@
   border: 1px solid #ccc;
   font-size: 0.95rem;
 }
-
+ 
 .modal-actions {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
 }
-
+ 
 button {
   cursor: pointer;
 }
-
+ 
 .btn-primary {
   background-color: #007bff;
   color: #fff;
@@ -65,11 +65,11 @@ button {
   border-radius: 6px;
   transition: background 0.2s;
 }
-
+ 
 .btn-primary:hover {
   background-color: #0056b3;
 }
-
+ 
 .btn-secondary {
   background-color: #ccc;
   border: none;
@@ -77,11 +77,11 @@ button {
   border-radius: 6px;
   transition: background 0.2s;
 }
-
+ 
 .btn-secondary:hover {
   background-color: #999;
 }
-
+ 
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -92,3 +92,4 @@ button {
     transform: scale(1);
   }
 }
+ 

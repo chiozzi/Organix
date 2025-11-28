@@ -38,9 +38,8 @@
           </div>
  
           <button class="edit-button" (click)="abrirModalEditar(evento)">
-  &#9998;
-</button>
- 
+            &#9998;
+          </button>
  
           <button class="delete-button" (click)="excluirEvento(evento.id)">
             &times;
@@ -76,7 +75,9 @@
   </div>
 </div>
  
-<!-- Modal Adicionar Evento -->
+<!-- =========================== -->
+<!--   MODAL ADICIONAR EVENTO    -->
+<!-- =========================== -->
 <div *ngIf="mostrarModalAdicionar" class="modal">
   <div class="modal-content">
     <h3 class="modal-title">Adicionar Evento</h3>
@@ -120,8 +121,14 @@
           Cancelar
         </button>
       </div>
+    </form>
+  </div>
+</div>
  
-      <div *ngIf="mostrarModalEditar && eventoEditando" class="modal">
+<!-- =========================== -->
+<!--     MODAL EDITAR EVENTO     -->
+<!-- =========================== -->
+<div *ngIf="mostrarModalEditar && eventoEditando" class="modal">
   <div class="modal-content">
     <h3 class="modal-title">Editar Evento</h3>
  
@@ -132,7 +139,7 @@
           type="text"
           id="edit-titulo"
           [(ngModel)]="eventoEditando.titulo"
-          name="edit-titulo"
+          name="editTitulo"
           required
         />
       </div>
@@ -142,7 +149,7 @@
         <textarea
           id="edit-descricao"
           [(ngModel)]="eventoEditando.descricao"
-          name="edit-descricao"
+          name="editDescricao"
           required
         ></textarea>
       </div>
@@ -153,7 +160,7 @@
           type="time"
           id="edit-horario"
           [(ngModel)]="eventoEditando.horario"
-          name="edit-horario"
+          name="editHorario"
           required
         />
       </div>
@@ -167,5 +174,4 @@
     </form>
   </div>
 </div>
- 
  

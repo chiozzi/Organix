@@ -6,9 +6,10 @@
       "descricao": "Melhorar performance e legibilidade",
       "dataVencimento": "2025-11-24",
       "horaVencimento": "09:00",
-      "statusExecucao": "Em Andamento",
-      "flag": "Pendente",
-      "ordem": 0
+      "statusExecucao": "Concluído",
+      "flag": "Concluido",
+      "ordem": 0,
+      "_statusNorm": "em atraso"
     },
     {
       "id": 2,
@@ -16,8 +17,8 @@
       "descricao": "Registrar despesas do mês",
       "dataVencimento": "2025-11-25",
       "horaVencimento": "08:00",
-      "statusExecucao": "emandamento",
-      "flag": "Pendente",
+      "statusExecucao": "Em Atraso",
+      "flag": "Atrasado",
       "ordem": 5
     },
     {
@@ -36,9 +37,10 @@
       "descricao": "Atualizar readme do projeto",
       "dataVencimento": "2025-11-16",
       "horaVencimento": "17:00",
-      "statusExecucao": "Em Atraso",
-      "flag": "Atrasado",
-      "ordem": 1
+      "statusExecucao": "Concluído",
+      "flag": "Concluido",
+      "ordem": 1,
+      "_statusNorm": "em atraso"
     },
     {
       "id": 5,
@@ -56,9 +58,10 @@
       "descricao": "Revisar entregas da última sprint",
       "dataVencimento": "2025-11-18",
       "horaVencimento": "15:00",
-      "statusExecucao": "Em Atraso",
-      "flag": "Atrasado",
-      "ordem": 0
+      "statusExecucao": "Concluído",
+      "flag": "Concluido",
+      "ordem": 0,
+      "_statusNorm": "em atraso"
     },
     {
       "id": 7,
@@ -94,11 +97,12 @@
       "id": 10,
       "titulo": "dasdasdasda",
       "descricao": "daadadada",
-      "dataVencimento": "2025-12-08",
+      "dataVencimento": "2025-12-15",
       "horaVencimento": "13:13",
-      "statusExecucao": "Em Andamento",
-      "flag": "Normal",
-      "ordem": 4
+      "statusExecucao": "Concluído",
+      "flag": "Concluido",
+      "ordem": 4,
+      "_statusNorm": "em andamento"
     },
     {
       "id": 11,
@@ -139,6 +143,76 @@
       "statusExecucao": "Concluído",
       "flag": "Concluido",
       "ordem": 4
+    },
+    {
+      "titulo": "ssajdja",
+      "descricao": "kljlkj",
+      "dataVencimento": "2025-11-30",
+      "horaVencimento": "01:01",
+      "statusExecucao": "A Fazer",
+      "flag": "Pendente",
+      "ordem": 0,
+      "id": 15
+    },
+    {
+      "titulo": "ajkdgashdlknh",
+      "descricao": "asdçajshd",
+      "dataVencimento": "2025-11-29",
+      "horaVencimento": "20:20",
+      "statusExecucao": "A Fazer",
+      "flag": "Pendente",
+      "ordem": 0,
+      "id": 16
+    },
+    {
+      "titulo": "popopopo",
+      "descricao": "çoppopopopopo",
+      "dataVencimento": "2025-12-16",
+      "horaVencimento": "12:56",
+      "statusExecucao": "A Fazer",
+      "flag": "Normal",
+      "ordem": 0,
+      "id": 17
+    },
+    {
+      "titulo": "kfskldmfcc",
+      "descricao": "çfjifcokssd",
+      "dataVencimento": "2025-12-05",
+      "horaVencimento": "12:12",
+      "statusExecucao": "A Fazer",
+      "flag": "Normal",
+      "ordem": 0,
+      "id": 18
+    },
+    {
+      "titulo": "qqqqqqqqqqqqqqq",
+      "descricao": "aaaaaaaaaaaaaaaa",
+      "dataVencimento": "2025-12-12",
+      "horaVencimento": "17:55",
+      "statusExecucao": "A Fazer",
+      "flag": "Normal",
+      "ordem": 0,
+      "id": 19
+    },
+    {
+      "titulo": "ççççççççççççççççççççççççççççççç",
+      "descricao": "ççççççççççççççççç",
+      "dataVencimento": "2025-12-01",
+      "horaVencimento": "23:23",
+      "statusExecucao": "A Fazer",
+      "flag": "Normal",
+      "ordem": 0,
+      "id": 20
+    },
+    {
+      "titulo": "feaszdcc\\",
+      "descricao": "dsdkfohcudsibh",
+      "dataVencimento": "2025-12-01",
+      "horaVencimento": "14:52",
+      "statusExecucao": "A Fazer",
+      "flag": "Pendente",
+      "ordem": 0,
+      "id": 21
     }
   ],
   "eventos": [
@@ -210,6 +284,4 @@
       "criadoEm": "2025-07-07"
     }
   ]
-
-
 }

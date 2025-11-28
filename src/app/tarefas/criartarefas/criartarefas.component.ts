@@ -38,13 +38,16 @@ export class CriartarefasComponent implements OnInit, OnDestroy {
       descricao: new FormControl(this.tarefa?.descricao || ''),
       dataVencimento: new FormControl(this.tarefa?.dataVencimento || '', Validators.required),
       horaVencimento: new FormControl(this.tarefa?.horaVencimento || '', Validators.required),
-      statusExecucao: new FormControl(this.tarefa?.statusExecucao || StatusExecucao.AFazer, Validators.required)
+      statusExecucao: new FormControl(
+        this.tarefa?.statusExecucao ?? StatusExecucao.AFazer,
+        Validators.required
+      )
+
     });
 
   }
 
   abrirModalComTarefa(tarefa: Tarefa | null): void {
-    this.tarefa = tarefa;
     if (this.formTarefa) {
       this.formTarefa.reset({
         titulo: tarefa?.titulo || '',
@@ -74,10 +77,16 @@ export class CriartarefasComponent implements OnInit, OnDestroy {
       descricao: formValue.descricao,
       dataVencimento: formValue.dataVencimento,
       horaVencimento: formValue.horaVencimento,
-      statusExecucao: formValue.statusExecucao,
-      flag: this.tarefa ? this.tarefa.flag : Flag.Normal, // será recalculada depois
+      statusExecucao: formValue.statusExecucao || StatusExecucao.AFazer,
+      flag: this.tarefa ? this.tarefa.flag : Flag.Normal,
       ordem: this.tarefa?.ordem ?? 0
     };
+
+    // Se for nova tarefa, garantir status e flag corretos
+    if (!this.tarefa) {
+      tarefaParaSalvar.statusExecucao = tarefaParaSalvar.statusExecucao || StatusExecucao.AFazer;
+      tarefaParaSalvar.flag = Flag.Normal;
+    }
 
 
     const operacao$ = this.tarefa?.id

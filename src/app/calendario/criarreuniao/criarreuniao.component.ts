@@ -19,15 +19,14 @@ export class CriarreuniaoComponent {
   @Input() evento!: Omit<Evento, 'id'>;
   @Output() salvar = new EventEmitter<Omit<Evento, 'id'>>();
   @Output() fechar = new EventEmitter<void>();
-
+ 
   salvarEvento() {
     if (this.evento.titulo && this.evento.descricao && this.evento.horario) {
       this.salvar.emit(this.evento);
     }
   }
-
+ 
   fecharModal() {
     this.fechar.emit();
   }
 }
-

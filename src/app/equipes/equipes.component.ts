@@ -10,55 +10,68 @@ import { HttpClient } from '@angular/common/http';
 export class EquipesComponent implements OnInit {
   equipes: any[] = [];
   mostrarModal = false;
-
+ 
   novaEquipe = {
     nome: '',
     lider: '',
-    membrosInput: ''
+    membrosInput: '',
+    dataPrazo: '',
+    descricao: ''
   };
-
+ 
   detalhesEquipe: any = null;
   novoChecklist: string = '';
   novoComentario: string = '';
-
+ 
   constructor(private http: HttpClient) {}
-
+ 
   ngOnInit(): void {
     this.carregarEquipes();
   }
-
-  carregarEquipes() {
-    this.http.get<any[]>('http://localhost:3000/equipes')
-      .subscribe(dados => this.equipes = dados);
+ 
+  carregarEquipes(): void {
+    this.http.get<any>('http://localhost:3000/equipes').subscribe((data) => {
+      this.equipes = data;
+    });
   }
-
+ 
+ 
   abrirModal() {
     this.mostrarModal = true;
   }
-
+ 
   fecharModal() {
     this.mostrarModal = false;
-    this.novaEquipe = { nome: '', lider: '', membrosInput: '' };
+    this.novaEquipe = { nome: '', lider: '', membrosInput: '', dataPrazo: '', descricao: '' };
   }
-
+ 
   criarEquipe() {
+    if (!this.novaEquipe.nome || !this.novaEquipe.lider) {
+      alert('Por favor, preencha o nome e o líder da equipe.');
+      return;
+    }
+ 
     const equipe = {
       nome: this.novaEquipe.nome,
       lider: this.novaEquipe.lider,
-      membros: this.novaEquipe.membrosInput.split(',').map(m => m.trim()),
+      membros: this.novaEquipe.membrosInput
+        ? this.novaEquipe.membrosInput.split(',').map(m => m.trim())
+        : [],
       etiqueta: 'afazer',
-      descricao: '',
+      descricao: this.novaEquipe.descricao || '',
       checklist: [],
-      comentarios: []
+      comentarios: [],
+      dataCriacao: new Date(),
+      dataPrazo: this.novaEquipe.dataPrazo || null
     };
-
+ 
     this.http.post('http://localhost:3000/equipes', equipe)
       .subscribe(() => {
         this.carregarEquipes();
         this.fecharModal();
       });
   }
-
+ 
   abrirDetalhes(equipe: any) {
     this.detalhesEquipe = {
       ...equipe,
@@ -68,29 +81,34 @@ export class EquipesComponent implements OnInit {
       comentarios: equipe.comentarios || []
     };
   }
-
+ 
   fecharDetalhes() {
     this.detalhesEquipe = null;
   }
-
+ 
   adicionarChecklist() {
     if (this.novoChecklist.trim() !== '') {
       this.detalhesEquipe.checklist.push({ tarefa: this.novoChecklist, feito: false });
       this.novoChecklist = '';
     }
   }
-
+ 
   removerChecklistItem(i: number) {
     this.detalhesEquipe.checklist.splice(i, 1);
   }
-
+ 
   adicionarComentario() {
     if (this.novoComentario.trim() !== '') {
-      this.detalhesEquipe.comentarios.push(this.novoComentario);
+      const novo = {
+        usuario: 'Usuário atual',
+        texto: this.novoComentario,
+        data: new Date()
+      };
+      this.detalhesEquipe.comentarios.push(novo);
       this.novoComentario = '';
     }
   }
-
+ 
   salvarDetalhes() {
     this.http.put(`http://localhost:3000/equipes/${this.detalhesEquipe.id}`, this.detalhesEquipe)
       .subscribe(() => {
@@ -98,4 +116,11 @@ export class EquipesComponent implements OnInit {
         this.fecharDetalhes();
       });
   }
+ 
+  getProgresso(equipe: any): number {
+    if (!equipe.checklist || equipe.checklist.length === 0) return 0;
+    const feitos = equipe.checklist.filter((item: any) => item.feito).length;
+    return (feitos / equipe.checklist.length) * 100;
+  }
 }
+ 
